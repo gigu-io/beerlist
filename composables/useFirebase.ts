@@ -29,16 +29,16 @@ export const signInUser = async (email, password) => {
 
 export const initUser = async () => {
     const auth = getAuth();
-    const firebaseUser: any = useFireBaseUser();
+    const firebaseUser: any = useFirebaseUser();
     firebaseUser.value = auth.currentUser;
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/firebase.User
-            console.log('Auth changed:', user);
+            // console.log('Auth changed:', user);
         } else {
-            console.log('Auth changed:', user);
+            // console.log('Auth changed:', user);
         }
         firebaseUser.value = user;
     });
