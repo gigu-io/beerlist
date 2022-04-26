@@ -36,7 +36,18 @@ export const initUser = async () => {
             const uid = user.uid;
             console.log(user);
         } else {
-            
+
         }
     });
+}
+
+export const signOutUser = async () => {
+    const auth = getAuth();
+    const result = await auth.signOut()
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
+    console.log(result);
+    return result;
 }
