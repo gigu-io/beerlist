@@ -1,0 +1,1 @@
+export const useFireBaseUser = () => useState('firebaseUser', () => {});
