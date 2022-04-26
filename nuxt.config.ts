@@ -19,5 +19,18 @@ export default defineNuxtConfig({
             FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
             FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
         }
-    }
+    },
+    build: {
+        postcss: {
+            postcssOptions: {
+                plugins: {
+                    tailwindcss: {},
+                    autoprefixer: {},
+                },
+            },
+        },
+    },
+    css: [
+        "~/assets/css/tailwind.css"
+    ],
 });
