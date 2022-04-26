@@ -15,7 +15,7 @@ export const initUser = async () => {
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
-
+            // router.push("/beerlist");
         } else {
             router.push("/");
         }
