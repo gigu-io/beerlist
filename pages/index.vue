@@ -1,7 +1,8 @@
 <template>
   <div>
-    <p><NuxtLink to="/secret">Go to Secret Page</NuxtLink></p>
+    <p v-if="firebaseUser"><NuxtLink to="/secret">Go to Secret Page</NuxtLink></p>
     <button class="button" @click="signOut" v-if="firebaseUser">Sign out</button>
+    <button class="button" @click="signIn" v-else>Sign in</button>
     <div v-if="firebaseUser">
       <client-only>
         <pre
@@ -16,6 +17,14 @@
 
 <script setup>
 const firebaseUser = useFirebaseUser();
+
+const signIn = async () => {
+  const email = "jan.lauber2@gmail.com";
+  const password = "password";
+  firebaseUser.value = await signInUser(email, password).catch(error => {
+    console.error(error);
+  });
+};
 
 const signOut = async () => {
   await signOutUser();
