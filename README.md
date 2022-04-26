@@ -1,4 +1,7 @@
-# Nuxt 3 Minimal Starter
+<img height="120px" src="assets/images/logo/beerlist_logo_small.png" />
+
+BEER LIST
+===
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
