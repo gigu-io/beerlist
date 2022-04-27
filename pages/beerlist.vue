@@ -27,7 +27,7 @@ const signOut = async () => {
 const firebaseUser = useFirebaseUser();
 </script>
 
-<script lang="ts">
+<script>
 export default {
   name: "BeerList"
 }
