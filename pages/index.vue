@@ -21,26 +21,13 @@
     </div>
 
     <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 sm:drop-shadow-lg">
+      <div
+        class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 sm:drop-shadow-lg"
+      >
         <div class="grid grid-cols-1 gap-3">
           <div>
             <span
-              class="
-                cursor-pointer
-                w-full
-                inline-flex
-                justify-center
-                py-2
-                px-4
-                border border-gray-300
-                rounded-md
-                shadow-sm
-                bg-red-200
-                text-sm
-                font-medium
-                text-gray-800
-                hover:bg-red-300
-              "
+              class="cursor-pointer w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-red-200 text-sm font-medium text-gray-800 hover:bg-red-300"
               @click="signInWithGoogle"
             >
               <span class="sr-only">Sign in with Google</span>
@@ -61,22 +48,7 @@
 
           <div>
             <span
-              class="
-                cursor-pointer
-                w-full
-                inline-flex
-                justify-center
-                py-2
-                px-4
-                border border-gray-300
-                rounded-md
-                shadow-sm
-                bg-gray-200
-                text-sm
-                font-medium
-                text-gray-800
-                hover:bg-gray-300
-              "
+              class="cursor-pointer w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-gray-200 text-sm font-medium text-gray-800 hover:bg-gray-300"
               @click="signInWithGithub"
             >
               <span class="sr-only">Sign in with GitHub</span>
@@ -120,5 +92,4 @@ const signOut = async () => {
 };
 </script>
 
-<style>
-</style>
+<style></style>
