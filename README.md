@@ -120,3 +120,12 @@ yarn preview
 Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment) for more information.
 
 ### Docker
+
+```bash
+docker build . -t beerlist:local
+docker run -p 3000:3000 beerlist:local
+```
+
+### Firebase
+
+**TODO**
