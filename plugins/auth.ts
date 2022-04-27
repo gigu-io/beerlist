@@ -1,11 +1,11 @@
 export default defineNuxtPlugin(() => {
-  addRouteMiddleware('auth', () => {
-      const { $auth } = useNuxtApp()
+  addRouteMiddleware("auth", () => {
+    const { $auth } = useNuxtApp();
 
-      if (!$auth) {
-          return navigateTo('/');
-      }
+    if (!$auth) {
+      return navigateTo("/");
+    }
 
-      // console.log(firebaseUser.value);
-  })
-})
+    // console.log(firebaseUser.value);
+  });
+});

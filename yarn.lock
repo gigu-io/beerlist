@@ -5235,6 +5235,11 @@ type-fest@^2.11.2:
   resolved "https://registry.npmjs.org/type-fest/-/type-fest-2.12.2.tgz"
   integrity sha512-qt6ylCGpLjZ7AaODxbpyBZSs9fCI9SkL3Z9q2oxMBQhs/uyY+VD8jHA8ULCGmWQJlBgqvO3EJeAngOHD8zQCrQ==
 
+typescript@^4.6.3:
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.3.tgz#eefeafa6afdd31d725584c67a0eaba80f6fc6c6c"
+  integrity sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==
+
 ufo@^0.7.11, ufo@^0.7.9:
   version "0.7.11"
   resolved "https://registry.npmjs.org/ufo/-/ufo-0.7.11.tgz"
