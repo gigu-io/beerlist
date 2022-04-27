@@ -4,7 +4,8 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "lint": "eslint --ext .ts,.js.,.vue ./"
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.6",
@@ -15,6 +16,8 @@
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "eslint": "^8.14.0",
+    "eslint-plugin-vue": "^8.7.1",
     "nuxt": "3.0.0-rc.1",
     "sass": "^1.38.0",
     "sass-loader": "^10.0.0",
