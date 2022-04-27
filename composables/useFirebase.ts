@@ -8,7 +8,7 @@ import {
 
 export const initUser = async () => {
   const auth = getAuth();
-  const firebaseUser: any = useFirebaseUser();
+  const firebaseUser = useFirebaseUser();
   firebaseUser.value = auth.currentUser;
 
   const router = useRouter();
