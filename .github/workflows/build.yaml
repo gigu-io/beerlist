@@ -14,7 +14,7 @@ on:
   
 jobs:
   run-linters:
-    name: Run linters
+    name: Yarn build
     runs-on: ubuntu-latest
 
     steps:
