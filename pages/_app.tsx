@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <h1>lol</h1> :
             <Auth />
         } */}
+        <Component {...pageProps} />
       </div>
     </UserContextProvider>
   )

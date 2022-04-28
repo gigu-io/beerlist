@@ -8,7 +8,7 @@ export const useUserContext = () => {
     return useContext(UserContext);
 };
 
-export const UserContextProvider = (children: any) => {
+export const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
