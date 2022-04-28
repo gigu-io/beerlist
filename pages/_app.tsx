@@ -1,8 +1,27 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import { useUserContext } from '../context/userContext';
+import Loading from '../components/Loading';
+import { UserContextProvider } from '../context/userContext';
+import Auth from '../components/Auth';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  // const { user, loading, error } = useUserContext();
+
+  return (
+    <UserContextProvider>
+      <div className='App'>
+        {/* {error && <div className='error'>{error}</div>}
+        {loading ? 
+          <Loading /> : 
+          user ?
+            <Component {...pageProps} /> :
+            <h1>lol</h1> :
+            <Auth />
+        } */}
+      </div>
+    </UserContextProvider>
+  )
 }
 
-export default MyApp
+export default MyApp;
