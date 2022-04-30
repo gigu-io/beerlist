@@ -4,21 +4,12 @@ import { useUserContext } from '../context/userContext';
 import Loading from '../components/Loading';
 import { UserContextProvider } from '../context/userContext';
 import Auth from '../components/Auth';
+import { useContext } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // const { user, loading, error } = useUserContext();
-
   return (
     <UserContextProvider>
       <div className='App'>
-        {/* {error && <div className='error'>{error}</div>}
-        {loading ? 
-          <Loading /> : 
-          user ?
-            <Component {...pageProps} /> :
-            <h1>lol</h1> :
-            <Auth />
-        } */}
         <Component {...pageProps} />
       </div>
     </UserContextProvider>

@@ -1,10 +1,25 @@
+import { User } from 'firebase/auth';
 import type { NextPage } from 'next'
+import { AppProps } from 'next/app'
+import { useRouter } from 'next/router';
+import Auth from '../components/Auth';
+import Dashboard from '../components/dashboard/Dashboard';
+import Loading from '../components/Loading';
+import { useUserContext } from '../context/userContext';
 
-const Home: NextPage = () => {
+const Home = () => {
+  const { user, loading, error }: any = useUserContext();
+
   return (
-    <h1>
-      looool
-    </h1>
+    <div>
+      {
+        loading ?
+          <Loading/> :
+          user && !error ?
+            <Dashboard /> :
+            <Auth />
+      }
+    </div>
   )
 }
 

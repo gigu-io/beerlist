@@ -1,13 +1,12 @@
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css'
+import { CircularProgress } from "@mui/material";
+
 
 export default function Loading() {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
-            <Skeleton count={10} height={50} width={200} />
-            <Skeleton count={10} height={50} width={200} />
-            <Skeleton count={10} height={50} width={200} />
+            <CircularProgress color="inherit" />
+            <h2>loading some beer...</h2>
         </div>
     );
 

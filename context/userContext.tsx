@@ -1,6 +1,8 @@
 import { GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
-import { createContext, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebaseAuth.client";
+import { User } from "firebase/auth";
+import { useRouter } from "next/router";
 
 export const UserContext = createContext({});
 
@@ -8,21 +10,26 @@ export const useUserContext = () => {
     return useContext(UserContext);
 };
 
-export const UserContextProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+type Props = {
+    children: ReactNode;
+};
+
+export const UserContextProvider = ({ children }: Props) => {
+    const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const router = useRouter();
 
-    useState(() => {
-        setLoading(true);
-        const unsubscribe = onAuthStateChanged(auth, (res: any) => {
-
-            res ? setUser(res) : setUser(null);
-            setError(null);
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser(null);
+            }
             setLoading(false);
-        });
-        return unsubscribe;
-    });
+        })
+    }, []);
 
     const signInWithGoogle = () => {
         setLoading(true);

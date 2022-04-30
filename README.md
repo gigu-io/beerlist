@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://squidfunk.github.io/mkdocs-material/">
-        <img height="120px" src="assets/images/logo/beerlist_logo_small.png" />
+        <img height="120px" src="public/images/logo/beerlist_logo.png" />
     </a>
 </p>
 
