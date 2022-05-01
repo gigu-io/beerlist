@@ -9,7 +9,7 @@ import { useContext } from 'react';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
-      <div className='App'>
+      <div className='bg-highlight h-screen'>
         <Component {...pageProps} />
       </div>
     </UserContextProvider>
