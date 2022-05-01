@@ -12,7 +12,8 @@ module.exports = {
       'main': '#f3d2c1',
       'highlight': '#fef6e4',
       'secondary': '#8bd3dd',
-      'tertiary': '#f582ae'
+      'tertiary': '#f582ae',
+      'tertiary-dark': '#D16F94',
     },
     extend: {
       anmiation: {

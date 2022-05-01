@@ -37,7 +37,7 @@
 </p>
 
 <p align="center">
-  See who owns me beer and how much I owe them. Also show the bet history. Choose between 3 different styles of beer (IPA, Lager, Stout) and 3 sizes (small, medium, big) for each bet.
+  See who owes me beer and how much I owe them. Also show the bet history. Choose between 3 different styles of beer (IPA, Lager, Stout) and 3 sizes (small, medium, big) for each bet.
 </p>
 
 <p align="center">

@@ -31,7 +31,7 @@ export default function Auth() {
                         <div>
                             <span
                                 onClick={signInWithGoogle}
-                                className="hover:bg-secondary cursor-pointer w-full inline-flex justify-center py-2 px-4 border border-stroke rounded-md shadow bg-white text-lg font-medium text-stroke hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-400 ease-in-out"
+                                className="hover:bg-secondary bg-highlight cursor-pointer w-full inline-flex justify-center py-2 px-4 border border-stroke rounded-md shadow bg-white text-lg font-medium text-stroke transition-colors duration-400 ease-in-out"
                             >
                                 <span className="sr-only">Sign in with Google</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-google" viewBox="0 0 16 16">
@@ -43,7 +43,7 @@ export default function Auth() {
                         <div>
                             <span
                                 onClick={signInWithGithub}
-                                className="hover:bg-secondary cursor-pointer w-full inline-flex justify-center py-2 px-4 border border-troke rounded-md shadow-sm bg-white text-sm font-medium text-stroke hover:-translate-y-1 hover:translate-x-1 transition-transform duration-400 ease-in-out"
+                                className="hover:bg-secondary bg-highlight cursor-pointer w-full inline-flex justify-center py-2 px-4 border border-troke rounded-md shadow-sm bg-white text-sm font-medium text-stroke transition-colors duration-400 ease-in-out"
                             >
                                 <span className="sr-only">Sign in with GitHub</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-github" viewBox="0 0 16 16">

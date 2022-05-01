@@ -23,9 +23,6 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
 
     const { logoutUser, user, loading, error }: any = useUserContext();
-    const navigation = [
-        { name: 'Dashboard', href: '#', current: true },
-    ]
     const userNavigation = [
         { name: 'Your Profile', onClickFunction: () => { } },
         { name: 'Settings', onClickFunction: () => { } },
@@ -33,7 +30,7 @@ export default function Navbar() {
     ]
 
     return (
-        <Disclosure as="nav" className="bg-yellow-100 mb-6">
+        <Disclosure as="nav" className="bg-transparent mb-6">
             {({ open }) => (
                 <div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,53 +48,32 @@ export default function Navbar() {
                                     </Disclosure.Button>
                                 </div>
                                 <div className="flex-shrink-0 flex items-center">
-                                    <Image
-                                        className="block h-8 w-auto"
-                                        src="/images/logo/beerlist_logo.png"
-                                        alt="Workflow"
-                                        width={64}
-                                        height={64}
-                                    />
-                                </div>
-                                <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-                                    {navigation.map((item) => (
-                                        <a
-                                            key={item.name}
-                                            href={item.href}
-                                            className={classNames(
-                                                item.current ? 'bg-yellow-400 text-white' : 'text-gray-300 hover:bg-yellow-500 hover:text-white',
-                                                'px-3 py-2 rounded-md text-sm font-medium'
-                                            )}
-                                            aria-current={item.current ? 'page' : undefined}
-                                        >
-                                            {item.name}
-                                        </a>
-                                    ))}
+                                    <div className="relative h-20 w-16">
+                                        <Image
+                                            src="/images/logo/beerlist_logo.png"
+                                            alt="beerlist logo"
+                                            layout="fill"
+                                            objectFit="contain"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">
                                     <button
                                         type="button"
-                                        className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                                        className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-sm font-medium rounded-md bg-tertiary hover:-translate-x-1 hover:-translate-y-1 transition-transform duration-150 ease-in-out"
                                     >
                                         <PlusSmIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                                         <span>New Bet</span>
                                     </button>
                                 </div>
                                 <div className="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
-                                    <button
-                                        type="button"
-                                        className="bg-yellow-400 p-1 rounded-full text-white hover:gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                                    >
-                                        <span className="sr-only">View notifications</span>
-                                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                    </button>
 
                                     {/* Profile dropdown */}
                                     <Menu as="div" className="ml-3 relative">
                                         <div>
-                                            <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                            <Menu.Button className="bg-gray-800 flex text-sm rounded-full">
                                                 <span className="sr-only">Open user menu</span>
                                                 {
                                                     user.photoURL ?
@@ -122,20 +98,15 @@ export default function Navbar() {
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95"
                                         >
-                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-tertiary">
                                                 {userNavigation.map((item) => (
                                                     <Menu.Item key={item.name}>
-                                                        {({ active }) => (
                                                             <a
                                                                 onClick={item.onClickFunction}
-                                                                className={classNames(
-                                                                    active ? 'bg-gray-100' : '',
-                                                                    'block px-4 py-2 text-sm text-gray-700 cursor-pointer'
-                                                                )}
+                                                                className='block px-4 py-2 text-sm text-paragraph cursor-pointer hover:bg-tertiary-dark'
                                                             >
                                                                 {item.name}
                                                             </a>
-                                                        )}
                                                     </Menu.Item>
                                                 ))}
                                             </Menu.Items>
@@ -146,24 +117,10 @@ export default function Navbar() {
                         </div>
                     </div>
 
+                    {/* Mobile menu, show/hide based on menu open state. */}
+
                     <Disclosure.Panel className="md:hidden">
-                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                            {navigation.map((item) => (
-                                <Disclosure.Button
-                                    key={item.name}
-                                    as="a"
-                                    href={item.href}
-                                    className={classNames(
-                                        item.current ? 'bg-yellow-400 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                        'block px-3 py-2 rounded-md text-base font-medium'
-                                    )}
-                                    aria-current={item.current ? 'page' : undefined}
-                                >
-                                    {item.name}
-                                </Disclosure.Button>
-                            ))}
-                        </div>
-                        <div className="pt-4 pb-3 border-t border-gray-700">
+                        <div className="pt-4 pb-3">
                             <div className="flex items-center px-5 sm:px-6">
                                 <div className="flex-shrink-0">
                                     {
@@ -184,13 +141,6 @@ export default function Navbar() {
                                     <div className="text-base font-medium text-gray-800">{user ? user.displayName : ''}</div>
                                     <div className="text-sm font-medium text-gray-700">{user ? user.email : ''}</div>
                                 </div>
-                                <button
-                                    type="button"
-                                    className="ml-auto flex-shrink-0 bg-yellow-400 p-1 rounded-full text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                                >
-                                    <span className="sr-only">View notifications</span>
-                                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                </button>
                             </div>
                             <div className="mt-3 px-2 space-y-1 sm:px-3">
                                 {userNavigation.map((item) => (
