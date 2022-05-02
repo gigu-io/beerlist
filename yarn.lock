@@ -1403,7 +1403,7 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-autoprefixer@^10.4.5:
+autoprefixer@^10.4.7:
   version "10.4.7"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.7.tgz#1db8d195f41a52ca5069b7593be167618edbbedf"
   integrity sha512-ypHju4Y2Oav95SipEcCcI5J7CGPuvz8oat7sUtYj3ClK44bldfvtvcxK6IEK++7rqB7YchDGzweZIBG+SD0ZAA==
@@ -5164,7 +5164,7 @@ postcss@8.4.5:
     picocolors "^1.0.0"
     source-map-js "^1.0.1"
 
-postcss@^8.4.12:
+postcss@^8.4.12, postcss@^8.4.13:
   version "8.4.13"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.13.tgz#7c87bc268e79f7f86524235821dfdf9f73e5d575"
   integrity sha512-jtL6eTBrza5MPzy8oJLFuUscHDXTV5KcLlqAWHl5q5WYRfnNRGSmOZmOZ1T6Gy7A99mOZfqungmZMpMmCVJ8ZA==
