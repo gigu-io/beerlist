@@ -9,7 +9,7 @@ import { useContext } from 'react';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
-      <div className='bg-pattern-self h-screen'>
+      <div className='bg-pattern-self h-full min-h-screen'>
         <Component {...pageProps} />
       </div>
     </UserContextProvider>

@@ -1,10 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { BellIcon, EmojiHappyIcon, EmojiSadIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { PlusSmIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
-import { useUserContext } from '../../context/userContext'
+import { useUserContext } from '../context/userContext'
 import { User } from 'firebase/auth'
 import { Skeleton } from '@mui/material'
 
@@ -28,6 +28,10 @@ export default function Navbar() {
         { name: 'Settings', onClickFunction: () => { } },
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
+    const navigation = [
+        { name: 'Owes Me', href: '#', current: true },
+        { name: 'My Debts', href: '#', current: false }
+    ]
 
     return (
         <Disclosure as="nav" className="bg-transparent mb-6">
@@ -38,7 +42,7 @@ export default function Navbar() {
                             <div className="flex">
                                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                                     {/* Mobile menu button */}
-                                    <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                                    <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-button-text hover:text-white hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                                         <span className="sr-only">Open main menu</span>
                                         {open ? (
                                             <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -57,12 +61,27 @@ export default function Navbar() {
                                         />
                                     </div>
                                 </div>
+                                <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
+                                    {navigation.map((item) => (
+                                        <a
+                                            key={item.name}
+                                            href={item.href}
+                                            className={classNames(
+                                                item.current ? 'bg-secondary text-button-text hover:bg-tertiary hover:text-white' : 'text-paragraph hover:bg-tertiary hover:text-white',
+                                                'px-3 py-2 rounded-md text-sm font-medium transition-colors ease-in-out'
+                                            )}
+                                            aria-current={item.current ? 'page' : undefined}
+                                        >
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </div>
                             </div>
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">
                                     <button
                                         type="button"
-                                        className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-sm font-medium rounded-md bg-tertiary hover:-translate-x-1 hover:-translate-y-1 transition-transform duration-150 ease-in-out"
+                                        className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-sm font-medium rounded-md bg-tertiary hover:-translate-x-0.5 hover:-translate-y-0.5 transition-transform duration-150 ease-in-out"
                                     >
                                         <PlusSmIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                                         <span>New Bet</span>
@@ -101,12 +120,12 @@ export default function Navbar() {
                                             <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-tertiary">
                                                 {userNavigation.map((item) => (
                                                     <Menu.Item key={item.name}>
-                                                            <a
-                                                                onClick={item.onClickFunction}
-                                                                className='block px-4 py-2 text-sm text-paragraph cursor-pointer hover:bg-tertiary-dark'
-                                                            >
-                                                                {item.name}
-                                                            </a>
+                                                        <a
+                                                            onClick={item.onClickFunction}
+                                                            className='block px-4 py-2 text-sm text-paragraph cursor-pointer hover:bg-tertiary-dark'
+                                                        >
+                                                            {item.name}
+                                                        </a>
                                                     </Menu.Item>
                                                 ))}
                                             </Menu.Items>
@@ -120,6 +139,22 @@ export default function Navbar() {
                     {/* Mobile menu, show/hide based on menu open state. */}
 
                     <Disclosure.Panel className="md:hidden">
+                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            {navigation.map((item) => (
+                                <Disclosure.Button
+                                    key={item.name}
+                                    as="a"
+                                    href={item.href}
+                                    className={classNames(
+                                        item.current ? 'bg-secondary text-button-text hover:bg-tertiary hover:text-white' : 'text-paragraph hover:bg-tertiary hover:text-white',
+                                                'block px-3 py-2 rounded-md text-base font-medium'
+                                    )}
+                                    aria-current={item.current ? 'page' : undefined}
+                                >
+                                    {item.name}
+                                </Disclosure.Button>
+                            ))}
+                        </div>
                         <div className="pt-4 pb-3">
                             <div className="flex items-center px-5 sm:px-6">
                                 <div className="flex-shrink-0">
