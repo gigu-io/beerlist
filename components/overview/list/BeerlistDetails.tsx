@@ -51,6 +51,10 @@ export default function BeerlistDetails({ beerguilty }: any) {
         bet.background = StatusBackgroundColors.Green
     })
 
+    confirmedIncompleteBets.forEach((bet: Bet) => {
+        bet.background = StatusBackgroundColors.Transparent
+    })
+
     interface BetListCount {
         type: Beer
         count: number
@@ -79,22 +83,25 @@ export default function BeerlistDetails({ beerguilty }: any) {
                         </div>
                         <div className="min-w-0 flex-1 px-4">
                             <p className="text-sm font-medium text-stroke truncate">{beerguilty.user.name}</p>
-                            <p className="mt-2 grid sm:grid-cols-6 grid-cols-4 gap-2 items-center text-sm text-paragraph">
+                            <p className="mt-2 grid sm:grid-cols-6 grid-cols-2 gap-2 items-center text-md text-paragraph">
                                 {/* Total Overview of all incomplete Bets */}
                                 {
                                     incompleteConfirmedBetsCount.map((bet: BetListCount) => (
-                                        <span key={bet.type} className="flex shadow p-1 rounded-md">
-                                            <span className="m-auto inline-flex"><span className="font-bold">{bet.count}</span>x
-                                                <span>
+                                        <span key={bet.type} className="group inline-flex p-1 shadow-md rounded-md ">
+                                            <div className="flex m-auto">
+                                                <span className="my-auto">
+                                                    <span className="font-bold">{bet.count}</span>x
+                                                </span>
+                                                <span className="group-hover:rotate-12 transition-all duration-300 ease-in-out">
                                                     {
-                                                        bet.type === Beer.Dark ? <BeerIconDark width={20} height={20} /> :
-                                                            bet.type === Beer.IPA ? <BeerIconIPA width={20} height={20} /> :
-                                                                bet.type === Beer.Lager ? <BeerIconLager width={20} height={20} /> :
-                                                                    bet.type === Beer.Stout ? <BeerIconStout width={20} height={20} /> :
+                                                        bet.type === Beer.Dark ? <BeerIconDark width={35} height={35} /> :
+                                                            bet.type === Beer.IPA ? <BeerIconIPA width={35} height={35} /> :
+                                                                bet.type === Beer.Lager ? <BeerIconLager width={35} height={35} /> :
+                                                                    bet.type === Beer.Stout ? <BeerIconStout width={35} height={35} /> :
                                                                         null
                                                     }
                                                 </span>
-                                            </span>
+                                            </div>
                                         </span>
                                     ))
                                 }
@@ -102,22 +109,32 @@ export default function BeerlistDetails({ beerguilty }: any) {
                                     uncofirmedIncompleteBets.length > 0 &&
                                     <span className={classNames(
                                         StatusBackgroundColors.Orange,
-                                        "p-1 rounded-md shadow text-center"
+                                        "group inline-flex p-2.5 rounded-md shadow-md text-center"
                                     )}>
-                                        <span className="text-paragraph font-bold">{uncofirmedIncompleteBets.length}</span>x
-                                        {' '}
-                                        <span className="text-paragraph font-extrabold">?</span>
+                                        <div className="flex m-auto">
+                                            <span className="text-paragraph font-bold">
+                                                {uncofirmedIncompleteBets.length}
+                                                <span className="font-normal">x</span>
+                                            </span>
+                                            &nbsp;
+                                            <span className="text-paragraph font-extrabold">?</span>
+                                        </div>
                                     </span>
                                 }
                                 {
                                     confirmedCompleteBets.length > 0 &&
                                     <span className={classNames(
                                         StatusBackgroundColors.Green,
-                                        "p-1 rounded-md shadow text-center"
+                                        "group inline-flex p-2.5 rounded-md shadow-md text-center"
                                     )}>
-                                        <span className="text-paragraph font-bold">{confirmedCompleteBets.length}</span>x
-                                        {' '}
-                                        <span className="text-paragraph font-extrabold">✓</span>
+                                        <div className="flex m-auto">
+                                            <span className="text-paragraph font-bold">
+                                                {confirmedCompleteBets.length}
+                                                <span className="font-normal">x</span>
+                                            </span>
+                                            &nbsp;
+                                            <span className="text-paragraph font-extrabold">✓</span>
+                                        </div>
                                     </span>
                                 }
 
@@ -146,7 +163,7 @@ export default function BeerlistDetails({ beerguilty }: any) {
                                     bet.completeDate ?
                                         StatusBackgroundHoverColors.Green
                                         :
-                                        'hover:bg-gray-50'
+                                        StatusBackgroundHoverColors.Gray
                                     :
                                     StatusBackgroundHoverColors.Orange,
                                 "shadow my-2 sm:my-0 sm:shadow-none hover:bg-opacity-50 text-paragraph cursor-pointer rounded-md px-2 transition-all duration-150 ease-in-out"
@@ -170,7 +187,7 @@ export default function BeerlistDetails({ beerguilty }: any) {
                                             </div>
                                             <div
                                                 className={classNames(
-                                                    bet.background,
+                                                    bet.background ? bet.background : 'bg-secondary',
                                                     'h-7 my-auto w-10 p-1 shadow rounded flex items-center justify-center'
                                                 )}
                                             >
