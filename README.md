@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://squidfunk.github.io/mkdocs-material/">
-        <img height="120px" src="assets/images/logo/beerlist_logo_small.png" />
+        <img height="120px" src="public/images/logo/beerlist_logo.png" />
     </a>
 </p>
 
@@ -37,7 +37,7 @@
 </p>
 
 <p align="center">
-  See who owns me beer and how much I owe them. Also show the bet history. Choose between 3 different styles of beer (IPA, Lager, Stout) and 3 sizes (small, medium, big) for each bet.
+  See who owes me beer and how much I owe them. Also show the bet history. Choose between 3 different styles of beer (IPA, Lager, Stout) and 3 sizes (small, medium, big) for each bet.
 </p>
 
 <p align="center">
@@ -74,7 +74,7 @@ Also you can host the app yourself.
 
 Trust me, I'm open source.  
 You can find the source code on [Github](https://github.com/gigu-io/beerlist).  
-The frontend is written in Nuxt.js and the backend is Firebase.  
+The frontend is written in Next.js and the backend is Firebase.  
 License: MIT.
 
 <h2></h2>
