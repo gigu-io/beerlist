@@ -83,7 +83,7 @@ export default function BeerlistDetails({ beerguilty }: any) {
                         </div>
                         <div className="min-w-0 flex-1 px-4">
                             <p className="text-sm font-medium text-stroke truncate">{beerguilty.user.name}</p>
-                            <p className="mt-2 grid sm:grid-cols-6 grid-cols-2 gap-2 items-center text-md text-paragraph">
+                            <p className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
                                 {/* Total Overview of all incomplete Bets */}
                                 {
                                     incompleteConfirmedBetsCount.map((bet: BetListCount) => (
@@ -151,8 +151,8 @@ export default function BeerlistDetails({ beerguilty }: any) {
                 </div>
             </a>
             <div className={classNames(
-                showDetails ? 'max-h-screen h-auto' : 'max-h-0',
-                "bg-white transition-all duration-150 ease-in-out overflow-hidden"
+                showDetails ? 'max-h-[2000px]' : 'max-h-0',
+                "bg-white transition-all duration-150 ease-in-out overflow-hidden flex"
             )}>
                 <ul role="list" className="p-4">
                     {beerguilty.bets.map((bet: any, betIdx: any) => (

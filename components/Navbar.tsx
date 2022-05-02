@@ -30,8 +30,8 @@ export default function Navbar() {
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
     const navigation = [
-        { name: 'Owes Me', href: '#', current: true },
-        { name: 'My Debts', href: '#', current: false }
+        { name: 'Owes Me', href: '', current: true },
+        { name: 'My Debts', href: '', current: false }
     ]
 
     return (
