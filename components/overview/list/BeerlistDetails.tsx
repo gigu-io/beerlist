@@ -3,7 +3,7 @@ import { AnnotationIcon, CheckIcon, ChevronDownIcon, DotsCircleHorizontalIcon, T
 import { BeerIconDark, BeerIconIPA, BeerIconLager, BeerIconStout } from "../../icons/BeerIcons";
 import { CheckCircleIcon, ChevronRightIcon, MailIcon } from '@heroicons/react/solid'
 import { User } from 'firebase/auth'
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import { BadgeCheckIcon, ChevronDoubleRightIcon, LinkIcon, QuestionMarkCircleIcon } from "@heroicons/react/outline";
 import { StatusBackgroundColors, StatusBackgroundHoverColors } from "../Dashboard";
 
@@ -79,7 +79,7 @@ export default function BeerlistDetails({ beerguilty }: any) {
                 <div className="flex items-center px-4 py-4 sm:px-6">
                     <div className="min-w-0 flex-1 flex items-center">
                         <div className="mt-1">
-                            <Image width={56} height={56} className="rounded-full" src={beerguilty.user.imageUrl} alt="" />
+                            <ExportedImage width={56} height={56} className="rounded-full" src={beerguilty.user.imageUrl} alt="" />
                         </div>
                         <div className="min-w-0 flex-1 px-4">
                             <p className="text-sm font-medium text-stroke truncate">{beerguilty.user.name}</p>

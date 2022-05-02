@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, EmojiHappyIcon, EmojiSadIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { PlusSmIcon } from '@heroicons/react/solid'
-import Image from 'next/image'
+import ExportedImage from "next-image-export-optimizer";
 import { useUserContext } from '../context/userContext'
 import { User } from 'firebase/auth'
 import { Skeleton } from '@mui/material'
@@ -55,7 +55,7 @@ export default function Navbar() {
                                 </div>
                                 <div className="flex-shrink-0 flex items-center">
                                     <div className="relative h-20 w-16">
-                                        <Image
+                                        <ExportedImage
                                             src="/images/logo/beerlist_logo.png"
                                             alt="beerlist logo"
                                             layout="fill"
@@ -98,7 +98,7 @@ export default function Navbar() {
                                                 <span className="sr-only">Open user menu</span>
                                                 {
                                                     user.photoURL ?
-                                                        <Image
+                                                        <ExportedImage
                                                             className="rounded-full"
                                                             src={user ? user.photoURL : ''}
                                                             alt="User"
@@ -162,7 +162,7 @@ export default function Navbar() {
                                 <div className="flex-shrink-0">
                                     {
                                         user.photoURL ?
-                                            <Image
+                                            <ExportedImage
                                                 className="rounded-full"
                                                 src={user ? user.photoURL : ''}
                                                 alt="User"
