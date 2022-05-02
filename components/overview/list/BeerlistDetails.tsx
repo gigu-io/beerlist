@@ -35,7 +35,6 @@ export interface Bet {
 export default function BeerlistDetails({ beerguilty }: any) {
     const [showDetails, setShowDetails] = useState(false);
 
-
     const confirmedBets = beerguilty.bets.filter((bet: Bet) => bet.confirmed)
     const incompleteBets = beerguilty.bets.filter((bet: Bet) => !bet.completeDate)
     const unconfirmedBets = beerguilty.bets.filter((bet: Bet) => !bet.confirmed)

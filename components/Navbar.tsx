@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, EmojiHappyIcon, EmojiSadIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { PlusSmIcon } from '@heroicons/react/solid'
@@ -22,7 +22,8 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
 
-    const { logoutUser, user, loading, error }: any = useUserContext();
+    const { user, logoutUser, loading, error }: any = useUserContext();
+
     const userNavigation = [
         { name: 'Your Profile', onClickFunction: () => { } },
         { name: 'Settings', onClickFunction: () => { } },
@@ -34,6 +35,7 @@ export default function Navbar() {
     ]
 
     return (
+
         <Disclosure as="nav" className="bg-transparent mb-6">
             {({ open }) => (
                 <div>
@@ -195,4 +197,5 @@ export default function Navbar() {
             )}
         </Disclosure>
     )
+
 }

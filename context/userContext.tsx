@@ -15,7 +15,7 @@ type Props = {
 };
 
 export const UserContextProvider = ({ children }: Props) => {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<any | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const router = useRouter();
@@ -35,8 +35,7 @@ export const UserContextProvider = ({ children }: Props) => {
         setLoading(true);
         setError(null);
         signInWithPopup(auth, new GoogleAuthProvider())
-            .then((res: any) => {
-                setUser(res);
+            .then(() => {
                 setLoading(false);
             })
             .catch((err: any) => {
@@ -52,8 +51,7 @@ export const UserContextProvider = ({ children }: Props) => {
         setLoading(true);
         setError(null);
         signInWithPopup(auth, new GithubAuthProvider())
-            .then((res: any) => {
-                setUser(res);
+            .then(() => {
                 setLoading(false);
             })
             .catch((err: any) => {
