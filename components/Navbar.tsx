@@ -36,7 +36,7 @@ export default function Navbar() {
 
     return (
 
-        <Disclosure as="nav" className="bg-transparent mb-6">
+        <Disclosure as="nav" className="bg-main mb-6">
             {({ open }) => (
                 <div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,7 +83,7 @@ export default function Navbar() {
                                 <div className="flex-shrink-0">
                                     <button
                                         type="button"
-                                        className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-sm font-medium rounded-md bg-tertiary hover:-translate-x-0.5 hover:-translate-y-0.5 transition-transform duration-150 ease-in-out"
+                                        className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-sm font-medium rounded-md bg-tertiary hover:shadow-md hover:translate-x-0.5 transition-all duration-300 ease-in-out"
                                     >
                                         <PlusSmIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                                         <span>New Bet</span>
@@ -119,16 +119,19 @@ export default function Navbar() {
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95"
                                         >
-                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-tertiary">
+                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 shadow-lg rounded-md  bg-secondary">
                                                 {userNavigation.map((item) => (
-                                                    <Menu.Item key={item.name}>
-                                                        <a
+                                                    <div
+                                                        key={item.name}
+                                                        className="hover:bg-tertiary  hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
+                                                    >
+                                                        <div
                                                             onClick={item.onClickFunction}
-                                                            className='block px-4 py-2 text-sm text-paragraph cursor-pointer hover:bg-tertiary-dark'
+                                                            className='block px-4 py-2 text-sm text-button-text font-bold hover:translate-x-1 transition-all duration-300 ease-in-out cursor-pointer'
                                                         >
                                                             {item.name}
-                                                        </a>
-                                                    </Menu.Item>
+                                                        </div>
+                                                    </div>
                                                 ))}
                                             </Menu.Items>
                                         </Transition>
@@ -149,7 +152,7 @@ export default function Navbar() {
                                     href={item.href}
                                     className={classNames(
                                         item.current ? 'bg-secondary text-button-text hover:bg-tertiary hover:text-white' : 'text-paragraph hover:bg-tertiary hover:text-white',
-                                                'block px-3 py-2 rounded-md text-base font-medium'
+                                        'block px-3 py-2 rounded-md text-base font-medium'
                                     )}
                                     aria-current={item.current ? 'page' : undefined}
                                 >

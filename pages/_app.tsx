@@ -9,7 +9,7 @@ import { useContext } from 'react';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
-      <div className='bg-pattern-self h-full min-h-screen items-stretch'>
+      <div className="bg-[url('/images/background/waves.svg')] bg-no-repeat bg-center bg-fixed bg-cover h-full min-h-screen items-stretch">
         <Component {...pageProps} />
       </div>
     </UserContextProvider>
