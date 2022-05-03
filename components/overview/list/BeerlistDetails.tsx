@@ -152,7 +152,7 @@ export default function BeerlistDetails({ beerguilty }: any) {
             </a>
             <div className={classNames(
                 showDetails ? 'max-h-[2000px]' : 'max-h-0',
-                "bg-white transition-all duration-150 ease-in-out overflow-hidden flex"
+                "bg-white transition-all duration-150 ease-in-out overflow-hidden"
             )}>
                 <ul role="list" className="p-4">
                     {beerguilty.bets.map((bet: any, betIdx: any) => (
