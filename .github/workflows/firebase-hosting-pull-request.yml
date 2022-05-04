@@ -14,6 +14,7 @@ jobs:
       - name: install yarn
         run: |
           npm install -g yarn
+      - uses: actions/checkout@v1
       - name: yarn install
         run: |
           yarn install
