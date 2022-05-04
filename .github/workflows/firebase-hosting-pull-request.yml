@@ -8,8 +8,18 @@ jobs:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: yarn build
+      - uses: action/setup-node@v1
+        with:
+          node-version: 16
+      - name: install yarn
+        run: |
+          npm install -g yarn
+      - name: yarn install
+        run: |
+          yarn install
+      - name: build
+        run: |
+          yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
