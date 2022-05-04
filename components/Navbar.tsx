@@ -77,7 +77,7 @@ export default function Navbar() {
                                             alt="beerlist logo"
                                             layout="fill"
                                             objectFit="contain"
-                                            unoptimized={true}
+                                            // unoptimized={true}
                                         />
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@ export default function Navbar() {
                                                             alt="User"
                                                             width={46}
                                                             height={46}
-                                                            unoptimized={true}
+                                                            // unoptimized={true}
                                                         />
                                                         :
                                                         <Skeleton variant="circular" width={46} height={46} />
@@ -191,7 +191,7 @@ export default function Navbar() {
                                                 alt="User"
                                                 width={46}
                                                 height={46}
-                                                unoptimized={true}
+                                                // unoptimized={true}
                                             />
                                             :
                                             <Skeleton variant="circular" width={46} height={46} />

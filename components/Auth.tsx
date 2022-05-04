@@ -16,7 +16,7 @@ export default function Auth() {
                     alt="beerlist logo"
                     width={100}
                     height={60}
-                    unoptimized={true}
+                    // unoptimized={true}
                 />
             </div>
             <h1 className="mt-6 text-center text-4xl font-extrabold text-stroke">BEER LIST</h1>
