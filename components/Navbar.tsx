@@ -7,6 +7,9 @@ import ExportedImage from "next-image-export-optimizer";
 import { useUserContext } from '../context/userContext'
 import { User } from 'firebase/auth'
 import { Skeleton } from '@mui/material'
+import { database } from "../firebase/firebaseAuth.client";
+import { ref, set } from "firebase/database";
+import { Beer } from './overview/list/BeerlistDetails';
 
 // const user = {
 //   name: 'Tom Cook',
@@ -19,6 +22,20 @@ import { Skeleton } from '@mui/material'
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
+
+function writeBetData(type: string, size: string, reason: string, user: User) {
+    try {
+        set(ref(database, `bets/${user.uid}`), {
+            reason,
+            size,
+            type,
+            timestamp: Date.now(),
+        });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
 
 export default function Navbar() {
 
@@ -60,6 +77,7 @@ export default function Navbar() {
                                             alt="beerlist logo"
                                             layout="fill"
                                             objectFit="contain"
+                                            unoptimized={true}
                                         />
                                     </div>
                                 </div>
@@ -83,6 +101,7 @@ export default function Navbar() {
                                 <div className="flex-shrink-0">
                                     <button
                                         type="button"
+                                        onClick={() => writeBetData('debt', 'small', Beer.Stout, user)}
                                         className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-sm font-medium rounded-md bg-tertiary hover:shadow-md hover:translate-x-0.5 transition-all duration-300 ease-in-out"
                                     >
                                         <PlusSmIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
@@ -104,6 +123,7 @@ export default function Navbar() {
                                                             alt="User"
                                                             width={46}
                                                             height={46}
+                                                            unoptimized={true}
                                                         />
                                                         :
                                                         <Skeleton variant="circular" width={46} height={46} />
@@ -171,6 +191,7 @@ export default function Navbar() {
                                                 alt="User"
                                                 width={46}
                                                 height={46}
+                                                unoptimized={true}
                                             />
                                             :
                                             <Skeleton variant="circular" width={46} height={46} />

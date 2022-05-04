@@ -79,11 +79,11 @@ export default function BeerlistDetails({ beerguilty }: any) {
                 <div className="flex items-center px-4 py-4 sm:px-6">
                     <div className="min-w-0 flex-1 flex items-center">
                         <div className="mt-1">
-                            <ExportedImage width={56} height={56} className="rounded-full" src={beerguilty.user.imageUrl} alt="" />
+                            <ExportedImage unoptimized={true} width={56} height={56} className="rounded-full" src={beerguilty.user.imageUrl} alt="" />
                         </div>
                         <div className="min-w-0 flex-1 px-4">
                             <p className="text-sm font-medium text-stroke truncate">{beerguilty.user.name}</p>
-                            <p className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
+                            <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
                                 {/* Total Overview of all incomplete Bets */}
                                 {
                                     incompleteConfirmedBetsCount.map((bet: BetListCount) => (
@@ -138,7 +138,7 @@ export default function BeerlistDetails({ beerguilty }: any) {
                                     </span>
                                 }
 
-                            </p>
+                            </div>
                         </div>
                     </div>
                     <div>

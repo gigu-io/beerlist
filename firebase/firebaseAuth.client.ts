@@ -1,6 +1,7 @@
 import getConfig from "next/config";
 import { getApps, initializeApp } from 'firebase/app';
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
@@ -17,6 +18,8 @@ const firebaseConfig = {
 if (!getApps().length) {
     initializeApp(firebaseConfig);
 }
+
+export const database = getDatabase();
 
 export const auth = getAuth();
 
