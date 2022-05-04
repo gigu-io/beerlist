@@ -4,16 +4,6 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 
-env:
-  NEXT_PUBLIC_FIREBASE_API_KEY: "${NEXT_PUBLIC_FIREBASE_API_KEY}"
-  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: "${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}"
-  NEXT_PUBLIC_FIREBASE_DATABASE_URL: "${NEXT_PUBLIC_FIREBASE_DATABASE_URL}"
-  NEXT_PUBLIC_FIREBASE_PROJECT_ID: "${NEXT_PUBLIC_FIREBASE_PROJECT_ID}"
-  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: "${NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}"
-  NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: "${NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}"
-  NEXT_PUBLIC_FIREBASE_APP_ID: "${NEXT_PUBLIC_FIREBASE_APP_ID}"
-  NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: "${NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}"
-
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
@@ -40,6 +30,9 @@ jobs:
           envkey_NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
           envkey_NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
           envkey_NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}
+          directory: '/home/runner/work/beerlist/beerlist/'
+          file_name: '.env'
+          fail_on_empty: true
       - name: build
         run: |
           yarn build
