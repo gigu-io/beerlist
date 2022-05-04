@@ -25,6 +25,9 @@ module.exports = {
         'tertiary': '#f582ae',
         'tertiary-dark': '#D16F94',
       },
+      backgroundImage: {
+        'background': "url('/images/background/waves.svg')",
+      }
     },
   },
   plugins: [

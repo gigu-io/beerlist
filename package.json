@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export && next-image-export-optimizer",
     "start": "next start",
     "lint": "next lint"
   },
@@ -16,19 +16,21 @@
     "@mui/material": "^5.6.3",
     "@tailwindcss/forms": "^0.5.0",
     "firebase": "^9.6.11",
-    "firebase-tools": "^10.7.1",
+    "firebase-tools": "^10.7.2",
     "next": "12.1.5",
+    "next-image-export-optimizer": "^0.9.6",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "sharp": "^0.30.4"
   },
   "devDependencies": {
     "@types/node": "17.0.29",
     "@types/react": "18.0.8",
     "@types/react-dom": "18.0.0",
-    "autoprefixer": "^10.4.5",
+    "autoprefixer": "10.4.5",
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.5",
-    "postcss": "^8.4.12",
+    "postcss": "^8.4.13",
     "tailwindcss": "^3.0.24",
     "typescript": "4.6.3"
   }

@@ -1,5 +1,5 @@
 import { HeartIcon } from "@heroicons/react/solid";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import { useUserContext } from "../context/userContext";
 
 export default function Auth() {
@@ -11,11 +11,12 @@ export default function Auth() {
             <div
                 className="grid place-content-center"
             >
-                <Image
+                <ExportedImage
                     src="/images/logo/beerlist_logo.png"
                     alt="beerlist logo"
                     width={100}
                     height={60}
+                    // unoptimized={true}
                 />
             </div>
             <h1 className="mt-6 text-center text-4xl font-extrabold text-stroke">BEER LIST</h1>

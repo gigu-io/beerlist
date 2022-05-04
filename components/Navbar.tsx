@@ -3,10 +3,13 @@ import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, EmojiHappyIcon, EmojiSadIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { PlusSmIcon } from '@heroicons/react/solid'
-import Image from 'next/image'
+import ExportedImage from "next-image-export-optimizer";
 import { useUserContext } from '../context/userContext'
 import { User } from 'firebase/auth'
 import { Skeleton } from '@mui/material'
+import { database } from "../firebase/firebaseAuth.client";
+import { ref, set } from "firebase/database";
+import { Beer } from './overview/list/BeerlistDetails';
 
 // const user = {
 //   name: 'Tom Cook',
@@ -20,6 +23,20 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
+function writeBetData(type: string, size: string, reason: string, user: User) {
+    try {
+        set(ref(database, `bets/${user.uid}`), {
+            reason,
+            size,
+            type,
+            timestamp: Date.now(),
+        });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+
 export default function Navbar() {
 
     const { user, logoutUser, loading, error }: any = useUserContext();
@@ -30,13 +47,13 @@ export default function Navbar() {
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
     const navigation = [
-        { name: 'Owes Me', href: '#', current: true },
-        { name: 'My Debts', href: '#', current: false }
+        { name: 'Owes Me', href: '', current: true },
+        { name: 'My Debts', href: '', current: false }
     ]
 
     return (
 
-        <Disclosure as="nav" className="bg-transparent mb-6">
+        <Disclosure as="nav" className="bg-main mb-6">
             {({ open }) => (
                 <div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,11 +72,12 @@ export default function Navbar() {
                                 </div>
                                 <div className="flex-shrink-0 flex items-center">
                                     <div className="relative h-20 w-16">
-                                        <Image
+                                        <ExportedImage
                                             src="/images/logo/beerlist_logo.png"
                                             alt="beerlist logo"
                                             layout="fill"
                                             objectFit="contain"
+                                            // unoptimized={true}
                                         />
                                     </div>
                                 </div>
@@ -83,7 +101,8 @@ export default function Navbar() {
                                 <div className="flex-shrink-0">
                                     <button
                                         type="button"
-                                        className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-sm font-medium rounded-md bg-tertiary hover:-translate-x-0.5 hover:-translate-y-0.5 transition-transform duration-150 ease-in-out"
+                                        onClick={() => writeBetData('debt', 'small', Beer.Stout, user)}
+                                        className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-sm font-medium rounded-md bg-tertiary hover:shadow-md hover:translate-x-0.5 transition-all duration-300 ease-in-out"
                                     >
                                         <PlusSmIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                                         <span>New Bet</span>
@@ -98,12 +117,13 @@ export default function Navbar() {
                                                 <span className="sr-only">Open user menu</span>
                                                 {
                                                     user.photoURL ?
-                                                        <Image
+                                                        <ExportedImage
                                                             className="rounded-full"
                                                             src={user ? user.photoURL : ''}
                                                             alt="User"
                                                             width={46}
                                                             height={46}
+                                                            // unoptimized={true}
                                                         />
                                                         :
                                                         <Skeleton variant="circular" width={46} height={46} />
@@ -119,16 +139,19 @@ export default function Navbar() {
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95"
                                         >
-                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-tertiary">
+                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 shadow-lg rounded-md  bg-secondary">
                                                 {userNavigation.map((item) => (
-                                                    <Menu.Item key={item.name}>
-                                                        <a
+                                                    <div
+                                                        key={item.name}
+                                                        className="hover:bg-tertiary  hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
+                                                    >
+                                                        <div
                                                             onClick={item.onClickFunction}
-                                                            className='block px-4 py-2 text-sm text-paragraph cursor-pointer hover:bg-tertiary-dark'
+                                                            className='block px-4 py-2 text-sm text-button-text font-bold hover:translate-x-1 transition-all duration-300 ease-in-out cursor-pointer'
                                                         >
                                                             {item.name}
-                                                        </a>
-                                                    </Menu.Item>
+                                                        </div>
+                                                    </div>
                                                 ))}
                                             </Menu.Items>
                                         </Transition>
@@ -149,7 +172,7 @@ export default function Navbar() {
                                     href={item.href}
                                     className={classNames(
                                         item.current ? 'bg-secondary text-button-text hover:bg-tertiary hover:text-white' : 'text-paragraph hover:bg-tertiary hover:text-white',
-                                                'block px-3 py-2 rounded-md text-base font-medium'
+                                        'block px-3 py-2 rounded-md text-base font-medium'
                                     )}
                                     aria-current={item.current ? 'page' : undefined}
                                 >
@@ -162,12 +185,13 @@ export default function Navbar() {
                                 <div className="flex-shrink-0">
                                     {
                                         user.photoURL ?
-                                            <Image
+                                            <ExportedImage
                                                 className="rounded-full"
                                                 src={user ? user.photoURL : ''}
                                                 alt="User"
                                                 width={46}
                                                 height={46}
+                                                // unoptimized={true}
                                             />
                                             :
                                             <Skeleton variant="circular" width={46} height={46} />

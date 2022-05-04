@@ -1,6 +1,7 @@
 import getConfig from "next/config";
 import { getApps, initializeApp } from 'firebase/app';
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
@@ -10,14 +11,15 @@ const firebaseConfig = {
     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
     projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
     storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
 };
 
 
 if (!getApps().length) {
     initializeApp(firebaseConfig);
 }
+
+export const database = getDatabase();
 
 export const auth = getAuth();
 
