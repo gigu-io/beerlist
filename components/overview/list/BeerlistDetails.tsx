@@ -7,6 +7,7 @@ import ExportedImage from "next-image-export-optimizer";
 import { BadgeCheckIcon, ChevronDoubleRightIcon, LinkIcon, QuestionMarkCircleIcon } from "@heroicons/react/outline";
 import { StatusBackgroundColors, StatusBackgroundHoverColors } from "../Dashboard";
 import { BetDetails } from "./BetDetails";
+import { Bet } from "./Beerlist";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -25,56 +26,48 @@ export interface BeerGuilty {
     bets: Array<Bet>
 }
 
-export interface Bet {
-    id: number
-    type: Beer
-    reason: string
-    size: string
-    date: string
-    datetime: string
-    background: string | "bg-transparent"
-    confirmed: boolean
-    completeDate: string | null
-    completeDatetime: string | null
-}
-
-export default function BeerlistDetails({ beerguilty }: {beerguilty: BeerGuilty}) {
+export default function BeerlistDetails({ bet, betid }: {bet: Bet, betid: string}) {
     const [showDetails, setShowDetails] = useState(false);
 
-    const confirmedBets = beerguilty.bets.filter((bet: Bet) => bet.confirmed)
-    const incompleteBets = beerguilty.bets.filter((bet: Bet) => !bet.completeDate)
-    const unconfirmedBets = beerguilty.bets.filter((bet: Bet) => !bet.confirmed)
-    const uncofirmedIncompleteBets = unconfirmedBets.filter((bet: Bet) => !bet.completeDate)
-    const confirmedIncompleteBets = confirmedBets.filter((bet: Bet) => !bet.completeDate)
-    const confirmedCompleteBets = confirmedBets.filter((bet: Bet) => bet.completeDate)
+    // REFACTOR the whole thing to use a map
+    
 
-    unconfirmedBets.forEach((bet: Bet) => {
-        bet.background = StatusBackgroundColors.Orange
-    })
 
-    const completeBets = beerguilty.bets.filter((bet: Bet) => bet.completeDate)
-    completeBets.forEach((bet: Bet) => {
-        bet.background = StatusBackgroundColors.Green
-    })
 
-    confirmedIncompleteBets.forEach((bet: Bet) => {
-        bet.background = StatusBackgroundColors.Transparent
-    })
+    // const confirmedBets = bet.bets.filter((bet: Bet) => bet.confirmed)
+    // const incompleteBets = bet.bets.filter((bet: Bet) => !bet.completeDate)
+    // const unconfirmedBets = bet.bets.filter((bet: Bet) => !bet.confirmed)
+    // const uncofirmedIncompleteBets = unconfirmedBets.filter((bet: Bet) => !bet.completeDate)
+    // const confirmedIncompleteBets = confirmedBets.filter((bet: Bet) => !bet.completeDate)
+    // const confirmedCompleteBets = confirmedBets.filter((bet: Bet) => bet.completeDate)
 
-    interface BetListCount {
-        type: Beer
-        count: number
-    }
+    // unconfirmedBets.forEach((bet: Bet) => {
+    //     bet.background = StatusBackgroundColors.Orange
+    // })
 
-    const incompleteConfirmedBetsCount = confirmedIncompleteBets.reduce((acc: BetListCount[], bet: Bet) => {
-        const existing = acc.find((count: BetListCount) => count.type === bet.type)
-        if (existing) {
-            existing.count++
-        } else {
-            acc.push({ type: bet.type, count: 1 })
-        }
-        return acc
-    }, [])
+    // const completeBets = beerguilty.bets.filter((bet: Bet) => bet.completeDate)
+    // completeBets.forEach((bet: Bet) => {
+    //     bet.background = StatusBackgroundColors.Green
+    // })
+
+    // confirmedIncompleteBets.forEach((bet: Bet) => {
+    //     bet.background = StatusBackgroundColors.Transparent
+    // })
+
+    // interface BetListCount {
+    //     type: Beer
+    //     count: number
+    // }
+
+    // const incompleteConfirmedBetsCount = confirmedIncompleteBets.reduce((acc: BetListCount[], bet: Bet) => {
+    //     const existing = acc.find((count: BetListCount) => count.type === bet.type)
+    //     if (existing) {
+    //         existing.count++
+    //     } else {
+    //         acc.push({ type: bet.type, count: 1 })
+    //     }
+    //     return acc
+    // }, [])
 
     return (
         <div>

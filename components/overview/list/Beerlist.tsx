@@ -1,115 +1,85 @@
+import { onValue, ref } from 'firebase/database'
+import { useEffect, useState } from 'react'
+import { useUserContext } from '../../../context/userContext'
+import { database } from '../../../firebase/firebaseAuth.client'
 import { Beer, BeerIconDark, BeerIconIPA, BeerIconLager, BeerIconStout } from '../../icons/BeerIcons'
-import BeerlistDetails from './BeerlistDetails'
+import { StatusBackgroundColors } from '../Dashboard'
+import BeerlistDetails, { BeerGuilty, SmallUser } from './BeerlistDetails'
 
-const beerguilties = [
-  {
-    id: 1,
-    user: {
-      uid: 1,
-      displayName: 'Ricardo Cooper',
-      email: 'ricardo.cooper@example.com',
-      photoURL:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    bets: [
-      {
-        id: 1,
-        type: Beer.Dark,
-        reason: 'Dolphin are fishes',
-        size: '0.5',
-        date: 'Sep 20',
-        datetime: '2020-09-20',
-        confirmed: true,
-        // completeDate: '2020-09-20',
-        // completeDatetime: '2020-09-20'
-      },
-      {
-        id: 2,
-        type: Beer.Stout,
-        reason: 'Some people are crazy, but I am not',
-        size: '0.5',
-        date: 'Sep 20',
-        datetime: '2020-09-20',
-        confirmed: false,
-        // completeDate: '2020-09-20',
-        // completeDatetime: '2020-09-20'
-      },
-      {
-        id: 3,
-        type: Beer.Stout,
-        reason: 'Why do you think I am so stupid?',
-        size: '0.5',
-        date: 'Sep 20',
-        datetime: '2020-09-20',
-        confirmed: true,
-        completeDate: 'Sep 20',
-        completeDatetime: '2020-09-20'
-      },
-      {
-        id: 4,
-        type: Beer.Lager,
-        reason: 'Some reason for this',
-        size: '0.5',
-        date: 'Sep 20',
-        datetime: '2020-09-20',
-        confirmed: true
-      },
-      {
-        id: 5,
-        type: Beer.Stout,
-        reason: 'Some reason for this',
-        size: '0.5',
-        date: 'Sep 20',
-        datetime: '2020-09-20',
-        confirmed: true
-      },
-      {
-        id: 6,
-        type: Beer.IPA,
-        reason: 'Some reason for this',
-        size: '0.5',
-        date: 'Sep 20',
-        datetime: '2020-09-20',
-        confirmed: true
-      },
-    ]
-  },
-  {
-    id: 2,
-    user: {
-      uid: 2,
-      displayName: 'Michaela Bagardi',
-      email: 'ricardo.cooper@example.com',
-      photoURL:
-        'https://images.unsplash.com/photo-1553514029-1318c9127859?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&h=256&q=80',
-    },
-    bets: [
-      {
-        id: 7,
-        type: Beer.IPA,
-        reason: 'Dolphin are some sort of fishes',
-        size: '0.5',
-        date: 'Sep 20',
-        datetime: '2020-09-20',
-        confirmed: true,
-        // completeDate: '2020-09-20',
-        // completeDatetime: '2020-09-20'
-      },
-    ]
+export enum BeerSize {
+  Small = '0.33',
+  Medium = '0.5',
+  Large = '0.75',
+}
+
+export interface Bet {
+  [key: string]: Beer | SmallUser | string | number | boolean | null | undefined
+  type: Beer
+  reason: string
+  size: BeerSize
+  createdTimestamp: number
+  confirmedTimestamp: number | null
+  completedTimestamp: number | null
+  guiltyUser: SmallUser | null
+  user: SmallUser
+}
+
+
+
+export const MatchBackgroundBetColor = (bet: Bet) => {
+  if (bet.confirmedTimestamp) {
+    if (bet.completedTimestamp) {
+      return StatusBackgroundColors.Green
+    } else {
+      return StatusBackgroundColors.Transparent
+    }
+  } else {
+    return StatusBackgroundColors.Orange
   }
-]
-
+}
 
 export default function Beerlist() {
+  const { user, loading, error }: any = useUserContext();
+  // const [bets, setBets] = useState<Map>([]);
+  // a map with key and value is bet object
+  const [bets, setBets] = useState<Map<string, Bet>>(new Map<string, Bet>());
+
+  useEffect(() => {
+    const betsRef = ref(database, 'bets/' + user.uid);
+    onValue(betsRef, (snapshot) => {
+      setBets(snapshot.val());
+    })
+  }, []);
+
+  // get keys from map
+  console.log(Object.keys(bets));
+
+
+
+  // Port BeerlistDetails to Beerlist because it is not used anymore
+
+
+  
+
+
 
   return (
     <div className="bg-white overflow-hidden shadow rounded-md">
       <ul role="list" className="divide-y divide-stroke divide-opacity-10">
-        {beerguilties.map((beerguilty) => (
+        {/* {bets.map((beerguilty: BeerGuilty) => (
           <li key={beerguilty.user.uid}>
             <BeerlistDetails beerguilty={beerguilty} />
           </li>
-        ))}
+        ))} */}
+        {
+          Object.keys(bets).map((key: string) => {
+            const bet: Bet = bets[key];
+            return (
+              <li key={key}>
+                <h1>{bet.reason}</h1>
+              </li>
+            )})
+        }
       </ul>
     </div>
   )

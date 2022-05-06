@@ -115,3 +115,6 @@ samples/ios/Continote/Continote/FCNContinue.m
 # Misc.
 .DS_Store
 *.swp
+
+# Local Testdata
+testdata.json
