@@ -1,10 +1,11 @@
 import { GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase/firebaseAuth.client";
+import { auth, database } from "../firebase/firebaseAuth.client";
 import { User } from "firebase/auth";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import { AlertType, DefaultAlert, DefaultAlertMessage } from "../components/alerts/Alerts";
+import { ref, set } from "firebase/database";
 
 export const UserContext = createContext({});
 
@@ -26,6 +27,15 @@ export const UserContextProvider = ({ children }: Props) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
+
+                // update user in database
+                set(ref(database, 'users/' + user.uid), {
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                });
+
+
             } else {
                 setUser(null);
             }
@@ -84,7 +94,7 @@ export const UserContextProvider = ({ children }: Props) => {
         signInWithGithub,
         logoutUser
     };
-    
+
     return (
         <UserContext.Provider value={contextValue}>
             {children}
