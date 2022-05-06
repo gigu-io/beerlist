@@ -4,7 +4,8 @@ export enum AlertType {
     Success = "success",
     Error = "error",
     Warning = "warning",
-    Info = "info"
+    Info = "info",
+    Question = "question"
 }
 
 export const DefaultAlert = (title: string, type: AlertType) => {
