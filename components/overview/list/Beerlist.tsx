@@ -12,73 +12,67 @@ export enum BeerSize {
   Large = '0.75',
 }
 
+export interface UserOwesMeBetList {
+  displayName: string;
+  email: string;
+  photoURL: string;
+  bets: Map<string, Bet>;
+}
+
 export interface Bet {
-  [key: string]: Beer | SmallUser | string | number | boolean | null | undefined
-  type: Beer
-  reason: string
-  size: BeerSize
+  type: Beer;
+  reason: string;
   createdTimestamp: number
   confirmedTimestamp: number | null
   completedTimestamp: number | null
-  guiltyUser: SmallUser | null
-  user: SmallUser
+  users: Map<string, SmallUser> | null
+  size: BeerSize
 }
 
-
-
-export const MatchBackgroundBetColor = (bet: Bet) => {
-  if (bet.confirmedTimestamp) {
-    if (bet.completedTimestamp) {
-      return StatusBackgroundColors.Green
-    } else {
-      return StatusBackgroundColors.Transparent
-    }
-  } else {
-    return StatusBackgroundColors.Orange
-  }
-}
+// export const MatchBackgroundBetColor = (bet: OwesMe) => {
+//   if (bet.confirmedTimestamp) {
+//     if (bet.completedTimestamp) {
+//       return StatusBackgroundColors.Green
+//     } else {
+//       return StatusBackgroundColors.Transparent
+//     }
+//   } else {
+//     return StatusBackgroundColors.Orange
+//   }
+// }
 
 export default function Beerlist() {
   const { user, loading, error }: any = useUserContext();
-  // const [bets, setBets] = useState<Map>([]);
-  // a map with key and value is bet object
-  const [bets, setBets] = useState<Map<string, Bet>>(new Map<string, Bet>());
+  const [owesme, setOwesme] = useState<Map<string, UserOwesMeBetList>>(new Map<string, UserOwesMeBetList>());
+
+  const [betsPerGuiltyUser, setBetsPerGuiltyUser] = useState<Map<string, Array<UserOwesMeBetList>>>(new Map<string, Array<UserOwesMeBetList>>());
 
   useEffect(() => {
-    const betsRef = ref(database, 'bets/' + user.uid);
+    const betsRef = ref(database, 'owesme/' + user.uid);
     onValue(betsRef, (snapshot) => {
-      setBets(snapshot.val());
+      // setBets(snapshot.val());
+      const returnOwnesmeUsers = new Map<string, UserOwesMeBetList>();
+      if (snapshot.size > 0) {
+        Object.keys(snapshot.val()).forEach((key: string) => {
+          returnOwnesmeUsers.set(key, snapshot.val()[key]);
+        });
+        setOwesme(returnOwnesmeUsers);
+      }
     })
+    // eslint-disable-next-line
   }, []);
-
-  // get keys from map
-  console.log(Object.keys(bets));
-
-
-
-  // Port BeerlistDetails to Beerlist because it is not used anymore
-
-
-  
-
-
 
   return (
     <div className="bg-white overflow-hidden shadow rounded-md">
       <ul role="list" className="divide-y divide-stroke divide-opacity-10">
-        {/* {bets.map((beerguilty: BeerGuilty) => (
-          <li key={beerguilty.user.uid}>
-            <BeerlistDetails beerguilty={beerguilty} />
-          </li>
-        ))} */}
         {
-          Object.keys(bets).map((key: string) => {
-            const bet: Bet = bets[key];
+          Array.from(owesme).map(([key, userOwesMeBetList]: [string, UserOwesMeBetList]) => {
             return (
               <li key={key}>
-                <h1>{bet.reason}</h1>
+                <BeerlistDetails userOwesMeBetList={userOwesMeBetList} owesmeuid={key} />
               </li>
-            )})
+            )
+          })
         }
       </ul>
     </div>

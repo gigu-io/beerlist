@@ -7,7 +7,7 @@ import ExportedImage from "next-image-export-optimizer";
 import { BadgeCheckIcon, ChevronDoubleRightIcon, LinkIcon, QuestionMarkCircleIcon } from "@heroicons/react/outline";
 import { StatusBackgroundColors, StatusBackgroundHoverColors } from "../Dashboard";
 import { BetDetails } from "./BetDetails";
-import { Bet } from "./Beerlist";
+import { Bet, UserOwesMeBetList, } from "./Beerlist";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -26,11 +26,12 @@ export interface BeerGuilty {
     bets: Array<Bet>
 }
 
-export default function BeerlistDetails({ bet, betid }: {bet: Bet, betid: string}) {
+export default function BeerlistDetails({ userOwesMeBetList, owesmeuid }: { userOwesMeBetList: UserOwesMeBetList, owesmeuid: string }) {
     const [showDetails, setShowDetails] = useState(false);
 
+
+
     // REFACTOR the whole thing to use a map
-    
 
 
 
@@ -71,98 +72,119 @@ export default function BeerlistDetails({ bet, betid }: {bet: Bet, betid: string
 
     return (
         <div>
-            <a
-                onClick={() => setShowDetails(!showDetails)}
-                className="cursor-pointer block hover:bg-gray-50 transition-all duration-150 ease-in-out"
-            >
-                <div className="flex items-center px-4 py-4 sm:px-6">
-                    <div className="min-w-0 flex-1 flex items-center">
-                        <div className="mt-1">
-                            <ExportedImage
-                                // unoptimized={true}
-                                width={56}
-                                height={56}
-                                className="rounded-full"
-                                src={beerguilty.user.photoURL}
-                                alt=""
-                            />
-                        </div>
-                        <div className="min-w-0 flex-1 px-4">
-                            <p className="text-sm font-medium text-stroke truncate">{beerguilty.user.displayName}</p>
-                            <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
-                                {/* Total Overview of all incomplete Bets */}
-                                {
-                                    incompleteConfirmedBetsCount.map((bet: BetListCount) => (
-                                        <span key={bet.type} className="group inline-flex p-1 shadow-md rounded-md ">
-                                            <div className="flex m-auto">
-                                                <span className="my-auto">
-                                                    <span className="font-bold">{bet.count}</span>x
-                                                </span>
-                                                <span className="group-hover:rotate-12 transition-all duration-300 ease-in-out">
-                                                    {MatchBeerIcon(bet.type, 35, 35)}
-                                                </span>
-                                            </div>
-                                        </span>
-                                    ))
-                                }
-                                {
-                                    uncofirmedIncompleteBets.length > 0 &&
-                                    <span className={classNames(
-                                        StatusBackgroundColors.Orange,
-                                        "group inline-flex p-2.5 rounded-md shadow-md text-center"
-                                    )}>
-                                        <div className="flex m-auto">
-                                            <span className="text-paragraph font-bold">
-                                                {uncofirmedIncompleteBets.length}
-                                                <span className="font-normal">x</span>
-                                            </span>
-                                            &nbsp;
-                                            <span className="text-paragraph font-extrabold">?</span>
-                                        </div>
-                                    </span>
-                                }
-                                {
-                                    confirmedCompleteBets.length > 0 &&
-                                    <span className={classNames(
-                                        StatusBackgroundColors.Green,
-                                        "group inline-flex p-2.5 rounded-md shadow-md text-center"
-                                    )}>
-                                        <div className="flex m-auto">
-                                            <span className="text-paragraph font-bold">
-                                                {confirmedCompleteBets.length}
-                                                <span className="font-normal">x</span>
-                                            </span>
-                                            &nbsp;
-                                            <span className="text-paragraph font-extrabold">✓</span>
-                                        </div>
-                                    </span>
-                                }
 
+            <div>
+                <a
+                    onClick={() => setShowDetails(!showDetails)}
+                    className="cursor-pointer block hover:bg-gray-50 transition-all duration-150 ease-in-out"
+                >
+                    <div className="flex items-center px-4 py-4 sm:px-6">
+                        <div className="min-w-0 flex-1 flex items-center">
+                            <div className="mt-1">
+                                <ExportedImage
+                                    // unoptimized={true}
+                                    width={56}
+                                    height={56}
+                                    className="rounded-full"
+                                    src={userOwesMeBetList.photoURL}
+                                    alt=""
+                                />
+                            </div>
+                            <div className="min-w-0 flex-1 px-4">
+                                <p className="text-sm font-medium text-stroke truncate">{userOwesMeBetList.displayName}</p>
+                                <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
+                                    {
+                                        // incompleteConfirmedBetsCount.map((bet: BetListCount) => (
+                                        //     <span key={bet.type} className="group inline-flex p-1 shadow-md rounded-md ">
+                                        //         <div className="flex m-auto">
+                                        //             <span className="my-auto">
+                                        //                 <span className="font-bold">{bet.count}</span>x
+                                        //             </span>
+                                        //             <span className="group-hover:rotate-12 transition-all duration-300 ease-in-out">
+                                        //                 {MatchBeerIcon(bet.type, 35, 35)}
+                                        //             </span>
+                                        //         </div>
+                                        //     </span>
+                                        // ))
+                                    }
+                                    {
+                                        // uncofirmedIncompleteBets.length > 0 &&
+                                        // <span className={classNames(
+                                        //     StatusBackgroundColors.Orange,
+                                        //     "group inline-flex p-2.5 rounded-md shadow-md text-center"
+                                        // )}>
+                                        //     <div className="flex m-auto">
+                                        //         <span className="text-paragraph font-bold">
+                                        //             {uncofirmedIncompleteBets.length}
+                                        //             <span className="font-normal">x</span>
+                                        //         </span>
+                                        //         &nbsp;
+                                        //         <span className="text-paragraph font-extrabold">?</span>
+                                        //     </div>
+                                        // </span>
+                                    }
+                                    {
+                                        // confirmedCompleteBets.length > 0 &&
+                                        // <span className={classNames(
+                                        //     StatusBackgroundColors.Green,
+                                        //     "group inline-flex p-2.5 rounded-md shadow-md text-center"
+                                        // )}>
+                                        //     <div className="flex m-auto">
+                                        //         <span className="text-paragraph font-bold">
+                                        //             {confirmedCompleteBets.length}
+                                        //             <span className="font-normal">x</span>
+                                        //         </span>
+                                        //         &nbsp;
+                                        //         <span className="text-paragraph font-extrabold">✓</span>
+                                        //     </div>
+                                        // </span>
+                                    }
+                                </div>
                             </div>
                         </div>
+                        <div>
+                            <ChevronRightIcon className={classNames(
+                                showDetails ? 'rotate-90 text-tertiary' : 'rotate-0 text-paragraph',
+                                "h-6 w-6 transition-all duration-150 ease-in-out"
+                            )}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <ChevronRightIcon className={classNames(
-                            showDetails ? 'rotate-90 text-tertiary' : 'rotate-0 text-paragraph',
-                            "h-6 w-6 transition-all duration-150 ease-in-out"
-                        )}
-                        />
-                    </div>
+                </a>
+
+                {/* Detailed Bets */}
+                <div className={classNames(
+                    showDetails ? 'max-h-[2000px]' : 'max-h-0',
+                    "bg-white transition-all duration-150 ease-in-out overflow-hidden"
+                )}>
+                    <ul role="list" className="p-4">
+                        {
+                            // Doesn't work atm
+                            Array.from(userOwesMeBetList.bets).map(([key, bet]: [string, Bet]) => (
+                                <li key={key}>
+                                    <h1>{bet.reason}</h1>
+                                </li>
+                            ))
+                            // Array.from(userOwesMeBetList.bets).map(([key, bet]: [string, Bet]) => {
+                            //     console.log(userOwesMeBetList.bets)
+                            //     return (
+                            //         <li key={key}>
+                            //             <h1>{key}</h1>
+                            //             {/* <BetDetails bet={bet} total={userOwesMeBetList.bets.length} key={key} /> */}
+                            //         </li>
+                            //     )
+                            // })
+                        }
+                        {/* {userOwesMeBetList.bets.map((bet: Bet, betIdx: any) => (
+                            <BetDetails bet={bet} total={userOwesMeBetList.bets.length} key={bet.id} />
+                        ))} */}
+                    </ul>
                 </div>
-            </a>
-
-            {/* Detailed Bets */}
-
-            <div className={classNames(
-                showDetails ? 'max-h-[2000px]' : 'max-h-0',
-                "bg-white transition-all duration-150 ease-in-out overflow-hidden"
-            )}>
-                <ul role="list" className="p-4">
-                    {beerguilty.bets.map((bet: Bet, betIdx: any) => (
-                        <BetDetails bet={bet} total={beerguilty.bets.length} key={bet.id} />
-                    ))}
-                </ul>
             </div>
+
+
+
+
         </div>
     )
 }
