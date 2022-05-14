@@ -46,42 +46,21 @@ export default function BeerlistDetails({ userOwesMeBetList, owesmeuid }: { user
 
     // REFACTOR the whole thing to use a map
 
+    let incompleteConfirmedBets: Map<string, Bet> = new Map<string, Bet>();
+    let incompleteUnconfirmedBets: Map<string, Bet> = new Map<string, Bet>();
+    let completeConfirmedBets: Map<string, Bet> = new Map<string, Bet>();
 
-
-    // const confirmedBets = bet.bets.filter((bet: Bet) => bet.confirmed)
-    // const incompleteBets = bet.bets.filter((bet: Bet) => !bet.completeDate)
-    // const unconfirmedBets = bet.bets.filter((bet: Bet) => !bet.confirmed)
-    // const uncofirmedIncompleteBets = unconfirmedBets.filter((bet: Bet) => !bet.completeDate)
-    // const confirmedIncompleteBets = confirmedBets.filter((bet: Bet) => !bet.completeDate)
-    // const confirmedCompleteBets = confirmedBets.filter((bet: Bet) => bet.completeDate)
-
-    // unconfirmedBets.forEach((bet: Bet) => {
-    //     bet.background = StatusBackgroundColors.Orange
-    // })
-
-    // const completeBets = beerguilty.bets.filter((bet: Bet) => bet.completeDate)
-    // completeBets.forEach((bet: Bet) => {
-    //     bet.background = StatusBackgroundColors.Green
-    // })
-
-    // confirmedIncompleteBets.forEach((bet: Bet) => {
-    //     bet.background = StatusBackgroundColors.Transparent
-    // })
-
-    // interface BetListCount {
-    //     type: Beer
-    //     count: number
-    // }
-
-    // const incompleteConfirmedBetsCount = confirmedIncompleteBets.reduce((acc: BetListCount[], bet: Bet) => {
-    //     const existing = acc.find((count: BetListCount) => count.type === bet.type)
-    //     if (existing) {
-    //         existing.count++
-    //     } else {
-    //         acc.push({ type: bet.type, count: 1 })
-    //     }
-    //     return acc
-    // }, [])
+    if (bets) {
+        Array.from(bets).map(([key, bet]: [string, Bet]) => {
+            if (bet.confirmedTimestamp == null) {
+                incompleteUnconfirmedBets.set(key, bet);
+            } else if (bet.completedTimestamp == null) {
+                incompleteConfirmedBets.set(key, bet);
+            } else {
+                completeConfirmedBets.set(key, bet);
+            }
+        });
+    }
 
     return (
         <div>
@@ -107,50 +86,54 @@ export default function BeerlistDetails({ userOwesMeBetList, owesmeuid }: { user
                                 <p className="text-sm font-medium text-stroke truncate">{userOwesMeBetList.displayName}</p>
                                 <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
                                     {
-                                        // incompleteConfirmedBetsCount.map((bet: BetListCount) => (
-                                        //     <span key={bet.type} className="group inline-flex p-1 shadow-md rounded-md ">
-                                        //         <div className="flex m-auto">
-                                        //             <span className="my-auto">
-                                        //                 <span className="font-bold">{bet.count}</span>x
-                                        //             </span>
-                                        //             <span className="group-hover:rotate-12 transition-all duration-300 ease-in-out">
-                                        //                 {MatchBeerIcon(bet.type, 35, 35)}
-                                        //             </span>
-                                        //         </div>
-                                        //     </span>
-                                        // ))
+                                        incompleteConfirmedBets.size > 0 ?
+                                            <span key={
+                                                incompleteConfirmedBets.values().next().value.type
+                                            } className="group inline-flex p-1 shadow-md rounded-md ">
+                                                <div className="flex m-auto">
+                                                    <span className="my-auto">
+                                                        <span className="font-bold">{incompleteUnconfirmedBets.size}</span>x
+                                                    </span>
+                                                    <span className="group-hover:rotate-12 transition-all duration-300 ease-in-out">
+                                                        {MatchBeerIcon(incompleteConfirmedBets.values().next().value.type, 35, 35)}
+                                                    </span>
+                                                </div>
+                                            </span>
+                                            : null
                                     }
                                     {
-                                        // uncofirmedIncompleteBets.length > 0 &&
-                                        // <span className={classNames(
-                                        //     StatusBackgroundColors.Orange,
-                                        //     "group inline-flex p-2.5 rounded-md shadow-md text-center"
-                                        // )}>
-                                        //     <div className="flex m-auto">
-                                        //         <span className="text-paragraph font-bold">
-                                        //             {uncofirmedIncompleteBets.length}
-                                        //             <span className="font-normal">x</span>
-                                        //         </span>
-                                        //         &nbsp;
-                                        //         <span className="text-paragraph font-extrabold">?</span>
-                                        //     </div>
-                                        // </span>
+                                        incompleteUnconfirmedBets.size > 0 ?
+                                            <span className={classNames(
+                                                StatusBackgroundColors.Orange,
+                                                "group inline-flex p-2.5 rounded-md shadow-md text-center"
+                                            )}>
+                                                <div className="flex m-auto">
+                                                    <span className="text-paragraph font-bold">
+                                                        {incompleteUnconfirmedBets.size}
+                                                        <span className="font-normal">x</span>
+                                                    </span>
+                                                    &nbsp;
+                                                    <span className="text-paragraph font-extrabold">?</span>
+                                                </div>
+                                            </span>
+                                            : null
                                     }
                                     {
-                                        // confirmedCompleteBets.length > 0 &&
-                                        // <span className={classNames(
-                                        //     StatusBackgroundColors.Green,
-                                        //     "group inline-flex p-2.5 rounded-md shadow-md text-center"
-                                        // )}>
-                                        //     <div className="flex m-auto">
-                                        //         <span className="text-paragraph font-bold">
-                                        //             {confirmedCompleteBets.length}
-                                        //             <span className="font-normal">x</span>
-                                        //         </span>
-                                        //         &nbsp;
-                                        //         <span className="text-paragraph font-extrabold">✓</span>
-                                        //     </div>
-                                        // </span>
+                                        completeConfirmedBets.size > 0 ?
+                                            <span className={classNames(
+                                                StatusBackgroundColors.Green,
+                                                "group inline-flex p-2.5 rounded-md shadow-md text-center"
+                                            )}>
+                                                <div className="flex m-auto">
+                                                    <span className="text-paragraph font-bold">
+                                                        {completeConfirmedBets.size}
+                                                        <span className="font-normal">x</span>
+                                                    </span>
+                                                    &nbsp;
+                                                    <span className="text-paragraph font-extrabold">✓</span>
+                                                </div>
+                                            </span>
+                                            : null
                                     }
                                 </div>
                             </div>
