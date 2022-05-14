@@ -84,6 +84,7 @@ export default function BeerlistDetails({ userOwesMeBetList, owesmeuid }: { user
                             </div>
                             <div className="min-w-0 flex-1 px-4">
                                 <p className="text-sm font-medium text-stroke truncate">{userOwesMeBetList.displayName}</p>
+                                <p className=" text-xs font-light text-gray-500 truncate">{userOwesMeBetList.email}</p>
                                 <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
                                     {
                                         incompleteConfirmedBets.size > 0 ?
