@@ -30,23 +30,9 @@ export interface Bet {
   size: BeerSize
 }
 
-// export const MatchBackgroundBetColor = (bet: OwesMe) => {
-//   if (bet.confirmedTimestamp) {
-//     if (bet.completedTimestamp) {
-//       return StatusBackgroundColors.Green
-//     } else {
-//       return StatusBackgroundColors.Transparent
-//     }
-//   } else {
-//     return StatusBackgroundColors.Orange
-//   }
-// }
-
 export default function Beerlist() {
   const { user, loading, error }: any = useUserContext();
   const [owesme, setOwesme] = useState<Map<string, UserOwesMeBetList>>(new Map<string, UserOwesMeBetList>());
-
-  const [betsPerGuiltyUser, setBetsPerGuiltyUser] = useState<Map<string, Array<UserOwesMeBetList>>>(new Map<string, Array<UserOwesMeBetList>>());
 
   useEffect(() => {
     const betsRef = ref(database, 'owesme/' + user.uid);

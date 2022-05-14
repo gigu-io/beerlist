@@ -184,10 +184,6 @@ export default function BeerlistDetails({ userOwesMeBetList, owesmeuid }: { user
                     </ul>
                 </div>
             </div>
-
-
-
-
         </div>
     )
 }

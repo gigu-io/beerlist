@@ -20,6 +20,8 @@ export function timeConverter(UNIX_timestamp: number): string {
     var time =
         date +
         " " +
-        month;
+        month +
+        " " +
+        year;
     return time;
 }

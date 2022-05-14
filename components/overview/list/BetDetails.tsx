@@ -68,7 +68,7 @@ export const BetDetails = ({ bet, betid, total, last }: { bet: Bet, betid: strin
                         <span className="absolute top-6 left-5 -ml-px h-full w-0.5 bg-gray-100" aria-hidden="true" />
                         : null
                 }
-                <div className="relative grid sm:grid-cols-7 grid-cols-7 space-x-3 py-4 group">
+                <div className="relative grid sm:grid-cols-6 grid-cols-8 space-x-3 py-4 group">
                     <div className="col-span-1">
                         <div className="grid grid-cols-1 sm:grid-cols-2">
                             <div
@@ -77,7 +77,6 @@ export const BetDetails = ({ bet, betid, total, last }: { bet: Bet, betid: strin
                                     'h-10 w-10 rounded-full p-1 flex items-center justify-center mb-1 sm:mb-0 group-hover:rotate-12 transition-all duration-300 ease-out'
                                 )}
                             >
-                                {/* <bet.icon width={30} height={30} /> */}
                                 {MatchBeerIcon(bet.type, 30, 30)}
                             </div>
                             <div
@@ -91,7 +90,7 @@ export const BetDetails = ({ bet, betid, total, last }: { bet: Bet, betid: strin
                         </div>
                     </div>
 
-                    <div className="col-span-4 sm:col-span-5 hover:translate-x-1 transition-all duration-150 ease-in-out">
+                    <div className="col-span-4 sm:col-span-4 hover:translate-x-1 transition-all duration-150 ease-in-out">
                         <p className="text-sm">
                             <a className="font-medium">
                                 &quot;{bet.reason}&quot;
