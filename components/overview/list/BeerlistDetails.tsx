@@ -1,11 +1,8 @@
 import { useState } from "react";
-import { AnnotationIcon, CheckIcon, ChevronDownIcon, DotsCircleHorizontalIcon, ThumbUpIcon, UserIcon } from '@heroicons/react/solid'
-import { Beer, BeerIcon, BeerIconDark, BeerIconIPA, BeerIconLager, BeerIconStout, MatchBeerIcon } from "../../icons/BeerIcons";
-import { CheckCircleIcon, ChevronRightIcon, MailIcon } from '@heroicons/react/solid'
-import { User, UserInfo } from 'firebase/auth'
+import { MatchBeerIcon } from "../../icons/BeerIcons";
+import { ChevronRightIcon } from '@heroicons/react/solid';
 import ExportedImage from "next-image-export-optimizer";
-import { BadgeCheckIcon, ChevronDoubleRightIcon, LinkIcon, QuestionMarkCircleIcon } from "@heroicons/react/outline";
-import { StatusBackgroundColors, StatusBackgroundHoverColors } from "../Dashboard";
+import { StatusBackgroundColors } from "../Dashboard";
 import { BetDetails } from "./BetDetails";
 import { Bet, UserOwesMeBetList, } from "./Beerlist";
 

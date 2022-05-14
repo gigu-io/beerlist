@@ -2,9 +2,8 @@ import { onValue, ref } from 'firebase/database'
 import { useEffect, useState } from 'react'
 import { useUserContext } from '../../../context/userContext'
 import { database } from '../../../firebase/firebaseAuth.client'
-import { Beer, BeerIconDark, BeerIconIPA, BeerIconLager, BeerIconStout } from '../../icons/BeerIcons'
-import { StatusBackgroundColors } from '../Dashboard'
-import BeerlistDetails, { BeerGuilty, SmallUser } from './BeerlistDetails'
+import { Beer } from '../../icons/BeerIcons'
+import BeerlistDetails, { SmallUser } from './BeerlistDetails'
 
 export enum BeerSize {
   Small = '0.3',

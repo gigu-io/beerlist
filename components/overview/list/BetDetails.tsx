@@ -2,7 +2,7 @@ import Swal from "sweetalert2"
 import { getBackgroundColor } from "../../../lib/getBackgroundColor"
 import { timeConverter } from "../../../lib/timeConverter"
 import { AlertType, DefaultAlert } from "../../alerts/Alerts"
-import { Beer, MatchBeerIcon } from "../../icons/BeerIcons"
+import { MatchBeerIcon } from "../../icons/BeerIcons"
 import { StatusBackgroundColors, StatusBackgroundHoverColors } from "../Dashboard"
 import { Bet } from "./Beerlist"
 
