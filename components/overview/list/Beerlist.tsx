@@ -7,7 +7,7 @@ import { StatusBackgroundColors } from '../Dashboard'
 import BeerlistDetails, { BeerGuilty, SmallUser } from './BeerlistDetails'
 
 export enum BeerSize {
-  Small = '0.33',
+  Small = '0.3',
   Medium = '0.5',
   Large = '0.75',
 }
@@ -20,6 +20,7 @@ export interface UserOwesMeBetList {
 }
 
 export interface Bet {
+  [key: string]: Beer | string | number | Map<string, SmallUser> | BeerSize | null;
   type: Beer;
   reason: string;
   createdTimestamp: number

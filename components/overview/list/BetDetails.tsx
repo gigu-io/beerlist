@@ -1,17 +1,21 @@
 import Swal from "sweetalert2"
+import { getBackgroundColor } from "../../../lib/getBackgroundColor"
+import { timeConverter } from "../../../lib/timeConverter"
 import { AlertType, DefaultAlert } from "../../alerts/Alerts"
 import { Beer, MatchBeerIcon } from "../../icons/BeerIcons"
 import { StatusBackgroundColors, StatusBackgroundHoverColors } from "../Dashboard"
-import { Bet } from "./BeerlistDetails"
+import { Bet } from "./Beerlist"
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
-export const BetDetails = ({bet, total}: {bet: Bet, total: number}) => {
+export const BetDetails = ({ bet, betid, total, last }: { bet: Bet, betid: string, total: number, last: boolean }) => {
+    
+    bet.background = getBackgroundColor(bet);
 
     const handleClick = () => {
-        if (bet.confirmed && !bet.completeDate) {
+        if (bet.confirmedTimestamp && !bet.completedTimestamp) {
             Swal.fire({
                 title: "redeem debt?",
                 text: "Are you sure you want to redeem this debt?",
@@ -26,7 +30,7 @@ export const BetDetails = ({bet, total}: {bet: Bet, total: number}) => {
                 }
             })
         }
-        else if (!bet.confirmed && !bet.completeDate) {
+        else if (!bet.confirmedTimestamp && !bet.completedTimestamp) {
             Swal.fire({
                 title: "confirm debt?",
                 text: "Are you sure you want to confirm this debt?",
@@ -47,10 +51,9 @@ export const BetDetails = ({bet, total}: {bet: Bet, total: number}) => {
     return (
         <div
             onClick={handleClick}
-            key={bet.id}
             className={classNames(
-                bet.confirmed ?
-                    bet.completeDate ?
+                bet.confirmedTimestamp ?
+                    bet.completedTimestamp ?
                         StatusBackgroundHoverColors.Green
                         :
                         StatusBackgroundHoverColors.Gray
@@ -61,9 +64,9 @@ export const BetDetails = ({bet, total}: {bet: Bet, total: number}) => {
         >
             <div className="relative">
                 {
-                    bet.id !== total && total > 1 ? 
-                    <span className="absolute top-6 left-5 -ml-px h-full w-0.5 bg-gray-100" aria-hidden="true" />
-                    : null
+                    !last && total > 1 ?
+                        <span className="absolute top-6 left-5 -ml-px h-full w-0.5 bg-gray-100" aria-hidden="true" />
+                        : null
                 }
                 <div className="relative grid sm:grid-cols-7 grid-cols-7 space-x-3 py-4 group">
                     <div className="col-span-1">
@@ -102,8 +105,26 @@ export const BetDetails = ({bet, total}: {bet: Bet, total: number}) => {
                                 bet.background,
                                 "text-sm  p-1 rounded"
                             )}
-                            dateTime={bet.completeDatetime ? bet.completeDatetime : bet.date}>
-                            {bet.completeDate ? bet.completeDate : bet.date}
+                            dateTime={
+                                bet.completedTimestamp ?
+                                    bet.confirmedTimestamp ?
+                                        timeConverter(bet.completedTimestamp)
+                                        :
+                                        // @ts-ignore
+                                        timeConverter(bet.confirmedTimestamp)
+                                    :
+                                    timeConverter(bet.createdTimestamp)
+                            }>
+                            {
+                                bet.completedTimestamp ?
+                                    bet.confirmedTimestamp ?
+                                        timeConverter(bet.completedTimestamp)
+                                        :
+                                        // @ts-ignore
+                                        timeConverter(bet.confirmedTimestamp)
+                                    :
+                                    timeConverter(bet.createdTimestamp)
+                            }
                         </time>
                     </div>
 

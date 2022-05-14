@@ -28,8 +28,21 @@ export interface BeerGuilty {
 
 export default function BeerlistDetails({ userOwesMeBetList, owesmeuid }: { userOwesMeBetList: UserOwesMeBetList, owesmeuid: string }) {
     const [showDetails, setShowDetails] = useState(false);
-
-
+    let bets: Map<string, Bet> = new Map<string, Bet>();
+    if (userOwesMeBetList.bets) {
+        Object.keys(userOwesMeBetList.bets).forEach((key: string) => {
+            // @ts-ignore
+            bets.set(key, userOwesMeBetList.bets[key]);
+            // @ts-ignore
+            if (bets.get(key) && bets.get(key).users) {
+                // @ts-ignore
+                Object.keys(bets.get(key).users).forEach((key2: string) => {
+                    // @ts-ignore
+                    bets.get(key).users[key2].uid = key2;
+                });
+            }
+        });
+    }
 
     // REFACTOR the whole thing to use a map
 
@@ -159,25 +172,15 @@ export default function BeerlistDetails({ userOwesMeBetList, owesmeuid }: { user
                 )}>
                     <ul role="list" className="p-4">
                         {
-                            // Doesn't work atm
-                            Array.from(userOwesMeBetList.bets).map(([key, bet]: [string, Bet]) => (
+                            Array.from(bets).map(([key, bet]: [string, Bet], i: number) => (
+
                                 <li key={key}>
-                                    <h1>{bet.reason}</h1>
+                                    <BetDetails bet={bet} betid={key} total={bets.size} key={key} last={
+                                        i === bets.size - 1
+                                    } />
                                 </li>
                             ))
-                            // Array.from(userOwesMeBetList.bets).map(([key, bet]: [string, Bet]) => {
-                            //     console.log(userOwesMeBetList.bets)
-                            //     return (
-                            //         <li key={key}>
-                            //             <h1>{key}</h1>
-                            //             {/* <BetDetails bet={bet} total={userOwesMeBetList.bets.length} key={key} /> */}
-                            //         </li>
-                            //     )
-                            // })
                         }
-                        {/* {userOwesMeBetList.bets.map((bet: Bet, betIdx: any) => (
-                            <BetDetails bet={bet} total={userOwesMeBetList.bets.length} key={bet.id} />
-                        ))} */}
                     </ul>
                 </div>
             </div>
