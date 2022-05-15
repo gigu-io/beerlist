@@ -11,14 +11,12 @@ export enum BeerSize {
   Large = '0.75',
 }
 
-export interface UserOwesMeBetList {
-  displayName: string;
-  email: string;
-  photoURL: string;
-  bets: Map<string, Bet>;
+export interface UserOwesMeDebtList {
+  userinfo: SmallUser
+  debts: Map<string, Debt>;
 }
 
-export interface Bet {
+export interface Debt {
   [key: string]: Beer | string | number | Map<string, SmallUser> | BeerSize | null;
   type: Beer;
   reason: string;
@@ -31,13 +29,12 @@ export interface Bet {
 
 export default function Beerlist() {
   const { user, loading, error }: any = useUserContext();
-  const [owesme, setOwesme] = useState<Map<string, UserOwesMeBetList>>(new Map<string, UserOwesMeBetList>());
+  const [owesme, setOwesme] = useState<Map<string, UserOwesMeDebtList>>(new Map<string, UserOwesMeDebtList>());
 
   useEffect(() => {
-    const betsRef = ref(database, 'owesme/' + user.uid);
-    onValue(betsRef, (snapshot) => {
-      // setBets(snapshot.val());
-      const returnOwnesmeUsers = new Map<string, UserOwesMeBetList>();
+    const debtsRef = ref(database, 'owesme/' + user.uid);
+    onValue(debtsRef, (snapshot) => {
+      const returnOwnesmeUsers = new Map<string, UserOwesMeDebtList>();
       if (snapshot.size > 0) {
         Object.keys(snapshot.val()).forEach((key: string) => {
           returnOwnesmeUsers.set(key, snapshot.val()[key]);
@@ -52,10 +49,10 @@ export default function Beerlist() {
     <div className="bg-white overflow-hidden shadow rounded-md">
       <ul role="list" className="divide-y divide-stroke divide-opacity-10">
         {
-          Array.from(owesme).map(([key, userOwesMeBetList]: [string, UserOwesMeBetList]) => {
+          Array.from(owesme).map(([key, userOwesMeDebtList]: [string, UserOwesMeDebtList]) => {
             return (
               <li key={key}>
-                <BeerlistDetails userOwesMeBetList={userOwesMeBetList} owesmeuid={key} />
+                <BeerlistDetails userOwesMeDebtList={userOwesMeDebtList} guiltyUID={key} />
               </li>
             )
           })

@@ -1,14 +1,14 @@
 import { StatusBackgroundColors } from "../components/overview/Dashboard";
-import { Bet } from "../components/overview/list/Beerlist";
+import { Debt } from "../components/overview/list/Beerlist";
 
-export function getBackgroundColor(bet: Bet): string {
-    if (bet.completedTimestamp) {
+export function getBackgroundColor(debt: Debt): string {
+    if (debt.completedTimestamp) {
         return StatusBackgroundColors.Green;
     }
-    if (bet.cancelledTimestamp) {
+    if (debt.cancelledTimestamp) {
         return StatusBackgroundColors.Red;
     }
-    if (!bet.confirmedTimestamp) {
+    if (!debt.confirmedTimestamp) {
         return StatusBackgroundColors.Orange;
     }
     return StatusBackgroundColors.Transparent;

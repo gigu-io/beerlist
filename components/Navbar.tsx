@@ -2,7 +2,7 @@
 import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, EmojiHappyIcon, EmojiSadIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import { PlusSmIcon } from '@heroicons/react/solid'
+import { CheckIcon, PlusSmIcon } from '@heroicons/react/solid'
 import ExportedImage from "next-image-export-optimizer";
 import { useUserContext } from '../context/userContext'
 import { User } from 'firebase/auth'
@@ -10,13 +10,15 @@ import { Skeleton } from '@mui/material'
 import { database } from "../firebase/firebaseAuth.client";
 import { ref, set } from "firebase/database";
 import { Beer } from './icons/BeerIcons';
+import { NewDebtForm } from './forms/NewDebtForm';
+import { Dialog } from '@headlessui/react';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
 export default function Navbar() {
-    const [showNewBetForm, setShowNewBetForm] = useState(false);
+    const [showNewDebtForm, setShowNewDebtForm] = useState(false);
 
     const { user, logoutUser, loading, error }: any = useUserContext();
 
@@ -26,8 +28,8 @@ export default function Navbar() {
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
     const navigation = [
-        { name: 'Owes Me', href: '', current: true },
-        { name: 'My Debts', href: '', current: false }
+        { name: 'Owes Me', href: '/', current: true },
+        { name: 'My Debts', href: '/mydebts', current: false }
     ]
 
     return (
@@ -56,7 +58,7 @@ export default function Navbar() {
                                             alt="beerlist logo"
                                             layout="fill"
                                             objectFit="contain"
-                                            // unoptimized={true}
+                                        // unoptimized={true}
                                         />
                                     </div>
                                 </div>
@@ -80,13 +82,36 @@ export default function Navbar() {
                                 <div className="flex-shrink-0">
                                     <button
                                         type="button"
-                                        onClick={() => setShowNewBetForm(!showNewBetForm)}
+                                        onClick={() => setShowNewDebtForm(!showNewDebtForm)}
                                         className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-sm font-medium rounded-md bg-tertiary hover:shadow-md hover:translate-x-0.5 transition-all duration-300 ease-in-out"
                                     >
                                         <PlusSmIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-                                        <span>New Bet</span>
+                                        <span>New Debt</span>
                                     </button>
                                 </div>
+
+                                <Transition.Root show={showNewDebtForm} as={Fragment}>
+                                    <Dialog as="div" className="relative z-10" onClose={setShowNewDebtForm}>
+                                        <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0"
+                                            enterTo="opacity-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                        >
+                                            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                                        </Transition.Child>
+
+                                        <div className="fixed z-10 inset-0 overflow-y-auto">
+                                            <div className="flex items-center justify-center min-h-full text-center p-0">
+                                                <NewDebtForm setShowNewDebtForm={setShowNewDebtForm} />
+                                            </div>
+                                        </div>
+                                    </Dialog>
+                                </Transition.Root>
+
                                 <div className="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
 
                                     {/* Profile dropdown */}
@@ -95,14 +120,14 @@ export default function Navbar() {
                                             <Menu.Button className="bg-gray-800 flex text-sm rounded-full">
                                                 <span className="sr-only">Open user menu</span>
                                                 {
-                                                    user.photoURL ?
+                                                    user && !loading ?
                                                         <ExportedImage
                                                             className="rounded-full"
-                                                            src={user ? user.photoURL : ''}
+                                                            src={user.photoURL}
                                                             alt="User"
                                                             width={46}
                                                             height={46}
-                                                            // unoptimized={true}
+                                                        // unoptimized={true}
                                                         />
                                                         :
                                                         <Skeleton variant="circular" width={46} height={46} />
@@ -163,14 +188,14 @@ export default function Navbar() {
                             <div className="flex items-center px-5 sm:px-6">
                                 <div className="flex-shrink-0">
                                     {
-                                        user.photoURL ?
+                                        user && !loading ?
                                             <ExportedImage
                                                 className="rounded-full"
-                                                src={user ? user.photoURL : ''}
+                                                src={user.photoURL}
                                                 alt="User"
                                                 width={46}
                                                 height={46}
-                                                // unoptimized={true}
+                                            // unoptimized={true}
                                             />
                                             :
                                             <Skeleton variant="circular" width={46} height={46} />

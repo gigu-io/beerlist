@@ -27,20 +27,19 @@ export const UserContextProvider = ({ children }: Props) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
-
                 // update user in database
                 set(ref(database, 'users/' + user.uid), {
                     email: user.email,
                     displayName: user.displayName,
                     photoURL: user.photoURL,
                 });
-
-
             } else {
+                router.push('/signIn')
                 setUser(null);
             }
             setLoading(false);
         })
+        // eslint-disable-next-line
     }, []);
 
     const signInWithGoogle = () => {
@@ -80,6 +79,7 @@ export const UserContextProvider = ({ children }: Props) => {
     }
 
     const logoutUser = () => {
+        router.push('/signIn')
         signOut(auth);
         setUser(null);
         setError(null);

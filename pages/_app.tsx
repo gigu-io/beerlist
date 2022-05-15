@@ -1,13 +1,14 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { UserContextProvider } from '../context/userContext';
+import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
-      <div className="bg-[url('/images/background/waves.svg')] bg-no-repeat bg-center bg-fixed bg-cover h-full min-h-screen items-stretch">
+      <Layout>
         <Component {...pageProps} />
-      </div>
+      </Layout>
     </UserContextProvider>
   )
 }
