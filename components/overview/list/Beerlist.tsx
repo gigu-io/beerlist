@@ -52,7 +52,7 @@ export default function Beerlist() {
           Array.from(owesme).map(([key, userOwesMeDebtList]: [string, UserOwesMeDebtList]) => {
             return (
               <li key={key}>
-                <BeerlistDetails userOwesMeDebtList={userOwesMeDebtList} owesmeuid={key} />
+                <BeerlistDetails userOwesMeDebtList={userOwesMeDebtList} guiltyUID={key} />
               </li>
             )
           })

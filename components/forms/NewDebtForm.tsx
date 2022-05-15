@@ -72,7 +72,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
     const handleSubmit = (event: any) => {
         event.preventDefault();
 
-        if (selectedUserId == '0') {
+        if (selectedUserId == '0' || reason == '') {
             DefaultAlert('Please select a user', AlertType.Error);
             return;
         }

@@ -22,7 +22,7 @@ export interface BeerGuilty {
     debts: Array<Debt>
 }
 
-export default function BeerlistDetails({ userOwesMeDebtList, owesmeuid }: { userOwesMeDebtList: UserOwesMeDebtList, owesmeuid: string }) {
+export default function BeerlistDetails({ userOwesMeDebtList, guiltyUID }: { userOwesMeDebtList: UserOwesMeDebtList, guiltyUID: string }) {
     const [showDetails, setShowDetails] = useState(false);
     let debts: Map<string, Debt> = new Map<string, Debt>();
     if (userOwesMeDebtList.debts) {
@@ -44,6 +44,8 @@ export default function BeerlistDetails({ userOwesMeDebtList, owesmeuid }: { use
         // sort by createdTimestamp
         // @ts-ignore
         debts = new Map([...debts.entries()].sort((a, b) => a[1].createdTimestamp - b[1].createdTimestamp));
+    } else {
+        return null;
     }
 
     // REFACTOR the whole thing to use a map
@@ -161,7 +163,7 @@ export default function BeerlistDetails({ userOwesMeDebtList, owesmeuid }: { use
                             Array.from(debts).map(([key, debt]: [string, Debt], i: number) => (
 
                                 <li key={key}>
-                                    <DebtDetails debt={debt} debtid={key} totalDebts={debt.size} key={key} last={
+                                    <DebtDetails debt={debt} debtid={key} guiltyUID={guiltyUID} totalDebts={debt.size} key={key} last={
                                         i === debts.size - 1
                                     } />
                                 </li>
