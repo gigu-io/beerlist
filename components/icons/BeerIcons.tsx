@@ -1,6 +1,33 @@
+export enum Beer {
+    Dark = 'Dark',
+    IPA = 'IPA',
+    Lager = 'Lager',
+    Stout = 'Stout'
+}
+
+export interface BeerIcon {
+    icon: JSX.Element;
+    beer: Beer;
+}
+
 interface BeerIconsProps {
     width: number;
     height: number;
+}
+
+export function MatchBeerIcon (type: Beer, width: number, height: number) {
+    switch (type) {
+        case Beer.Dark:
+            return <BeerIconDark width={width} height={width} />;
+        case Beer.IPA:
+            return <BeerIconIPA width={width} height={width} />;
+        case Beer.Lager:
+            return <BeerIconLager width={width} height={width} />;
+        case Beer.Stout:
+            return <BeerIconStout width={width} height={width} />;
+        default:
+            return null;
+    }
 }
 
 export const BeerIconStout = (props: BeerIconsProps) => (

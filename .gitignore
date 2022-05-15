@@ -27,7 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
-.env
+.env*
 
 # vercel
 .vercel
@@ -115,3 +115,6 @@ samples/ios/Continote/Continote/FCNContinue.m
 # Misc.
 .DS_Store
 *.swp
+
+# Local Testdata
+testdata.json
