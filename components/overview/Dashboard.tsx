@@ -23,7 +23,6 @@ export enum StatusBackgroundHoverColors {
 export default function Dashboard() {
     return (
         <div>
-            <Navbar />
             <DeptsOverview />
         </div>
     );

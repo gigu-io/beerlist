@@ -9,6 +9,7 @@ import { useUserContext } from '../context/userContext';
 
 const Home = () => {
   const { user, loading, error }: any = useUserContext();
+  const router = useRouter();
 
   return (
     <div>
@@ -17,7 +18,7 @@ const Home = () => {
           <Loading/> :
           user && !error ?
             <Dashboard /> :
-            <Auth />
+            null
       }
     </div>
   )

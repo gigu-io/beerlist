@@ -28,8 +28,8 @@ export default function Navbar() {
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
     const navigation = [
-        { name: 'Owes Me', href: '', current: true },
-        { name: 'My Debts', href: '', current: false }
+        { name: 'Owes Me', href: '/', current: true },
+        { name: 'My Debts', href: '/mydebts', current: false }
     ]
 
     return (
@@ -120,10 +120,10 @@ export default function Navbar() {
                                             <Menu.Button className="bg-gray-800 flex text-sm rounded-full">
                                                 <span className="sr-only">Open user menu</span>
                                                 {
-                                                    user.photoURL ?
+                                                    user && !loading ?
                                                         <ExportedImage
                                                             className="rounded-full"
-                                                            src={user ? user.photoURL : ''}
+                                                            src={user.photoURL}
                                                             alt="User"
                                                             width={46}
                                                             height={46}
@@ -188,10 +188,10 @@ export default function Navbar() {
                             <div className="flex items-center px-5 sm:px-6">
                                 <div className="flex-shrink-0">
                                     {
-                                        user.photoURL ?
+                                        user && !loading ?
                                             <ExportedImage
                                                 className="rounded-full"
-                                                src={user ? user.photoURL : ''}
+                                                src={user.photoURL}
                                                 alt="User"
                                                 width={46}
                                                 height={46}
