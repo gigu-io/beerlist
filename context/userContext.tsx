@@ -27,7 +27,6 @@ export const UserContextProvider = ({ children }: Props) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
-
                 // update user in database
                 set(ref(database, 'users/' + user.uid), {
                     email: user.email,
@@ -40,6 +39,7 @@ export const UserContextProvider = ({ children }: Props) => {
             }
             setLoading(false);
         })
+        // eslint-disable-next-line
     }, []);
 
     const signInWithGoogle = () => {

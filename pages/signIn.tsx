@@ -4,7 +4,9 @@ import { useUserContext } from "../context/userContext";
 
 export default function signIn() {
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { user }: any = useUserContext();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const router = useRouter();
 
     if (user) {
