@@ -37,7 +37,7 @@
 </p>
 
 <p align="center">
-  See who owes me beer and how much I owe them. Also show the bet history. Choose between 3 different styles of beer (IPA, Lager, Stout) and 3 sizes (small, medium, big) for each bet.
+  See who owes me beer and how much I owe them. Also show the debt history. Choose between 3 different styles of beer (IPA, Lager, Stout) and 3 sizes (small, medium, big) for each debt.
 </p>
 
 <p align="center">
@@ -56,7 +56,7 @@
 
 ### It's a simple web app
 
-Focus on the beer list and the bet history.  
+Focus on the beer list and the debt history.  
 The app is simple and easy to use.  
 Define who owns the beer and how much they owe you.
 
