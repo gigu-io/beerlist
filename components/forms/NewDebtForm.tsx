@@ -6,10 +6,11 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { SmallUser } from "../overview/list/BeerlistDetails";
 import ExportedImage from "next-image-export-optimizer";
-import { onValue, ref } from "firebase/database";
+import { onValue, ref, set } from "firebase/database";
 import { database } from "../../firebase/firebaseAuth.client";
 import { useUserContext } from "../../context/userContext";
 import { Dialog } from '@headlessui/react';
+import { AlertType, DefaultAlert } from "../alerts/Alerts";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -31,7 +32,10 @@ const beerSizeOptions = [
 export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
     const [beerType, setBeerType] = useState(beerOptions[0].name);
     const [beerSize, setBeerSize] = useState(beerSizeOptions[0].value);
-    const [selectedUser, setSelectedUser] = useState<SmallUser>({ uid: '1', email: '<emailaddress>', photoURL: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y', displayName: 'Select a user' });
+    const [selectedUser, setSelectedUser] = useState<SmallUser>({displayName: 'Select a user',
+        photoURL: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y',
+        email: 'email'});
+    const [selectedUserId, setSelectedUserId] = useState('0');
     const [userList, setUserList] = useState<Map<string, SmallUser>>(new Map<string, SmallUser>());
     const [reason, setReason] = useState('');
     const [size, setSize] = useState('');
@@ -60,18 +64,52 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
         setReason(event.target.value);
     }
 
+    const handleSelectedUser = (newSelectedUser: any) => {
+        setSelectedUserId(newSelectedUser.keys().next().value);
+        setSelectedUser(newSelectedUser.values().next().value);
+    }
+
     const handleSubmit = (event: any) => {
         event.preventDefault();
 
+        if (selectedUserId == '0') {
+            DefaultAlert('Please select a user', AlertType.Error);
+            return;
+        }
+
+        const timeStamp = Math.floor(Date.now() / 1000);
+        const debtId = `${timeStamp}-${selectedUserId}-${user.uid}`;
+        const smallUser: SmallUser = {
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            email: user.email
+        }
+
         const newDebt = {
-
-        }
-        const newOwesMe = {
             reason: reason,
+            size: beerSize,
+            type: beerType,
+            createdTimestamp: timeStamp
         }
-        const newMyDebt = {
 
+        try {
+            const owesmeRef = ref(database, `owesme/${user.uid}/${selectedUserId}/debts/${debtId}`);
+            const owesmeUserRef = ref(database, `owesme/${user.uid}/${selectedUserId}/userinfo`);
+            const mydebtsRef = ref(database, `mydebts/${selectedUserId}/${user.uid}/debts/${debtId}`);
+            const mydebtsUserRef = ref(database, `mydebts/${selectedUserId}/${user.uid}/userinfo`);
+            const debtsRef = ref(database, `debts/${debtId}`);
+
+            set(owesmeRef, newDebt);
+            set(owesmeUserRef, selectedUser);
+            set(mydebtsRef, newDebt);
+            set(mydebtsUserRef, smallUser);
+            set(debtsRef, newDebt);
+        } catch (error) {
+            console.log(error);
         }
+
+        DefaultAlert('Debt added', AlertType.Success);
+        setShowNewDebtForm(false);
     }
 
     return (
@@ -94,7 +132,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                             </div>
 
                             <div className="sm:col-span-3 mt-3">
-                                <Listbox value={selectedUser} onChange={setSelectedUser}>
+                                <Listbox value={selectedUser} onChange={handleSelectedUser}>
                                     {({ open }) => (
                                         <>
                                             <Listbox.Label className="block text-sm font-medium text-gray-700">Select a guilty user</Listbox.Label>
@@ -132,17 +170,20 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
 
                                                         {Array.from(userList).map(([key, listUser]) => {
 
+                                                            const listUserMap: Map<string, SmallUser> = new Map<string, SmallUser>();
+                                                            listUserMap.set(key, listUser);
+
                                                             if (user.uid !== key) {
                                                                 return (
                                                                     <Listbox.Option
-                                                                        key={listUser.uid}
+                                                                        key={key}
                                                                         className={({ active }) =>
                                                                             classNames(
                                                                                 active ? 'text-white bg-tertiary' : 'text-gray-900',
                                                                                 'cursor-pointer select-none relative py-2 pl-3 pr-9 transition-all duration-150 ease-in-out'
                                                                             )
                                                                         }
-                                                                        value={listUser}
+                                                                        value={listUserMap}
                                                                     >
                                                                         {({ selected, active }) => (
                                                                             <>

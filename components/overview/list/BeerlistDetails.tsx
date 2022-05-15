@@ -11,7 +11,6 @@ function classNames(...classes: any) {
 }
 
 export interface SmallUser {
-    uid: string;
     email: string;
     photoURL: string;
     displayName: string;
@@ -40,6 +39,12 @@ export default function BeerlistDetails({ userOwesMeDebtList, owesmeuid }: { use
             }
         });
     }
+    
+    if (debts.size > 0) {
+        // sort by createdTimestamp
+        // @ts-ignore
+        debts = new Map([...debts.entries()].sort((a, b) => a[1].createdTimestamp - b[1].createdTimestamp));
+    }
 
     // REFACTOR the whole thing to use a map
 
@@ -49,9 +54,9 @@ export default function BeerlistDetails({ userOwesMeDebtList, owesmeuid }: { use
 
     if (debts) {
         Array.from(debts).map(([key, debt]: [string, Debt]) => {
-            if (debt.confirmedTimestamp == null) {
+            if (!debt.confirmedTimestamp) {
                 incompleteUnconfirmedDebts.set(key, debt);
-            } else if (debt.completedTimestamp == null) {
+            } else if (!debt.completedTimestamp) {
                 incompleteConfirmedDebts.set(key, debt);
             } else {
                 completeConfirmedDebts.set(key, debt);
@@ -75,13 +80,13 @@ export default function BeerlistDetails({ userOwesMeDebtList, owesmeuid }: { use
                                     width={56}
                                     height={56}
                                     className="rounded-full"
-                                    src={userOwesMeDebtList.photoURL}
+                                    src={userOwesMeDebtList.userinfo.photoURL}
                                     alt=""
                                 />
                             </div>
                             <div className="min-w-0 flex-1 px-4">
-                                <p className="text-sm font-medium text-stroke truncate">{userOwesMeDebtList.displayName}</p>
-                                <p className=" text-xs font-light text-gray-500 truncate">{userOwesMeDebtList.email}</p>
+                                <p className="text-sm font-medium text-stroke truncate">{userOwesMeDebtList.userinfo.displayName}</p>
+                                <p className=" text-xs font-light text-gray-500 truncate">{userOwesMeDebtList.userinfo.email}</p>
                                 <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
                                     {
                                         incompleteConfirmedDebts.size > 0 ?
@@ -90,7 +95,7 @@ export default function BeerlistDetails({ userOwesMeDebtList, owesmeuid }: { use
                                             } className="group inline-flex p-1 shadow-md rounded-md ">
                                                 <div className="flex m-auto">
                                                     <span className="my-auto">
-                                                        <span className="font-bold">{incompleteUnconfirmedDebts.size}</span>x
+                                                        <span className="font-bold">{incompleteConfirmedDebts.size}</span>x
                                                     </span>
                                                     <span className="group-hover:rotate-12 transition-all duration-300 ease-in-out">
                                                         {MatchBeerIcon(incompleteConfirmedDebts.values().next().value.type, 35, 35)}

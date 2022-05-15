@@ -12,9 +12,7 @@ export enum BeerSize {
 }
 
 export interface UserOwesMeDebtList {
-  displayName: string;
-  email: string;
-  photoURL: string;
+  userinfo: SmallUser
   debts: Map<string, Debt>;
 }
 
