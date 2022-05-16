@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { createContext, ReactNode, useContext, useState } from "react";
 
 export const DashboardContext = createContext({});
@@ -17,6 +18,14 @@ export enum DashboardType {
 
 export const DashboardContextProvider = ({ children }: Props) => {
     const [dashboardType, setDashboardType] = useState<DashboardType>(DashboardType.OwesMe);
+
+    const router = useRouter();
+
+    if (router.pathname === "/mydebts" && dashboardType !== DashboardType.MyDebts) {
+        setDashboardType(DashboardType.MyDebts);
+    } else if (router.pathname === "/owesme" && dashboardType !== DashboardType.OwesMe) {
+        setDashboardType(DashboardType.OwesMe);
+    }
 
     const contextValue = {
         dashboardType,

@@ -32,14 +32,14 @@ export default function Navbar() {
     const navigation = [
         {
             name: 'Owes Me', onClickFunction: () => {
-                setDashboardType(DashboardType.OwesMe)
                 router.push('/owesme')
+                setDashboardType(DashboardType.OwesMe)
             }, current: dashboardType === DashboardType.OwesMe
         },
         {
             name: 'My Debts', onClickFunction: () => {
-                setDashboardType(DashboardType.MyDebts)
                 router.push('/mydebts')
+                setDashboardType(DashboardType.MyDebts)
             }, current: dashboardType === DashboardType.MyDebts
         },
     ]

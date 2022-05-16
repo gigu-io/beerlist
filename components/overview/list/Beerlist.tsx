@@ -35,8 +35,6 @@ export default function Beerlist() {
 
   const { dashboardType }: any = useDashboardContext();
 
-  { }
-
   useEffect(() => {
     if (dashboardType === DashboardType.OwesMe) {
       const owesmeRef = ref(database, 'owesme/' + user.uid);

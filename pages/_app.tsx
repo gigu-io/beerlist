@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import { DashboardContextProvider } from '../context/dashboardContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
     <DashboardContextProvider>
       <UserContextProvider>
