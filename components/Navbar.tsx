@@ -28,7 +28,7 @@ export default function Navbar() {
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
     const navigation = [
-        { name: 'Owes Me', href: '/', current: true },
+        { name: 'Owes Me', href: '/owesme', current: true },
         { name: 'My Debts', href: '/mydebts', current: false }
     ]
 
