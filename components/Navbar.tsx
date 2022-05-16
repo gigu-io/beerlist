@@ -9,6 +9,7 @@ import { Skeleton } from '@mui/material'
 import { NewDebtForm } from './forms/NewDebtForm';
 import { Dialog } from '@headlessui/react';
 import { DashboardType, useDashboardContext } from '../context/dashboardContext';
+import { useRouter } from 'next/router';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -21,14 +22,26 @@ export default function Navbar() {
 
     const { dashboardType, setDashboardType }: any = useDashboardContext();
 
+    const router = useRouter();
+
     const userNavigation = [
         // { name: 'Your Profile', onClickFunction: () => { } },
         // { name: 'Settings', onClickFunction: () => { } },
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
     const navigation = [
-        { name: 'Owes Me', onClickFunction: () => { setDashboardType(DashboardType.OwesMe) }, current: dashboardType === DashboardType.OwesMe },
-        { name: 'My Debts', onClickFunction: () => { setDashboardType(DashboardType.MyDebts) }, current: dashboardType === DashboardType.MyDebts },
+        { name: 'Owes Me', onClickFunction: () => { 
+            setDashboardType(DashboardType.OwesMe)
+            if (router.pathname !== '/debts') {
+                router.push('/debts')
+            }
+        }, current: dashboardType === DashboardType.OwesMe },
+        { name: 'My Debts', onClickFunction: () => { 
+            setDashboardType(DashboardType.MyDebts) 
+            if (router.pathname !== '/debts') {
+                router.push('/debts')
+            }
+        }, current: dashboardType === DashboardType.MyDebts },
     ]
 
     return (
@@ -174,7 +187,7 @@ export default function Navbar() {
                         leaveFrom=" max-h-full"
                         leaveTo=" max-h-0"
                     >
-                        <Disclosure.Panel className="absolute max-h-0 z-50 bg-main shadow-lg w-full md:hidden overflow-hidden rounded-b-md ">
+                        <Disclosure.Panel className="absolute max-h-0 z-10 bg-main shadow-lg w-full md:hidden overflow-hidden rounded-b-md ">
                             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                                 {navigation.map((item) => (
                                     <Disclosure.Button

@@ -30,7 +30,7 @@ export interface Debt {
 
 export default function Beerlist() {
   const { user, loading, error }: any = useUserContext();
-  const [ownesMe, setOwnesMe] = useState<Map<string, UserDebtList>>(new Map<string, UserDebtList>());
+  const [owesMe, setOwnesMe] = useState<Map<string, UserDebtList>>(new Map<string, UserDebtList>());
   const [myDebts, setMyDebts] = useState<Map<string, UserDebtList>>(new Map<string, UserDebtList>());
 
   const { dashboardType }: any = useDashboardContext();
@@ -64,7 +64,13 @@ export default function Beerlist() {
       <ul role="list" className="divide-y divide-stroke divide-opacity-10">
         {
           dashboardType === DashboardType.OwesMe ?
-            Array.from(ownesMe).map(([key, userDebtList]: [string, UserDebtList]) => {
+            
+            Array.from(owesMe).map(([key, userDebtList]: [string, UserDebtList]) => {
+
+              if (!userDebtList.debts) {
+                return null;
+              }
+
               return (
                 <li key={key}>
                   <BeerlistDetails userDebtList={userDebtList} guiltyUID={key} />
@@ -72,6 +78,11 @@ export default function Beerlist() {
               )
             }) :
             Array.from(myDebts).map(([key, userDebtList]: [string, UserDebtList]) => {
+
+              if (!userDebtList.debts) {
+                return null;
+              }
+
               return (
                 <li key={key}>
                   <BeerlistDetails userDebtList={userDebtList} guiltyUID={key} />
