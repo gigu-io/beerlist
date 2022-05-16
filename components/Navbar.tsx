@@ -26,7 +26,11 @@ export default function Navbar() {
 
     const userNavigation = [
         // { name: 'Your Profile', onClickFunction: () => { } },
-        // { name: 'Settings', onClickFunction: () => { } },
+        {
+            name: 'Profile', onClickFunction: () => {
+                router.push('/profile');
+            }
+        },
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
     const navigation = [
@@ -155,14 +159,14 @@ export default function Navbar() {
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95"
                                         >
-                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 shadow-lg rounded-md  bg-secondary">
+                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 shadow-lg rounded-md z-20 bg-secondary">
                                                 {userNavigation.map((item) => (
                                                     <div
                                                         key={item.name}
-                                                        className="hover:bg-tertiary  hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
+                                                        onClick={item.onClickFunction}
+                                                        className="hover:bg-tertiary hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
                                                     >
                                                         <div
-                                                            onClick={item.onClickFunction}
                                                             className='block px-4 py-2 text-sm text-button-text font-bold hover:translate-x-1 transition-all duration-300 ease-in-out cursor-pointer'
                                                         >
                                                             {item.name}
