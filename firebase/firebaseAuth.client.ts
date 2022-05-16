@@ -2,7 +2,7 @@ import getConfig from "next/config";
 import { getApps, initializeApp } from 'firebase/app';
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, isSupported } from "firebase/analytics";
 
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
@@ -26,9 +26,14 @@ export const database = getDatabase();
 
 export const auth = getAuth();
 
-if (typeof window !== 'undefined') {
-    getAnalytics();
-}
+export const analytics = isSupported().then(yes => yes ? getAnalytics() : null);
 
+// export const analytics = () => {
+//     if (typeof window !== 'undefined') {
+//         return getAnalytics();
+//     } else {
+//         return null;
+//     }
+// }
 
 export default firebaseConfig;
