@@ -7,7 +7,7 @@ const Home = () => {
   const router = useRouter();
 
   if (user) {
-      router.push("/debts");
+      router.push("/owesme");
   }
 
   return <Auth />

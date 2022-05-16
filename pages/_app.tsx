@@ -5,14 +5,15 @@ import Layout from '../components/Layout';
 import { DashboardContextProvider } from '../context/dashboardContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
-    <UserContextProvider>
-      <DashboardContextProvider>
+    <DashboardContextProvider>
+      <UserContextProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </DashboardContextProvider>
-    </UserContextProvider>
+      </UserContextProvider>
+    </DashboardContextProvider>
   )
 }
 

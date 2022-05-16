@@ -186,11 +186,11 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                         </div>
                     </div>
 
-                    <div className="col-span-5 my-auto sm:col-span-4 px-4 hover:translate-x-1 transition-all duration-150 ease-in-out">
+                    <div className="col-span-5 my-auto overflow-hidden sm:col-span-4 px-4 hover:translate-x-1 transition-all duration-150 ease-in-out">
                         <p className="text-sm">
-                            <a className="font-medium">
+                            <span className="font-medium">
                                 &quot;{debt.reason}&quot;
-                            </a>
+                            </span>
                         </p>
                     </div>
 

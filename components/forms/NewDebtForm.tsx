@@ -11,6 +11,7 @@ import { database } from "../../firebase/firebaseAuth.client";
 import { useUserContext } from "../../context/userContext";
 import { Dialog } from '@headlessui/react';
 import { AlertType, DefaultAlert } from "../alerts/Alerts";
+import { DashboardType, useDashboardContext } from "../../context/dashboardContext";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -39,6 +40,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
     const [userList, setUserList] = useState<Map<string, SmallUser>>(new Map<string, SmallUser>());
     const [reason, setReason] = useState('');
     const [size, setSize] = useState('');
+    const { setDashboardType }: any = useDashboardContext();
 
     const { user, logoutUser, loading, error }: any = useUserContext();
 
@@ -72,8 +74,13 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
     const handleSubmit = (event: any) => {
         event.preventDefault();
 
-        if (selectedUserId == '0' || reason == '') {
+        if (selectedUserId == '0') {
             DefaultAlert('Please select a user', AlertType.Error);
+            return;
+        }
+
+        if (reason == '') {
+            DefaultAlert('Please enter a reason', AlertType.Error);
             return;
         }
 
@@ -110,6 +117,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
 
         DefaultAlert('Debt added', AlertType.Success);
         setShowNewDebtForm(false);
+        setDashboardType(DashboardType.OwesMe);
     }
 
     return (
