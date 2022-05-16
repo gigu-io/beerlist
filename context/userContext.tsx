@@ -34,7 +34,7 @@ export const UserContextProvider = ({ children }: Props) => {
                     photoURL: user.photoURL,
                 });
             } else {
-                router.push('/signIn')
+                router.push('/')
                 setUser(null);
             }
             setLoading(false);
@@ -79,7 +79,6 @@ export const UserContextProvider = ({ children }: Props) => {
     }
 
     const logoutUser = () => {
-        router.push('/signIn')
         signOut(auth);
         setUser(null);
         setError(null);

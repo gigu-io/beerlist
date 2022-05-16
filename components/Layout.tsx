@@ -12,7 +12,7 @@ export default function Layout(props: any) {
     return (
         <div className="flex flex-col bg-[url('/images/background/waves.svg')] bg-no-repeat bg-center bg-fixed bg-cover h-full min-h-screen items-stretch">
             {
-                router.pathname != "/signIn" ?
+                router.pathname != "/" ?
                     <Navbar /> :
                     null
             }

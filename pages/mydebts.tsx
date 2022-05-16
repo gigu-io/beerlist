@@ -1,4 +1,4 @@
-export default function mydebts() {
+export default function Mydebts() {
     return (
         <div>
             <h1>My Debts</h1>
