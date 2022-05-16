@@ -4,7 +4,7 @@ import { ChevronRightIcon } from '@heroicons/react/solid';
 import ExportedImage from "next-image-export-optimizer";
 import { StatusBackgroundColors } from "../Dashboard";
 import { DebtDetails } from "./DebtDetails";
-import { Debt, UserOwesMeDebtList, } from "./Beerlist";
+import { Debt, UserDebtList, } from "./Beerlist";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -22,13 +22,13 @@ export interface BeerGuilty {
     debts: Array<Debt>
 }
 
-export default function BeerlistDetails({ userOwesMeDebtList, guiltyUID }: { userOwesMeDebtList: UserOwesMeDebtList, guiltyUID: string }) {
+export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtList: UserDebtList, guiltyUID: string }) {
     const [showDetails, setShowDetails] = useState(false);
     let debts: Map<string, Debt> = new Map<string, Debt>();
-    if (userOwesMeDebtList.debts) {
-        Object.keys(userOwesMeDebtList.debts).forEach((key: string) => {
+    if (userDebtList.debts) {
+        Object.keys(userDebtList.debts).forEach((key: string) => {
             // @ts-ignore
-            debts.set(key, userOwesMeDebtList.debts[key]);
+            debts.set(key, userDebtList.debts[key]);
             // @ts-ignore
             if (debts.get(key) && debts.get(key).users) {
                 // @ts-ignore
@@ -82,13 +82,13 @@ export default function BeerlistDetails({ userOwesMeDebtList, guiltyUID }: { use
                                     width={56}
                                     height={56}
                                     className="rounded-full"
-                                    src={userOwesMeDebtList.userinfo.photoURL}
+                                    src={userDebtList.userinfo.photoURL}
                                     alt=""
                                 />
                             </div>
                             <div className="min-w-0 flex-1 px-4">
-                                <p className="text-sm font-medium text-stroke truncate">{userOwesMeDebtList.userinfo.displayName}</p>
-                                <p className=" text-xs font-light text-gray-500 truncate">{userOwesMeDebtList.userinfo.email}</p>
+                                <p className="text-sm font-medium text-stroke truncate">{userDebtList.userinfo.displayName}</p>
+                                <p className=" text-xs font-light text-gray-500 truncate">{userDebtList.userinfo.email}</p>
                                 <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
                                     {
                                         incompleteConfirmedDebts.size > 0 ?

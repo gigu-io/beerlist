@@ -8,7 +8,7 @@ export default function BuyMeACoffee() {
                 href="https://www.buymeacoffee.com/janlauber"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-5 right-5 flex flex-col justify-center items-center bg-white rounded-full shadow-lg p-4 hover:bg-highlight hover:scale-105 hover:rotate-12 transition-all duration-200 ease-in-out"
+                className="fixed bottom-5 right-5 flex flex-col justify-center items-center bg-white rounded-full shadow-lg p-4 hover:bg-highlight hover:scale-105 hover:rotate-12 transition-all duration-200 ease-in-out"
             >
                 <svg width="30" height="30" viewBox="0 0 884 1279" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M791.109 297.518L790.231 297.002L788.201 296.383C789.018 297.072 790.04 297.472 791.109 297.518V297.518Z" fill="#0D0C22" />
