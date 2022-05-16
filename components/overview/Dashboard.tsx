@@ -1,6 +1,4 @@
-import { User } from "firebase/auth";
 import DeptsOverview from "./DepsOverview";
-import Navbar from "../Navbar"
 
 export enum StatusBackgroundColors {
     Green = "bg-green-200",
@@ -8,7 +6,7 @@ export enum StatusBackgroundColors {
     Orange = "bg-orange-200",
     Blue = "bg-secondary",
     Transparent = "bg-transparent",
-    Gray = "bg-gray-200",
+    Gray = "bg-gray-100",
 }
 
 export enum StatusBackgroundHoverColors {
@@ -22,8 +20,6 @@ export enum StatusBackgroundHoverColors {
 
 export default function Dashboard() {
     return (
-        <div>
-            <DeptsOverview />
-        </div>
+        <DeptsOverview />
     );
 }

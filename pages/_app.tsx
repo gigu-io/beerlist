@@ -2,13 +2,16 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { UserContextProvider } from '../context/userContext';
 import Layout from '../components/Layout';
+import { DashboardContextProvider } from '../context/dashboardContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <DashboardContextProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </DashboardContextProvider>
     </UserContextProvider>
   )
 }
