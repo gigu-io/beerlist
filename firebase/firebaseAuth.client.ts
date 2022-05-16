@@ -26,9 +26,4 @@ export const database = getDatabase();
 
 export const auth = getAuth();
 
-if (typeof window !== 'undefined') {
-    getAnalytics();
-}
-
-
 export default firebaseConfig;
