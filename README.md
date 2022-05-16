@@ -82,6 +82,20 @@ License: MIT.
 
 ## Setup Self Hosted
 
+### Env
+
+Set the following environment variables via `.env.local` file:
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=<redacted>
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=<redacted>
+NEXT_PUBLIC_FIREBASE_DATABASE_URL=<redacted>
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=<redacted>
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=<redacted>
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=<redacted>
+NEXT_PUBLIC_FIREBASE_APP_ID=<redacted>
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=<redacted>
+```
+
 ### Node.js
 
 Make sure to install the dependencies:
