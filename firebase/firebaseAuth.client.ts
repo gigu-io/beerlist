@@ -3,6 +3,8 @@ import { getApps, initializeApp } from 'firebase/app';
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { getAnalytics, isSupported } from "firebase/analytics";
+import { getPerformance } from "firebase/performance";
+import { getMessaging } from "firebase/messaging";
 
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
@@ -26,14 +28,10 @@ export const database = getDatabase();
 
 export const auth = getAuth();
 
-export const analytics = isSupported().then(yes => yes ? getAnalytics() : null);
+export const analytics = isSupported().then(yes => yes ? getAnalytics() : console.log('Analytics not supported'));
 
-// export const analytics = () => {
-//     if (typeof window !== 'undefined') {
-//         return getAnalytics();
-//     } else {
-//         return null;
-//     }
-// }
+export const performance = isSupported().then(yes => yes ? getPerformance() : console.log('Performance is not supported'));
+
+export const messaging = isSupported().then(yes => yes ? getMessaging() : console.log('Messaging is not supported'));
 
 export default firebaseConfig;
