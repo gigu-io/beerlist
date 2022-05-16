@@ -30,18 +30,18 @@ export default function Navbar() {
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
     const navigation = [
-        { name: 'Owes Me', onClickFunction: () => { 
-            setDashboardType(DashboardType.OwesMe)
-            if (router.pathname !== '/debts') {
-                router.push('/debts')
-            }
-        }, current: dashboardType === DashboardType.OwesMe },
-        { name: 'My Debts', onClickFunction: () => { 
-            setDashboardType(DashboardType.MyDebts) 
-            if (router.pathname !== '/debts') {
-                router.push('/debts')
-            }
-        }, current: dashboardType === DashboardType.MyDebts },
+        {
+            name: 'Owes Me', onClickFunction: () => {
+                setDashboardType(DashboardType.OwesMe)
+                router.push('/owesme')
+            }, current: dashboardType === DashboardType.OwesMe
+        },
+        {
+            name: 'My Debts', onClickFunction: () => {
+                setDashboardType(DashboardType.MyDebts)
+                router.push('/mydebts')
+            }, current: dashboardType === DashboardType.MyDebts
+        },
     ]
 
     return (

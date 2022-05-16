@@ -34,7 +34,7 @@ export const UserContextProvider = ({ children }: Props) => {
                     photoURL: user.photoURL,
                 });
             } else {
-                router.push('/')
+                router.push('/');
                 setUser(null);
             }
             setLoading(false);
