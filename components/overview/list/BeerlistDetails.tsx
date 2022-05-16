@@ -163,7 +163,7 @@ export default function BeerlistDetails({ userOwesMeDebtList, guiltyUID }: { use
                             Array.from(debts).map(([key, debt]: [string, Debt], i: number) => (
 
                                 <li key={key}>
-                                    <DebtDetails debt={debt} debtid={key} guiltyUID={guiltyUID} totalDebts={debt.size} key={key} last={
+                                    <DebtDetails debt={debt} debtid={key} guiltyUID={guiltyUID} totalDebts={debts.size} key={key} last={
                                         i === debts.size - 1
                                     } />
                                 </li>
