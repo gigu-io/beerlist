@@ -22,8 +22,8 @@ export default function Navbar() {
     const { dashboardType, setDashboardType }: any = useDashboardContext();
 
     const userNavigation = [
-        { name: 'Your Profile', onClickFunction: () => { } },
-        { name: 'Settings', onClickFunction: () => { } },
+        // { name: 'Your Profile', onClickFunction: () => { } },
+        // { name: 'Settings', onClickFunction: () => { } },
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
     const navigation = [
