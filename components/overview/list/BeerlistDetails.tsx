@@ -42,9 +42,37 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
     }
 
     if (debts.size > 0) {
-        // sort by createdTimestamp
+        //sort by if confirmedTimestamp exists and by createdTimestamp and move completedTimestamp to the end
         // @ts-ignore
-        debts = new Map([...debts.entries()].sort((a, b) => a[1].createdTimestamp - b[1].createdTimestamp));
+        debts = new Map([...debts.entries()].sort((a, b) => {
+            if (a[1].confirmedTimestamp && b[1].confirmedTimestamp) {
+                return a[1].confirmedTimestamp - b[1].confirmedTimestamp;
+            }
+            if (a[1].confirmedTimestamp) {
+                return -1;
+            }
+            if (b[1].confirmedTimestamp) {
+                return 1;
+            }
+            return a[1].createdTimestamp - b[1].createdTimestamp;
+        }));
+
+        // move "completed" debts to the end of the list
+        const completedDebts = new Map<string, Debt>();
+        const activeDebts = new Map<string, Debt>();
+        debts.forEach((debt: Debt, key: string) => {
+            if (debt.completedTimestamp) {
+                completedDebts.set(key, debt);
+            }
+            else {
+                activeDebts.set(key, debt);
+            }
+        });
+
+        // @ts-ignore
+        debts = new Map([...activeDebts.entries(), ...completedDebts.entries()]);
+
+
     } else {
         return null;
     }
