@@ -21,6 +21,7 @@ module.exports = {
         'button-text': '#001858',
         'main': '#f3d2c1',
         'highlight': '#fef6e4',
+        'highlight-dark': '#F5EDDC',
         'secondary': '#8bd3dd',
         'tertiary': '#f582ae',
         'tertiary-dark': '#D16F94',
