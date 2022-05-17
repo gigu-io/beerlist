@@ -99,7 +99,7 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
         <Disclosure>
             <a
                 onClick={() => setShowDetails(!showDetails)}
-                className="cursor-pointer block bg-white sm:hover:bg-gray-50 hover:active:bg-gray-50 transition-all duration-150 ease-in-out"
+                className="cursor-pointer block group bg-white sm:hover:bg-gray-50 hover:active:bg-gray-50 transition-all duration-150 ease-in-out"
             >
                 <div className="flex items-center px-4 py-4 sm:px-6">
                     <div className="min-w-0 flex-1 flex items-center">
@@ -121,12 +121,12 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
                                     incompleteConfirmedDebts.size > 0 ?
                                         <span key={
                                             incompleteConfirmedDebts.values().next().value.type
-                                        } className="group inline-flex p-1 shadow-md rounded-md ">
+                                        } className="inline-flex p-1 shadow-md rounded-md ">
                                             <div className="flex m-auto">
                                                 <span className="my-auto">
                                                     <span className="font-bold">{incompleteConfirmedDebts.size}</span>x
                                                 </span>
-                                                <span className="group-hover:rotate-12 transition-all duration-300 ease-in-out">
+                                                <span className="sm:group-hover:rotate-12 group-hover:group-active:rotate-12 transition-all duration-300 ease-in-out">
                                                     {MatchBeerIcon(incompleteConfirmedDebts.values().next().value.type, 35, 35)}
                                                 </span>
                                             </div>

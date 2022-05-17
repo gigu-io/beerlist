@@ -20,6 +20,7 @@ export default function Layout(props: any) {
                 {React.cloneElement(props.children)}
             </main>
             <BuyMeACoffee />
+
         </div>
     )
 }

@@ -278,11 +278,11 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                 value={option.name}
                                                 className={({ active, checked }) =>
                                                     classNames(
-                                                        active ? 'ring-2 ring-offset-2 ring-tertiary' : '',
+                                                        active ? '' : '',
                                                         checked
-                                                            ? 'bg-secondary border-transparent text-white hover:bg-tertiary'
+                                                            ? 'border-transparent text-white bg-secondary'
                                                             : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
-                                                        'cursor-pointer border rounded-md py-3 px-3 flex items-center justify-center font-medium uppercase sm:flex-1',
+                                                        'cursor-pointer border rounded-md py-3 px-3 flex focus:ring-0 items-center justify-center font-medium uppercase sm:flex-1',
                                                         'transition-all duration-150 ease-in-out'
                                                     )
                                                 }
@@ -311,11 +311,11 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                 value={option.value}
                                                 className={({ active, checked }) =>
                                                     classNames(
-                                                        active ? 'ring-2 ring-offset-2 ring-tertiary' : '',
+                                                        active ? '' : '',
                                                         checked
-                                                            ? 'bg-secondary border-transparent text-white hover:bg-tertiary'
+                                                            ? ' border-transparent text-white bg-secondary'
                                                             : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
-                                                        'cursor-pointer border rounded-md py-3 px-3 flex items-center justify-center text-lg sm:text-base font-medium uppercase sm:flex-1',
+                                                        'cursor-pointer border rounded-md py-3 px-3 focus:ring-0 flex items-center justify-center text-lg sm:text-base font-medium uppercase sm:flex-1',
                                                         'transition-all duration-150 ease-in-out'
                                                     )
                                                 }
@@ -336,14 +336,14 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                             <button
                                 type="button"
                                 onClick={handleClose}
-                                className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tertiary"
+                                className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm font-medium text-gray-700 hover:bg-gray-50 hover:active:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tertiary"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
                                 onClick={handleSubmit}
-                                className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm font-medium rounded-md text-white bg-tertiary hover:bg-tertiary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tertiary"
+                                className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm font-medium rounded-md text-white bg-tertiary hover:bg-tertiary-dark hover:active:bg-tertiary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tertiary"
                             >
                                 Save
                             </button>

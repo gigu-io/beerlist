@@ -13,8 +13,8 @@ export default function Auth() {
                 className="grid place-content-center"
             >
                 <svg width="168" height="246" viewBox="0 0 367 507" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M89.5283 433.943H306.648V497H89.5283V433.943Z" fill="#FEF6E4" />
-                    <path d="M89.5283 433.943H152.585V497H89.5283V433.943Z" fill="#F3D2C1" />
+                    <path d="M89.5283 433.943H306.648V497H89.5283V433.943Z" fill="#C4C4C4" />
+                    <path d="M89.5283 433.943H152.585V497H89.5283V433.943Z" fill="#9E9E9E" />
                     <g filter="url(#filter0_d_227_178)">
                         <path d="M326.271 163.579H69.7253V455.879C69.7253 464.789 76.9508 472.016 85.8635 472.016H310.133C319.046 472.016 326.275 464.789 326.275 455.879V163.579H326.271Z" fill="#F582AE" />
                     </g>
@@ -58,6 +58,7 @@ export default function Auth() {
                         </filter>
                     </defs>
                 </svg>
+
 
             </div>
             <h2 className="mt-2 text-center text-paragraph">
