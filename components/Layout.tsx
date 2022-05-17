@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useUserContext } from "../context/userContext";
 import BuyMeACoffee from "./donate/BuyMeACoffee";
+import Loading from "./Loading";
 import Navbar from "./Navbar";
 
 export default function Layout(props: any) {
@@ -16,10 +17,14 @@ export default function Layout(props: any) {
                     <Navbar /> :
                     null
             }
-            <main className="">
-                {React.cloneElement(props.children)}
-            </main>
-            <BuyMeACoffee />
+            {
+                loading ?
+                    <Loading /> :
+                    <main className="">
+                        {React.cloneElement(props.children)}
+                        <BuyMeACoffee />
+                    </main>
+            }
 
         </div>
     )

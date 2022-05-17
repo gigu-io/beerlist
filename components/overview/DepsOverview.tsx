@@ -17,7 +17,7 @@ export default function DeptsOverview() {
 
                             {
                                 dashboardType === DashboardType.OwesMe ?
-                                    <svg width="168" height="246" viewBox="0 0 367 507" fill="none" xmlns="http://www.w3.org/2000/svg" className="block m-auto">
+                                    <svg width="168" height="246" viewBox="0 0 367 507" fill="none" xmlns="http://www.w3.org/2000/svg" className="block m-auto hover:active:rotate-12 sm:hover:rotate-6 rotate-0 transition-all duration-150 ease-in-out">
                                         <path d="M89.5283 433.943H306.648V497H89.5283V433.943Z" fill="#C4C4C4" />
                                         <path d="M89.5283 433.943H152.585V497H89.5283V433.943Z" fill="#9E9E9E" />
                                         <g filter="url(#filter0_d_232_241)">
@@ -58,7 +58,7 @@ export default function DeptsOverview() {
                                         </defs>
                                     </svg>
                                     :
-                                    <svg width="168" height="246" viewBox="0 0 367 507" fill="none" xmlns="http://www.w3.org/2000/svg" className="block m-auto">
+                                    <svg width="168" height="246" viewBox="0 0 367 507" fill="none" xmlns="http://www.w3.org/2000/svg" className="block m-auto hover:active:rotate-12 sm:hover:rotate-6 rotate-0 transition-all duration-150 ease-in-out">
                                         <path d="M89.5282 433.943H306.648V497H89.5282V433.943Z" fill="#C4C4C4" />
                                         <path d="M89.5282 433.943H152.585V497H89.5282V433.943Z" fill="#9E9E9E" />
                                         <g filter="url(#filter0_d_232_257)">
