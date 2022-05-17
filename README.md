@@ -37,7 +37,7 @@
 </p>
 
 <p align="center">
-  See who owes me beer and how much I owe them. Also show the debt history. Choose between 3 different styles of beer (IPA, Lager, Stout) and 3 sizes (small, medium, big) for each debt.
+  See who owes me beer and how much I owe them. Also show the debt history. Choose between 3 different styles of beer (IPA, Lager, Stout) and 3 sizes (small, medium, big) for each debt. Write a short reason about why someone owes you beer (max 100 characters).
 </p>
 
 <p align="center">

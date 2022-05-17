@@ -84,6 +84,12 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
             return;
         }
 
+        // if reason has more than 100 characters
+        if (reason.length > 100) {
+            DefaultAlert('You got ' + reason.length + '/100 characters', AlertType.Error);
+            return;
+        }
+
         const timeStamp = Math.floor(Date.now() / 1000);
         const debtId = `${timeStamp}-${selectedUserId}-${user.uid}`;
         const smallUser: SmallUser = {
@@ -250,7 +256,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                 <label htmlFor="reason" className="block text-base font-medium text-gray-700">
                                     Reason
                                 </label>
-                                <p className="text-base text-gray-500">Write a few words about the debt.</p>
+                                <p className="text-base text-gray-500">{reason.length}/100</p>
                                 <div className="mt-1">
                                     <textarea
                                         id="reason"
