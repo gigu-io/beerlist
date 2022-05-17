@@ -3,9 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-const runtimeCaching = require('next-pwa/cache')
+const withPWA = require('next-pwa');
 
-module.exports = {
+module.exports = withPWA({
   trailingSlash: true,
   nextConfig,
   serverRuntimeConfig: {
@@ -35,6 +35,6 @@ module.exports = {
     dest: "public",
     register: true,
     skipWaiting: true,
-  },
-  runtimeCaching
-}
+    disable: process.env.NODE_ENV === "development",
+  }
+})
