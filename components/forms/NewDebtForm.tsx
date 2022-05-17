@@ -317,7 +317,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                     value={option.name}
                                                     className={({ active, checked }) =>
                                                         classNames(
-                                                            active ? '' : '',
+                                                            active ? 'ring-0 focus:ring-0' : 'ring-0 focus:ring-0',
                                                             checked
                                                                 ? 'border-transparent text-white bg-secondary'
                                                                 : 'bg-white border-gray-200 text-gray-700',
@@ -352,7 +352,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                 value={option.value}
                                                 className={({ active, checked }) =>
                                                     classNames(
-                                                        active ? '' : '',
+                                                        active ? 'ring-0 focus:ring-0' : 'ring-0 focus:ring-0',
                                                         checked
                                                             ? ' border-transparent text-white bg-secondary'
                                                             : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50',

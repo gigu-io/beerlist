@@ -175,12 +175,12 @@ export default function Navbar() {
                     {/* Mobile menu, show/hide based on menu open state. */}
                     <Transition
                         as={Fragment}
-                        enter="transition-all ease-in-out duration-300"
-                        enterFrom="max-h-0"
-                        enterTo=" max-h-full"
+                        enter="transition-all ease-in-out duration-150"
+                        enterFrom="max-h-0 opacity-0 scale-95"
+                        enterTo="max-h-full opacity-100 scale-100"
                         leave="ease-in-out duration-200"
-                        leaveFrom=" max-h-full"
-                        leaveTo=" max-h-0"
+                        leaveFrom=" max-h-full opacity-100 scale-100"
+                        leaveTo="max-h-0 opacity-0 scale-95"
                     >
                         <Disclosure.Panel className="absolute max-h-0 z-10 shadow-lg w-full md:hidden overflow-hidden rounded-b-md bg-secondary">
                             <div className="p-2">

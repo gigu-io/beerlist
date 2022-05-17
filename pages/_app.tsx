@@ -39,6 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="apple-mobile-web-app-capable" content="yes"></meta>
         <meta name="apple-mobile-web-app-status-bar-style" content="default"></meta>
         <meta name="theme-color" content="#8BD3DD"></meta>
+        <meta name="description" content="A Beer List for handling beer betting debts"></meta>
       </Head>
       <DashboardContextProvider>
         <UserContextProvider>
