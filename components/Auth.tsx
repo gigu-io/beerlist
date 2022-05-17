@@ -7,7 +7,7 @@ export default function Auth() {
 
     const { signInWithGoogle, signInWithGithub }: any = useUserContext();
 
-    const ghActionRef: string = "https://github.com/gigu-io/beerlist/actions/runs" + process.env.NEXT_PUBLIC_APP_VERSION
+    const ghActionRef: string = "https://github.com/gigu-io/beerlist/actions/runs/" + process.env.NEXT_PUBLIC_APP_VERSION
 
     return (
         <div className="flex flex-col h-screen justify-center items-center">
@@ -101,7 +101,7 @@ export default function Auth() {
             <div className="mt-8 text-center">
                 <p className="text-paragraph text-sm">
                     <a href={ghActionRef} target="_blank" rel="noreferrer">
-                        Version:&nbsp;
+                        GitHub Action:&nbsp;
                         <span className="text-bold">
                             {process.env.NEXT_PUBLIC_APP_VERSION}
                         </span>
