@@ -1,3 +1,4 @@
+import { CloudDownloadIcon, CloudUploadIcon } from "@heroicons/react/outline";
 import { useState } from "react"
 import { DashboardType, useDashboardContext } from "../../context/dashboardContext";
 import Beerlist from "./list/Beerlist";
@@ -12,11 +13,15 @@ export default function DeptsOverview() {
             <div className="max-w-3xl mx-auto">
                 <div className="overflow-hidden rounded-lg divide-gray-200">
                     <div className="px-4 py-5 sm:px-6">
-                        <h1 className="text-center text-3xl leading-9 font-bold text-white">
+                        <h1 className="text-center text-white px-3 py-2 rounded-md text-2xl transition-colors ease-in-out">
                             {
                                 dashboardType === DashboardType.OwesMe ?
-                                    "Owes Me" :
-                                    "My Debts"
+                                    <span>
+                                        <CloudDownloadIcon className="inline-block h-12 w-12 text-white" />
+                                    </span> :
+                                    <span>
+                                        <CloudUploadIcon className="inline-block h-12 w-12 text-white" />
+                                    </span>
                             }
                         </h1>
                     </div>

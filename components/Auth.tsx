@@ -1,3 +1,4 @@
+import { LinkIcon } from "@heroicons/react/outline";
 import { HeartIcon } from "@heroicons/react/solid";
 import ExportedImage from "next-image-export-optimizer";
 import { useUserContext } from "../context/userContext";
@@ -11,15 +12,54 @@ export default function Auth() {
             <div
                 className="grid place-content-center"
             >
-                <ExportedImage
-                    src="/images/logo/beerlist_logo.png"
-                    alt="beerlist logo"
-                    width={100}
-                    height={60}
-                    // unoptimized={true}
-                />
+                <svg width="168" height="246" viewBox="0 0 367 507" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M89.5283 433.943H306.648V497H89.5283V433.943Z" fill="#FEF6E4" />
+                    <path d="M89.5283 433.943H152.585V497H89.5283V433.943Z" fill="#F3D2C1" />
+                    <g filter="url(#filter0_d_227_178)">
+                        <path d="M326.271 163.579H69.7253V455.879C69.7253 464.789 76.9508 472.016 85.8635 472.016H310.133C319.046 472.016 326.275 464.789 326.275 455.879V163.579H326.271Z" fill="#F582AE" />
+                    </g>
+                    <path d="M122.573 163.579H69.7253V455.879C69.7253 464.789 76.9238 472.016 85.8033 472.016H122.573V163.579Z" fill="#D16F94" />
+                    <rect x="101.434" y="234.683" width="193.133" height="177.759" rx="10" fill="#8BD3DD" />
+                    <path d="M101.434 244.683C101.434 239.16 105.911 234.683 111.434 234.683H122.573V412.442H111.434C105.911 412.442 101.434 407.965 101.434 402.442V244.683Z" fill="#7CBDC6" />
+                    <path d="M132.017 321.161V266.68H146.209C148.541 266.68 150.738 266.859 152.801 267.218C154.908 267.576 156.769 268.272 158.383 269.303C159.997 270.289 161.253 271.724 162.15 273.607C163.091 275.446 163.562 277.89 163.562 280.939C163.562 283.136 163.226 284.997 162.553 286.521C161.925 288.001 161.006 289.189 159.796 290.086C158.63 290.983 157.217 291.588 155.558 291.902C157.666 292.171 159.437 292.866 160.872 293.987C162.307 295.064 163.383 296.521 164.1 298.359C164.863 300.198 165.244 302.417 165.244 305.018C165.244 307.843 164.863 310.287 164.1 312.349C163.383 314.367 162.329 316.026 160.939 317.327C159.549 318.627 157.823 319.591 155.76 320.219C153.742 320.847 151.41 321.161 148.765 321.161H132.017ZM144.057 312.753H146.613C149.258 312.753 151.074 312.08 152.061 310.735C153.092 309.39 153.608 307.417 153.608 304.816C153.608 302.754 153.383 301.117 152.935 299.906C152.487 298.696 151.747 297.821 150.715 297.283C149.684 296.7 148.294 296.409 146.545 296.409H144.057V312.753ZM144.057 288.472H146.411C148.249 288.472 149.639 288.203 150.581 287.665C151.523 287.082 152.15 286.252 152.464 285.176C152.823 284.1 153.002 282.8 153.002 281.275C153.002 279.84 152.733 278.652 152.195 277.71C151.702 276.724 150.94 275.984 149.908 275.491C148.922 274.998 147.666 274.751 146.142 274.751H144.057V288.472Z" fill="white" />
+                    <path d="M171.559 321.161V266.68H196.042V274.885H183.598V288.405H193.082V296.745H183.598V313.022H196.176V321.161H171.559Z" fill="white" />
+                    <path d="M201.642 321.161V266.68H226.125V274.885H213.682V288.405H223.165V296.745H213.682V313.022H226.259V321.161H201.642Z" fill="white" />
+                    <path d="M231.725 321.161V266.68H246.724C250.401 266.68 253.585 267.083 256.275 267.89C258.966 268.697 261.051 270.155 262.53 272.262C264.055 274.325 264.817 277.262 264.817 281.073C264.817 283.315 264.638 285.311 264.279 287.06C263.92 288.808 263.248 290.333 262.261 291.633C261.32 292.889 259.952 293.943 258.158 294.794L265.624 321.161H253.181L247.195 296.745H243.765V321.161H231.725ZM243.765 289.817H247.128C248.832 289.817 250.154 289.526 251.096 288.943C252.038 288.315 252.688 287.441 253.047 286.32C253.45 285.154 253.652 283.764 253.652 282.15C253.652 279.818 253.226 278.002 252.374 276.701C251.522 275.401 249.953 274.751 247.666 274.751H243.765V289.817Z" fill="white" />
+                    <path d="M145.721 386.499V332.018H157.76V378.361H170.271V386.499H145.721Z" fill="white" />
+                    <path d="M175.608 386.499V332.018H187.648V386.499H175.608Z" fill="white" />
+                    <path d="M210.233 387.306C206.825 387.306 203.978 386.701 201.691 385.49C199.404 384.28 197.678 382.419 196.512 379.908C195.346 377.352 194.696 374.056 194.561 370.02L204.852 368.473C204.897 370.805 205.099 372.688 205.457 374.123C205.861 375.558 206.399 376.589 207.072 377.217C207.789 377.845 208.641 378.159 209.627 378.159C210.883 378.159 211.69 377.733 212.049 376.881C212.452 376.029 212.654 375.132 212.654 374.19C212.654 371.948 212.116 370.065 211.04 368.541C209.964 366.971 208.506 365.402 206.668 363.832L201.96 359.73C199.897 357.981 198.148 356.008 196.713 353.811C195.323 351.569 194.628 348.811 194.628 345.538C194.628 340.919 195.996 337.399 198.731 334.978C201.467 332.512 205.188 331.278 209.896 331.278C212.811 331.278 215.143 331.772 216.892 332.758C218.685 333.745 220.03 335.045 220.927 336.659C221.869 338.229 222.497 339.91 222.81 341.704C223.169 343.453 223.371 345.134 223.416 346.748L213.058 348.026C213.013 346.412 212.901 345.022 212.721 343.856C212.587 342.645 212.273 341.726 211.78 341.098C211.287 340.426 210.524 340.09 209.493 340.09C208.372 340.09 207.542 340.56 207.004 341.502C206.511 342.444 206.264 343.385 206.264 344.327C206.264 346.345 206.735 348.004 207.677 349.304C208.663 350.56 209.941 351.883 211.511 353.273L216.017 357.241C218.394 359.259 220.389 361.546 222.003 364.101C223.662 366.657 224.492 369.819 224.492 373.585C224.492 376.141 223.909 378.473 222.743 380.58C221.577 382.643 219.918 384.28 217.766 385.49C215.658 386.701 213.147 387.306 210.233 387.306Z" fill="white" />
+                    <path d="M235.232 386.499V340.964H227.026V332.018H255.477V340.964H247.338V386.499H235.232Z" fill="white" />
+                    <g filter="url(#filter1_d_227_178)">
+                        <path d="M346.094 140.798C346.094 176.411 317.228 205.271 281.621 205.271C270.848 205.271 260.704 202.618 251.781 197.955C238.209 204.709 222.899 208.518 206.708 208.518C206.255 208.518 205.813 208.496 205.36 208.496V252.576C205.36 263.952 196.133 273.182 184.753 273.182C173.376 273.182 164.146 263.952 164.146 252.576V199.15C159.224 196.868 154.507 194.212 150.053 191.197C142.809 200.416 133.548 207.964 122.943 213.182H122.936C112.522 218.318 100.8 221.191 88.4086 221.191C45.1045 221.191 10.0042 186.091 10.0042 142.798C10.0042 99.4976 45.1045 64.3936 88.4086 64.3936C97.0619 64.3936 105.386 65.8208 113.174 68.4168C113.174 68.4056 113.185 68.4056 113.185 68.3943C128.424 31.7581 164.558 6.00415 206.708 6.00415C244.079 6.00415 276.718 26.2477 294.257 56.3733C298.61 63.8541 302.037 71.9343 304.379 80.4678V80.479C313.646 83.9778 321.899 89.5332 328.563 96.6207C339.43 108.162 346.094 123.701 346.094 140.798V140.798Z" fill="#FEF6E4" />
+                    </g>
+                    <path d="M122.932 213.178C112.518 218.314 100.796 221.187 88.4045 221.187C45.1003 221.187 10 186.087 10 142.794C10 99.4897 45.1003 64.3894 88.4045 64.3894C97.0578 64.3894 105.381 65.8166 113.173 68.4126C63.6245 52.9827 22.4144 194.452 122.932 213.178Z" fill="#F3D2C1" />
+                    <path d="M294.253 56.3692C190.169 13.316 153.739 99.4523 153.739 99.4523C144.16 85.0263 129.918 73.9605 113.181 68.3902C128.42 31.754 164.557 6 206.704 6C244.075 6 276.714 26.2436 294.253 56.3692Z" fill="#F3D2C1" />
+                    <path d="M328.563 96.6203C321.217 111.81 306.993 121.348 306.993 121.348C307.626 116.744 307.96 112.039 307.96 107.255C307.96 97.9876 306.712 89.0121 304.378 80.4786C313.646 83.9737 321.899 89.5328 328.563 96.6203Z" fill="#F3D2C1" />
+                    <defs>
+                        <filter id="filter0_d_227_178" x="29.7253" y="127.579" width="336.55" height="388.436" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                            <feOffset dy="4" />
+                            <feGaussianBlur stdDeviation="20" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0" />
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_227_178" />
+                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_227_178" result="shape" />
+                        </filter>
+                        <filter id="filter1_d_227_178" x="0.00415039" y="0.00415039" width="356.09" height="287.178" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                            <feOffset dy="4" />
+                            <feGaussianBlur stdDeviation="5" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_227_178" />
+                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_227_178" result="shape" />
+                        </filter>
+                    </defs>
+                </svg>
+
             </div>
-            <h1 className="mt-6 text-center text-4xl font-extrabold text-stroke">BEER LIST</h1>
             <h2 className="mt-2 text-center text-paragraph">
                 made with
                 <HeartIcon className="text-tertiary h-6 absolute m-auto left-0 right-0" />
@@ -32,10 +72,10 @@ export default function Auth() {
                         <div>
                             <span
                                 onClick={signInWithGoogle}
-                                className="hover:bg-secondary cursor-pointer w-full inline-flex justify-center py-2 px-4 border border-stroke rounded-md shadow bg-white text-lg font-medium text-stroke transition-colors duration-400 ease-in-out"
+                                className="hover:bg-tertiary hover:scale-105 cursor-pointer w-full inline-flex justify-center py-4 px-4 rounded-md shadow bg-secondary text-lg font-medium text-white transition-all duration-400 ease-in-out"
                             >
                                 <span className="sr-only">Sign in with Google</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-google" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-google" viewBox="0 0 16 16">
                                     <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
                                 </svg>
                             </span>
@@ -44,16 +84,28 @@ export default function Auth() {
                         <div>
                             <span
                                 onClick={signInWithGithub}
-                                className="hover:bg-secondary cursor-pointer w-full inline-flex justify-center py-2 px-4 border border-stroke rounded-md shadow-sm bg-white text-sm font-medium text-stroke transition-colors duration-400 ease-in-out"
+                                className="hover:bg-tertiary hover:scale-105 cursor-pointer w-full inline-flex justify-center py-4 px-4 rounded-md shadow-sm bg-secondary text-sm font-medium text-white transition-all duration-400 ease-in-out"
                             >
                                 <span className="sr-only">Sign in with GitHub</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-github" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-github" viewBox="0 0 16 16">
                                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
                                 </svg>
                             </span>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="mt-8 text-center">
+                <p className="text-paragraph text-sm">
+                    <a href="https://github.com/gigu-io/beerlist" target="_blank" rel="noreferrer">
+                        Version:&nbsp;
+                        <span className="text-bold">
+                            {process.env.NEXT_PUBLIC_APP_VERSION}
+                        </span>
+                        &nbsp;
+                        <LinkIcon className="inline h-4 m-auto left-0 right-0" />
+                    </a>
+                </p>
             </div>
         </div>
     )

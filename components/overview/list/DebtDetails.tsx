@@ -155,13 +155,13 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                         StatusBackgroundHoverColors.Gray
                     :
                     StatusBackgroundHoverColors.Orange,
-                "shadow my-2 sm:my-0 sm:shadow-none hover:bg-opacity-50 text-paragraph cursor-pointer rounded-md px-2 transition-all duration-150 ease-in-out"
+                "shadow my-2 sm:my-0 sm:shadow-none sm:hover:bg-opacity-50 bg-white text-paragraph cursor-pointer rounded-md px-2 transition-all duration-150 ease-in-out"
             )}
         >
             <div className="relative">
                 {
                     !last && totalDebts > 1 ?
-                        <span className="absolute top-6 left-6 -ml-px h-full w-0.5 bg-gray-100" aria-hidden="true" />
+                        <span className="absolute top-6 left-6 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
                         : null
                 }
                 <div className="relative grid sm:grid-cols-6 grid-cols-7 py-2 group">
@@ -170,7 +170,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                             <div
                                 className={classNames(
                                     debt.background,
-                                    'h-12 w-12 rounded-full p-1 flex items-center justify-center mb-1 sm:mb-0 group-hover:rotate-12 transition-all duration-300 ease-out'
+                                    'h-12 w-12 rounded-full p-1 flex items-center justify-center mb-1 sm:mb-0 group-hover:group-active:rotate-12 sm:group-hover:rotate-12 transition-all duration-300 ease-out'
                                 )}
                             >
                                 {MatchBeerIcon(debt.type, 60, 60)}
@@ -275,25 +275,22 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                                             }
                                         </div>
                                         <div className="mt-3 text-left sm:mt-0 sm:ml-4">
-                                            <Dialog.Title as="h3" className="text-lg mt-2 leading-6 font-medium text-gray-900 text-center sm:text-left">
+                                            <Dialog.Title as="h3" className="text-2xl my-4 leading-6 font-medium text-gray-900 text-center sm:text-left">
                                                 Debt Actions
                                             </Dialog.Title>
                                             <div className="mt-2">
-                                                <div className="grid grid-cols-2 py-2 text-center sm:text-left">
-                                                    <div className="font-normal">
-                                                        Status:
-                                                    </div>
+                                                <div className="my-6 text-center sm:text-left">
                                                     <div className="text-gray-500">
                                                         {
                                                             debt.completedTimestamp ?
-                                                                <span className="bg-green-100 text-green-700 p-2 rounded-lg font-bold shadow-sm cursor-default">
+                                                                <span className="bg-green-100 sm:bg-transparent text-green-700 p-2 sm:p-0 rounded-lg font-bold shadow-sm cursor-default">
                                                                     Redeemed
                                                                 </span> :
                                                                 debt.confirmedTimestamp ?
-                                                                    <span className="bg-yellow-100 text-yellow-700 p-2 rounded-lg font-bold shadow-sm cursor-default">
+                                                                    <span className="bg-yellow-100 sm:bg-transparent text-yellow-700 p-2 sm:p-0 rounded-lg font-bold shadow-sm cursor-default">
                                                                         Confirmed
                                                                     </span> :
-                                                                    <span className="bg-orange-100 text-orange-700 p-2 rounded-lg font-bold shadow-sm cursor-default">
+                                                                    <span className="bg-orange-100 sm:bg-transparent text-orange-700 p-2 sm:p-0 rounded-lg font-bold shadow-sm cursor-default">
                                                                         Unconfirmed
                                                                     </span>
                                                         }
@@ -342,7 +339,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                                             !debt.completedTimestamp && debt.confirmedTimestamp && dashboardType === DashboardType.OwesMe ?
                                                 <button
                                                     type="button"
-                                                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-400 text-base font-medium text-white hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 sm:w-auto sm:text-sm transition-all duration-150 ease-in-out"
+                                                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-400 text-xl font-medium text-white hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 sm:w-auto sm:text-sm transition-all duration-150 ease-in-out"
                                                     onClick={handleRedeem}
                                                 >
                                                     Redeem
@@ -358,7 +355,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                                                 (
                                                     <button
                                                         type="button"
-                                                        className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-400 text-base font-medium text-white hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 sm:mt-0 sm:w-auto sm:text-sm transition-all duration-150 ease-in-out"
+                                                        className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-400 text-xl font-medium text-white hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 sm:mt-0 sm:w-auto sm:text-sm transition-all duration-150 ease-in-out"
                                                         onClick={handleDelete}
                                                     >
                                                         Delete
@@ -368,7 +365,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                                                     <div></div> :
                                                     <button
                                                         type="button"
-                                                        className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-orange-400 text-base font-medium text-white hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 sm:mt-0 sm:w-auto sm:text-sm transition-all duration-150 ease-in-out"
+                                                        className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-orange-400 text-xl font-medium text-white hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 sm:mt-0 sm:w-auto sm:text-sm transition-all duration-150 ease-in-out"
                                                         onClick={handleConfirm}
                                                     >
                                                         Confirm
@@ -379,7 +376,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
 
                                         <button
                                             type="button"
-                                            className="w-full inline-flex justify-center rounded-md border border-gray-300 px-4 py-2 bg-white text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 sm:mt-0 sm:w-auto sm:text-sm transition-all duration-150 ease-in-out"
+                                            className="w-full inline-flex justify-center rounded-md border border-gray-300 px-4 py-2 bg-white text-xl font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 sm:mt-0 sm:w-auto sm:text-sm transition-all duration-150 ease-in-out"
                                             onClick={() => setShowActions(false)}
                                             ref={cancelButtonRef}
                                         >

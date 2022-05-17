@@ -64,7 +64,7 @@ export default function Beerlist() {
   }, []);
 
   return (
-    <div className="bg-white overflow-hidden shadow rounded-md">
+    <div className="overflow-hidden sm:bg-white rounded-md">
       <ul role="list" className="divide-y divide-stroke divide-opacity-10">
         {
           dashboardType === DashboardType.OwesMe ?

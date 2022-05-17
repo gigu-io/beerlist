@@ -5,7 +5,7 @@ import ExportedImage from "next-image-export-optimizer";
 import { StatusBackgroundColors } from "../Dashboard";
 import { DebtDetails } from "./DebtDetails";
 import { Debt, UserDebtList, } from "./Beerlist";
-import { Transition } from "@headlessui/react";
+import { Disclosure, Transition } from "@headlessui/react";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -96,10 +96,10 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
     }
 
     return (
-        <div>
+        <Disclosure>
             <a
                 onClick={() => setShowDetails(!showDetails)}
-                className="cursor-pointer block hover:bg-gray-50 transition-all duration-150 ease-in-out"
+                className="cursor-pointer block bg-white sm:hover:bg-gray-50 hover:active:bg-gray-50 transition-all duration-150 ease-in-out"
             >
                 <div className="flex items-center px-4 py-4 sm:px-6">
                     <div className="min-w-0 flex-1 flex items-center">
@@ -114,8 +114,8 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
                             />
                         </div>
                         <div className="min-w-0 flex-1 px-4">
-                            <p className="text-sm font-medium text-stroke truncate">{userDebtList.userinfo.displayName}</p>
-                            <p className=" text-xs font-light text-gray-500 truncate">{userDebtList.userinfo.email}</p>
+                            <p className="text-xl font-medium text-stroke truncate">{userDebtList.userinfo.displayName}</p>
+                            <p className=" text-sm font-light text-gray-500 truncate">{userDebtList.userinfo.email}</p>
                             <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
                                 {
                                     incompleteConfirmedDebts.size > 0 ?
@@ -180,12 +180,11 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
                 </div>
             </a>
 
-            {/* Detailed Debts */}
             <div className={classNames(
-                showDetails ? 'max-h-full' : 'max-h-0',
-                "bg-white transition-all duration-150 ease-in-out overflow-hidden"
+                showDetails ? 'max-h-screen opacity-100' : 'opacity-0 max-h-0',
+                " transition-all duration-300 ease-in-out overflow-hidden"
             )}>
-                <ul role="list" className="p-4">
+                <ul role="list" className="sm:p-4">
                     {
                         Array.from(debts).map(([key, debt]: [string, Debt], i: number) => (
 
@@ -198,6 +197,6 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
                     }
                 </ul>
             </div>
-        </div>
+        </Disclosure>
     )
 }

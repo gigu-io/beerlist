@@ -1,8 +1,8 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { PlusSmIcon } from '@heroicons/react/solid'
+import { MenuIcon, PlusIcon, XIcon } from '@heroicons/react/outline'
+import { LogoutIcon, PlusSmIcon } from '@heroicons/react/solid'
 import ExportedImage from "next-image-export-optimizer";
 import { useUserContext } from '../context/userContext'
 import { Skeleton } from '@mui/material'
@@ -10,6 +10,7 @@ import { NewDebtForm } from './forms/NewDebtForm';
 import { Dialog } from '@headlessui/react';
 import { DashboardType, useDashboardContext } from '../context/dashboardContext';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -58,7 +59,7 @@ export default function Navbar() {
                             <div className="flex">
                                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                                     {/* Mobile menu button */}
-                                    <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-button-text focus:outline-none transition-all duration-200 ease-in-out">
+                                    <Disclosure.Button className="inline-flex items-center justify-center p-2 text-stroke focus:outline-none ">
                                         <span className="sr-only">Open main menu</span>
                                         {open ? (
                                             <XIcon className="block h-10 w-10" aria-hidden="true" />
@@ -67,24 +68,13 @@ export default function Navbar() {
                                         )}
                                     </Disclosure.Button>
                                 </div>
-                                <div className="flex-shrink-0 flex items-center">
-                                    <div className="relative h-20 w-16 hidden sm:block">
-                                        <ExportedImage
-                                            src="/images/logo/beerlist_logo.png"
-                                            alt="beerlist logo"
-                                            layout="fill"
-                                            objectFit="contain"
-                                        // unoptimized={true}
-                                        />
-                                    </div>
-                                </div>
                                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                                     {navigation.map((item) => (
                                         <button
                                             key={item.name}
                                             onClick={item.onClickFunction}
                                             className={classNames(
-                                                item.current ? 'bg-secondary text-button-text hover:bg-tertiary hover:text-white' : 'text-paragraph hover:bg-tertiary hover:text-white',
+                                                item.current ? 'bg-tertiary text-white hover:bg-tertiary-dark' : 'text-white hover:bg-tertiary',
                                                 'px-3 py-2 rounded-md text-base font-medium transition-colors ease-in-out'
                                             )}
                                             aria-current={item.current ? 'page' : undefined}
@@ -99,10 +89,9 @@ export default function Navbar() {
                                     <button
                                         type="button"
                                         onClick={() => setShowNewDebtForm(!showNewDebtForm)}
-                                        className="text-button-text relative inline-flex items-center border-transparent shadow-sm text-base font-medium rounded-md hover:shadow-md hover:translate-x-0.5 hover:scale-105 transition-all duration-300 ease-in-out"
-                                    >
-                                        <PlusSmIcon className="-ml-1 mr-2 h-7 w-7" aria-hidden="true" />
-
+                                        className="text-white relative inline-flex items-center text-xl sm:text-base font-extrabold sm:font-medium bg-tertiary p-2 sm:hover:-translate-x-1 hover:active:-translate-x-1 rounded-lg transition-all duration-300 ease-in-out">
+                                        <PlusIcon className="h-6 w-6" aria-hidden="true" />
+                                        New Debt
 
                                     </button>
                                 </div>
@@ -192,15 +181,15 @@ export default function Navbar() {
                         leaveFrom=" max-h-full"
                         leaveTo=" max-h-0"
                     >
-                        <Disclosure.Panel className="absolute max-h-0 z-10 bg-secondary shadow-lg w-full md:hidden overflow-hidden rounded-b-md ">
-                            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                        <Disclosure.Panel className="absolute max-h-0 z-10 shadow-lg w-full md:hidden overflow-hidden rounded-b-md bg-secondary">
+                            <div className="p-2">
                                 {navigation.map((item) => (
                                     <Disclosure.Button
                                         key={item.name}
                                         onClick={item.onClickFunction}
                                         className={classNames(
-                                            item.current ? 'bg-tertiary text-white' : 'text-white border border-white',
-                                            'block px-3 py-2 rounded-md text-base font-extrabold w-full text-center transition-all duration-150 ease-in-out'
+                                            item.current ? 'bg-tertiary text-white hover:active:bg-tertiary-dark hover:active:border-tertiary-dark border-tertiary border-4' : 'text-white border-4 border-white hover:active:bg-tertiary hover:active:border-tertiary',
+                                            'block px-3 py-2 rounded-md text-xl font-extrabold w-full text-center transition-all duration-150 ease-in-out mb-2'
                                         )}
                                         aria-current={item.current ? 'page' : undefined}
                                     >
@@ -208,8 +197,16 @@ export default function Navbar() {
                                     </Disclosure.Button>
                                 ))}
                             </div>
-                            <div className="p-2 bg-opacity-25 bg-gray-700">
-                                <div className="flex px-2 sm:px-6 mx-2">
+                            <div className="p-2">
+                                <Disclosure.Button
+                                    onClick={
+                                        () => {
+                                            setDashboardType(null)
+                                            router.push('/profile')
+                                        }
+                                    }
+                                    className='mb-6 flex text-white border-4 border-white px-3 py-2 rounded-md text-2xl font-extrabold w-full text-center transition-all duration-150 ease-in-out'
+                                >
                                     <div className="mt-1">
                                         {
                                             user && !loading ?
@@ -226,29 +223,24 @@ export default function Navbar() {
                                         }
 
                                     </div>
-                                    <div className="grid grid-cols-1 ml-3 mt-1">
-                                        <span className="text-lg font-extrabold text-white h-3">{user ? user.displayName : ''}</span>
-                                        <span className="text-sm font-normal text-gray-50">{user ? user.email : ''}</span>
+                                    <div className="grid grid-cols-1 ml-3 text-left">
+                                        <span className="text-xl mt-1 font-extrabold text-white h-6">{user ? user.displayName : ''}</span>
+                                        <span className="text-base font-normal text-gray-50">{user ? user.email : ''}</span>
                                     </div>
-                                </div>
-                                <div className="mt-3 px-2 space-y-1 sm:px-3">
-                                    {userNavigation.map((item) => (
-                                        <Disclosure.Button
-                                            key={item.name}
-                                            as="a"
-                                            onClick={item.onClickFunction}
-                                            className="cursor-pointer block px-3 py-2 rounded-md text-base font-extrabold text-white hover:text-white hover:bg-gray-700"
-                                        >
-                                            {item.name}
-                                        </Disclosure.Button>
-                                    ))}
-                                </div>
+                                </Disclosure.Button>
+                                <Disclosure.Button
+                                    as="a"
+                                    onClick={() => logoutUser()}
+                                    className='mb-6 text-tertiary border-4 border-tertiary block px-3 py-2 rounded-md text-xl font-extrabold w-full text-center transition-all duration-150 ease-in-out'
+                                >
+                                    Logout <LogoutIcon className="inline w-6 h-6 mr-1" />
+                                </Disclosure.Button>
                             </div>
                         </Disclosure.Panel>
                     </Transition>
                 </div>
             )}
-        </Disclosure>
+        </Disclosure >
     )
 
 }
