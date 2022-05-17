@@ -17,13 +17,13 @@ export enum DashboardType {
 }
 
 export const DashboardContextProvider = ({ children }: Props) => {
-    const [dashboardType, setDashboardType] = useState<DashboardType>(DashboardType.OwesMe);
+    const [dashboardType, setDashboardType] = useState<DashboardType | null>(DashboardType.OwesMe);
 
     const router = useRouter();
 
-    if (router.pathname === "/mydebts" && dashboardType !== DashboardType.MyDebts) {
+    if (router.pathname === "/mydebts" && dashboardType !== DashboardType.MyDebts && dashboardType !== null) {
         setDashboardType(DashboardType.MyDebts);
-    } else if (router.pathname === "/owesme" && dashboardType !== DashboardType.OwesMe) {
+    } else if (router.pathname === "/owesme" && dashboardType !== DashboardType.OwesMe&& dashboardType !== null) {
         setDashboardType(DashboardType.OwesMe);
     }
 

@@ -32,6 +32,4 @@ export const analytics = isSupported().then(yes => yes ? getAnalytics() : consol
 
 export const performance = isSupported().then(yes => yes ? getPerformance() : console.log('Performance is not supported'));
 
-export const messaging = isSupported().then(yes => yes ? getMessaging() : console.log('Messaging is not supported'));
-
 export default firebaseConfig;

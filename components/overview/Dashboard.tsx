@@ -10,12 +10,12 @@ export enum StatusBackgroundColors {
 }
 
 export enum StatusBackgroundHoverColors {
-    Green = "hover:bg-green-100",
-    Red = "hover:bg-red-100",
-    Orange = "hover:bg-orange-100",
-    Blue = "hover:bg-secondary",
-    Transparent = "hover:bg-transparent",
-    Gray = "hover:bg-gray-100",
+    Green = "sm:hover:bg-green-100",
+    Red = "sm:hover:bg-red-100",
+    Orange = "sm:hover:bg-orange-100",
+    Blue = "sm:hover:bg-secondary",
+    Transparent = "sm:hover:bg-transparent",
+    Gray = "sm:hover:bg-gray-100",
 }
 
 export default function Dashboard() {

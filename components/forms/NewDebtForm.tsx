@@ -18,10 +18,10 @@ function classNames(...classes: any) {
 }
 
 const beerOptions = [
-    { name: Beer.Lager, icon: <BeerIconLager height={30} width={30} /> },
-    { name: Beer.Dark, icon: <BeerIconDark height={30} width={30} /> },
-    { name: Beer.IPA, icon: <BeerIconIPA height={30} width={30} /> },
-    { name: Beer.Stout, icon: <BeerIconStout height={30} width={30} /> }
+    { name: Beer.Lager, icon: <BeerIconLager height={40} width={40} /> },
+    { name: Beer.Dark, icon: <BeerIconDark height={40} width={40} /> },
+    { name: Beer.IPA, icon: <BeerIconIPA height={40} width={40} /> },
+    { name: Beer.Stout, icon: <BeerIconStout height={40} width={40} /> }
 ]
 
 const beerSizeOptions = [
@@ -132,20 +132,20 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
         >
             <Dialog.Panel className="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-6">
 
-                <form className="space-y-8 divide-y divide-gray-200">
-                    <div className="space-y-8 divide-y divide-gray-200">
+                <form className="space-y-4 divide-y divide-gray-200">
+                    <div>
                         <div>
                             <div>
-                                <h3 className="text-lg leading-6 font-medium text-gray-900">New Debt</h3>
+                                <h3 className=" text-2xl leading-6 font-normal text-gray-900">New Debt</h3>
                             </div>
 
                             <div className="sm:col-span-3 mt-3">
                                 <Listbox value={selectedUser} onChange={handleSelectedUser}>
                                     {({ open }) => (
                                         <>
-                                            <Listbox.Label className="block text-sm font-medium text-gray-700">Select a guilty user</Listbox.Label>
+                                            <Listbox.Label className="block text-base font-medium text-gray-700">Guilty User</Listbox.Label>
                                             <div className="mt-1 relative">
-                                                <Listbox.Button className="cursor-pointer relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left focus:outline-none focus:ring-1 focus:ring-tertiary focus:border-tertiary sm:text-sm">
+                                                <Listbox.Button className="cursor-pointer relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left focus:outline-none focus:ring-1 focus:ring-tertiary focus:border-tertiary sm:text-base">
                                                     <span className="flex items-center">
                                                         <ExportedImage
                                                             src={selectedUser.photoURL}
@@ -174,7 +174,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                     leaveFrom="opacity-100"
                                                     leaveTo="opacity-0"
                                                 >
-                                                    <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                                                    <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-base">
 
                                                         {Array.from(userList).map(([key, listUser]) => {
 
@@ -247,17 +247,17 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                             </div>
 
                             <div className="sm:col-span-6 mt-3">
-                                <label htmlFor="reason" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="reason" className="block text-base font-medium text-gray-700">
                                     Reason
                                 </label>
-                                <p className="text-sm text-gray-500">Write a few words about the debt.</p>
+                                <p className="text-base text-gray-500">Write a few words about the debt.</p>
                                 <div className="mt-1">
                                     <textarea
                                         id="reason"
                                         name="reason"
                                         rows={3}
                                         onChange={handleReasonChange}
-                                        className="shadow-sm focus:ring-tertiary focus:border-tertiary w-full sm:text-sm border border-gray-300 rounded-md"
+                                        className="shadow-sm focus:ring-tertiary focus:border-tertiary w-full sm:text-base border border-gray-300 rounded-md"
                                         defaultValue={''}
                                     />
                                 </div>
@@ -266,8 +266,8 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                             <div
                                 className="mt-3"
                             >
-                                <div className="flex items-center justify-between">
-                                    <h2 className="text-sm font-medium text-gray-900">Beer Type</h2>
+                                <div className="flex items-center justify-between mb-2">
+                                    <h2 className="text-base font-medium text-gray-900">Beer Type</h2>
                                 </div>
                                 <RadioGroup value={beerType} onChange={setBeerType} className="">
                                     <RadioGroup.Label className="sr-only">Choose a memory option</RadioGroup.Label>
@@ -278,11 +278,11 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                 value={option.name}
                                                 className={({ active, checked }) =>
                                                     classNames(
-                                                        active ? 'ring-2 ring-offset-2 ring-tertiary' : '',
+                                                        active ? '' : '',
                                                         checked
-                                                            ? 'bg-secondary border-transparent text-white hover:bg-tertiary'
+                                                            ? 'border-transparent text-white bg-secondary'
                                                             : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
-                                                        'cursor-pointer border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1',
+                                                        'cursor-pointer border rounded-md py-3 px-3 flex focus:ring-0 focus:outline-none items-center justify-center font-medium uppercase sm:flex-1',
                                                         'transition-all duration-150 ease-in-out'
                                                     )
                                                 }
@@ -299,8 +299,8 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                             <div
                                 className="mt-3"
                             >
-                                <div className="flex items-center justify-between">
-                                    <h2 className="text-sm font-medium text-gray-900">Beer Size</h2>
+                                <div className="flex items-center justify-between mb-2">
+                                    <h2 className="text-base font-medium text-gray-900">Beer Size</h2>
                                 </div>
                                 <RadioGroup value={beerSize} onChange={setBeerSize} className="">
                                     <RadioGroup.Label className="sr-only">Choose a memory option</RadioGroup.Label>
@@ -311,11 +311,11 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                 value={option.value}
                                                 className={({ active, checked }) =>
                                                     classNames(
-                                                        active ? 'ring-2 ring-offset-2 ring-tertiary' : '',
+                                                        active ? '' : '',
                                                         checked
-                                                            ? 'bg-secondary border-transparent text-white hover:bg-tertiary'
+                                                            ? ' border-transparent text-white bg-secondary'
                                                             : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
-                                                        'cursor-pointer border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1',
+                                                        'cursor-pointer border rounded-md py-3 px-3 focus:ring-0 focus:outline-none flex items-center justify-center text-lg sm:text-base font-medium uppercase sm:flex-1',
                                                         'transition-all duration-150 ease-in-out'
                                                     )
                                                 }
@@ -332,18 +332,18 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                         </div>
                     </div>
                     <div className="pt-5">
-                        <div className="flex justify-end">
+                        <div className="grid grid-cols-2 justify-end text-lg sm:text-base">
                             <button
                                 type="button"
                                 onClick={handleClose}
-                                className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tertiary"
+                                className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm font-medium text-gray-700 hover:bg-gray-50 hover:active:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tertiary"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
                                 onClick={handleSubmit}
-                                className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-tertiary hover:bg-tertiary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tertiary"
+                                className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm font-medium rounded-md text-white bg-tertiary hover:bg-tertiary-dark hover:active:bg-tertiary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tertiary"
                             >
                                 Save
                             </button>

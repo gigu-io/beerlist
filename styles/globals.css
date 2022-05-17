@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #F3D2C1;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

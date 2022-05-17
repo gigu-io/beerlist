@@ -1,7 +1,7 @@
 import Dashboard from '../components/overview/Dashboard';
 import Loading from '../components/Loading';
 import { useUserContext } from '../context/userContext';
-import { DashboardType, useDashboardContext } from '../context/dashboardContext';
+import { Skeleton } from '@mui/material';
 
 export default function MyDebts() {
     const { user, loading, error }: any = useUserContext();
@@ -9,11 +9,9 @@ export default function MyDebts() {
     return (
         <div>
             {
-                loading ?
-                    <Loading /> :
-                    user && !error ?
-                        <Dashboard /> :
-                        null
+                user && !loading ?
+                    <Dashboard /> :
+                    <Skeleton variant="rectangular" width="80%" height="100%" />
             }
         </div>
     )
