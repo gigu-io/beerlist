@@ -29,6 +29,7 @@ export default function Navbar() {
         // { name: 'Your Profile', onClickFunction: () => { } },
         {
             name: 'Profile', onClickFunction: () => {
+                setDashboardType(null)
                 router.push('/profile');
             }
         },
