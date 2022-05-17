@@ -3,7 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = {
+const withPWA = require('next-pwa');
+
+module.exports = withPWA({
   trailingSlash: true,
   nextConfig,
   serverRuntimeConfig: {
@@ -29,4 +31,10 @@ module.exports = {
   env: {
     storePicturesInWEBP: true,
   },
-}
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+    disable: process.env.NODE_ENV === "development",
+  }
+})

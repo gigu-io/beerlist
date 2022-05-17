@@ -4,6 +4,7 @@ import { UserContextProvider } from '../context/userContext';
 import Layout from '../components/Layout';
 import { DashboardContextProvider } from '../context/dashboardContext';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -12,6 +13,21 @@ function MyApp({ Component, pageProps }: AppProps) {
       window.scrollTo(0, 0)
     });
   }
+
+  useEffect(() => {
+    if("serviceWorker" in navigator && typeof window !== 'undefined') {
+      window.addEventListener("load", function () {
+       navigator.serviceWorker.register("/sw.js").then(
+          function (registration) {
+            console.log("Service Worker registration successful with scope: ", registration.scope);
+          },
+          function (err) {
+            console.log("Service Worker registration failed: ", err);
+          }
+        );
+      });
+    }
+  }, [])
 
   return (
     <div>

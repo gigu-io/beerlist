@@ -19,6 +19,7 @@
     "firebase-tools": "^10.7.2",
     "next": "12.1.5",
     "next-image-export-optimizer": "^0.9.6",
+    "next-pwa": "^5.5.2",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "sharp": "^0.30.4",
