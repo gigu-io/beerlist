@@ -50,7 +50,7 @@ export default function Navbar() {
 
     return (
 
-        <Disclosure as="nav" className="bg-white mb-6 w-full z-50">
+        <Disclosure as="nav" className="bg-secondary mb-6 w-full z-50">
             {({ open }) => (
                 <div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,7 +68,7 @@ export default function Navbar() {
                                     </Disclosure.Button>
                                 </div>
                                 <div className="flex-shrink-0 flex items-center">
-                                    <div className="relative h-20 w-16">
+                                    <div className="relative h-20 w-16 hidden sm:block">
                                         <ExportedImage
                                             src="/images/logo/beerlist_logo.png"
                                             alt="beerlist logo"
@@ -99,10 +99,11 @@ export default function Navbar() {
                                     <button
                                         type="button"
                                         onClick={() => setShowNewDebtForm(!showNewDebtForm)}
-                                        className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-base font-medium rounded-md bg-tertiary hover:shadow-md hover:translate-x-0.5 transition-all duration-300 ease-in-out"
+                                        className="text-button-text relative inline-flex items-center border-transparent shadow-sm text-base font-medium rounded-md hover:shadow-md hover:translate-x-0.5 hover:scale-105 transition-all duration-300 ease-in-out"
                                     >
                                         <PlusSmIcon className="-ml-1 mr-2 h-7 w-7" aria-hidden="true" />
-                                        <span>New Debt</span>
+
+
                                     </button>
                                 </div>
 
@@ -191,15 +192,15 @@ export default function Navbar() {
                         leaveFrom=" max-h-full"
                         leaveTo=" max-h-0"
                     >
-                        <Disclosure.Panel className="absolute max-h-0 z-10 bg-white shadow-lg w-full md:hidden overflow-hidden rounded-b-md ">
+                        <Disclosure.Panel className="absolute max-h-0 z-10 bg-secondary shadow-lg w-full md:hidden overflow-hidden rounded-b-md ">
                             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                                 {navigation.map((item) => (
                                     <Disclosure.Button
                                         key={item.name}
                                         onClick={item.onClickFunction}
                                         className={classNames(
-                                            item.current ? 'bg-secondary text-button-text hover:bg-tertiary hover:text-white' : 'text-paragraph hover:bg-tertiary hover:text-white',
-                                            'block px-3 py-2 rounded-md text-base font-medium w-full text-left'
+                                            item.current ? 'bg-tertiary text-white' : 'text-white border border-white',
+                                            'block px-3 py-2 rounded-md text-base font-extrabold w-full text-center transition-all duration-150 ease-in-out'
                                         )}
                                         aria-current={item.current ? 'page' : undefined}
                                     >
@@ -207,9 +208,9 @@ export default function Navbar() {
                                     </Disclosure.Button>
                                 ))}
                             </div>
-                            <div className="pt-4 pb-3">
-                                <div className="flex items-center px-5 sm:px-6">
-                                    <div className="flex-shrink-0">
+                            <div className="p-2 bg-opacity-25 bg-gray-700">
+                                <div className="flex px-2 sm:px-6 mx-2">
+                                    <div className="mt-1">
                                         {
                                             user && !loading ?
                                                 <ExportedImage
@@ -225,9 +226,9 @@ export default function Navbar() {
                                         }
 
                                     </div>
-                                    <div className="ml-3">
-                                        <div className="text-base font-medium text-gray-800">{user ? user.displayName : ''}</div>
-                                        <div className="text-base font-medium text-gray-700">{user ? user.email : ''}</div>
+                                    <div className="grid grid-cols-1 ml-3 mt-1">
+                                        <span className="text-lg font-extrabold text-white h-3">{user ? user.displayName : ''}</span>
+                                        <span className="text-sm font-normal text-gray-50">{user ? user.email : ''}</span>
                                     </div>
                                 </div>
                                 <div className="mt-3 px-2 space-y-1 sm:px-3">
@@ -236,7 +237,7 @@ export default function Navbar() {
                                             key={item.name}
                                             as="a"
                                             onClick={item.onClickFunction}
-                                            className="cursor-pointer block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gray-700"
+                                            className="cursor-pointer block px-3 py-2 rounded-md text-base font-extrabold text-white hover:text-white hover:bg-gray-700"
                                         >
                                             {item.name}
                                         </Disclosure.Button>

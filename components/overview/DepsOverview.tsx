@@ -12,7 +12,7 @@ export default function DeptsOverview() {
             <div className="max-w-3xl mx-auto">
                 <div className="overflow-hidden rounded-lg divide-gray-200">
                     <div className="px-4 py-5 sm:px-6">
-                        <h1 className="text-center text-3xl leading-9 font-normal text-stroke">
+                        <h1 className="text-center text-3xl leading-9 font-bold text-white">
                             {
                                 dashboardType === DashboardType.OwesMe ?
                                     "Owes Me" :
