@@ -282,7 +282,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                         checked
                                                             ? 'border-transparent text-white bg-secondary'
                                                             : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
-                                                        'cursor-pointer border rounded-md py-3 px-3 flex focus:ring-0 items-center justify-center font-medium uppercase sm:flex-1',
+                                                        'cursor-pointer border rounded-md py-3 px-3 flex focus:ring-0 focus:outline-none items-center justify-center font-medium uppercase sm:flex-1',
                                                         'transition-all duration-150 ease-in-out'
                                                     )
                                                 }
@@ -315,7 +315,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                         checked
                                                             ? ' border-transparent text-white bg-secondary'
                                                             : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
-                                                        'cursor-pointer border rounded-md py-3 px-3 focus:ring-0 flex items-center justify-center text-lg sm:text-base font-medium uppercase sm:flex-1',
+                                                        'cursor-pointer border rounded-md py-3 px-3 focus:ring-0 focus:outline-none flex items-center justify-center text-lg sm:text-base font-medium uppercase sm:flex-1',
                                                         'transition-all duration-150 ease-in-out'
                                                     )
                                                 }
