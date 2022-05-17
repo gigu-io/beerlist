@@ -35,10 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>BEER LIST</title>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="images/manifest/icon-192x192.png" />
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"></meta>
         <meta name="apple-mobile-web-app-capable" content="yes"></meta>
         <meta name="apple-mobile-web-app-status-bar-style" content="default"></meta>
         <meta name="theme-color" content="#8BD3DD"></meta>
