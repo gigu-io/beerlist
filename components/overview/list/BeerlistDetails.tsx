@@ -14,7 +14,7 @@ function classNames(...classes: any) {
 export interface SmallUser {
     email: string;
     photoURL: string;
-    displayName: string;
+    displayName: string | null;
 }
 
 export interface BeerGuilty {

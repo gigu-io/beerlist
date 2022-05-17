@@ -29,6 +29,7 @@ export default function Navbar() {
         // { name: 'Your Profile', onClickFunction: () => { } },
         {
             name: 'Profile', onClickFunction: () => {
+                setDashboardType(null)
                 router.push('/profile');
             }
         },
@@ -74,7 +75,7 @@ export default function Navbar() {
                                             key={item.name}
                                             onClick={item.onClickFunction}
                                             className={classNames(
-                                                item.current ? 'bg-tertiary text-white hover:bg-tertiary-dark' : 'text-white hover:bg-tertiary',
+                                                item.current ? 'bg-tertiary text-white md:hover:active:bg-tertiary-dark lg:hover:bg-tertiary-dark' : 'text-white md:hover:active:bg-tertiary lg:hover:bg-tertiary',
                                                 'px-3 py-2 rounded-md text-base font-medium transition-colors ease-in-out'
                                             )}
                                             aria-current={item.current ? 'page' : undefined}
@@ -149,19 +150,19 @@ export default function Navbar() {
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95"
                                         >
-                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 shadow-lg rounded-md z-20 bg-secondary">
+                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 shadow-lg rounded-md z-20 bg-tertiary">
                                                 {userNavigation.map((item) => (
-                                                    <div
+                                                    <Menu.Button
                                                         key={item.name}
                                                         onClick={item.onClickFunction}
-                                                        className="hover:bg-tertiary hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
+                                                        className="sm:hover:bg-tertiary-dark text-left w-full block hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
                                                     >
                                                         <div
-                                                            className='block px-4 py-2 text-base text-button-text font-bold hover:translate-x-1 transition-all duration-300 ease-in-out cursor-pointer'
+                                                            className='block px-4 py-2 text-base text-white font-bold hover:translate-x-1 transition-all duration-300 ease-in-out cursor-pointer'
                                                         >
                                                             {item.name}
                                                         </div>
-                                                    </div>
+                                                    </Menu.Button>
                                                 ))}
                                             </Menu.Items>
                                         </Transition>
