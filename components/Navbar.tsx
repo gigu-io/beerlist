@@ -149,19 +149,19 @@ export default function Navbar() {
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95"
                                         >
-                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 shadow-lg rounded-md z-20 bg-secondary">
+                                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 shadow-lg rounded-md z-20 bg-tertiary">
                                                 {userNavigation.map((item) => (
-                                                    <div
+                                                    <Menu.Button
                                                         key={item.name}
                                                         onClick={item.onClickFunction}
-                                                        className="hover:bg-tertiary hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
+                                                        className="hover:bg-tertiary-dark text-left w-full block hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
                                                     >
                                                         <div
-                                                            className='block px-4 py-2 text-base text-button-text font-bold hover:translate-x-1 transition-all duration-300 ease-in-out cursor-pointer'
+                                                            className='block px-4 py-2 text-base text-white font-bold hover:translate-x-1 transition-all duration-300 ease-in-out cursor-pointer'
                                                         >
                                                             {item.name}
                                                         </div>
-                                                    </div>
+                                                    </Menu.Button>
                                                 ))}
                                             </Menu.Items>
                                         </Transition>

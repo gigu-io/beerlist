@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RadioGroup } from '@headlessui/react';
+import { Combobox, RadioGroup } from '@headlessui/react';
 import { Beer, BeerIconDark, BeerIconIPA, BeerIconLager, BeerIconStout } from "../icons/BeerIcons";
 import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
@@ -12,6 +12,8 @@ import { useUserContext } from "../../context/userContext";
 import { Dialog } from '@headlessui/react';
 import { AlertType, DefaultAlert } from "../alerts/Alerts";
 import { DashboardType, useDashboardContext } from "../../context/dashboardContext";
+import { Avatar } from "@mui/material";
+import { SearchIcon, UserCircleIcon } from "@heroicons/react/outline";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -35,11 +37,13 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
     const [beerSize, setBeerSize] = useState(beerSizeOptions[0].value);
     const [selectedUser, setSelectedUser] = useState<SmallUser>({displayName: 'Select a user',
         photoURL: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y',
-        email: 'email'});
+        email: ''});
     const [selectedUserId, setSelectedUserId] = useState('0');
     const [userList, setUserList] = useState<Map<string, SmallUser>>(new Map<string, SmallUser>());
     const [reason, setReason] = useState('');
     const [size, setSize] = useState('');
+    const [query, setQuery] = useState('');
+
     const { setDashboardType }: any = useDashboardContext();
 
     const { user, logoutUser, loading, error }: any = useUserContext();
@@ -57,6 +61,15 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
         })
         // eslint-disable-next-line
     }, []);
+
+    // filter Map<string, SmallUser> by query of SmallUser.displayName and return a Map<string, SmallUser>
+    const filteredUserList: Map<string, SmallUser> =
+        query === '' ?
+            userList :
+            new Map(
+                Array.from(userList).filter(([key, value]) => value.email.toLowerCase().includes(query.toLowerCase()))
+            ) as Map<string, SmallUser>;
+
 
     const handleClose = () => {
         setShowNewDebtForm(false);
@@ -146,60 +159,71 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                             </div>
 
                             <div className="sm:col-span-3 mt-3">
-                                <Listbox value={selectedUser} onChange={handleSelectedUser}>
-                                    {({ open }) => (
-                                        <>
-                                            <Listbox.Label className="block text-base font-medium text-gray-700">Guilty User</Listbox.Label>
-                                            <div className="mt-1 relative">
-                                                <Listbox.Button className="cursor-pointer relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left focus:outline-none focus:ring-1 focus:ring-tertiary focus:border-tertiary sm:text-base">
-                                                    <span className="flex items-center">
-                                                        <ExportedImage
-                                                            src={selectedUser.photoURL}
-                                                            alt="beerlist logo"
-                                                            objectFit="contain"
-                                                            height={30}
-                                                            width={30}
-                                                            className="flex-shrink-0 h-6 w-6 rounded-full"
-                                                        // unoptimized={true}
-                                                        />
-                                                        <div>
-                                                            <span className="ml-3 truncate">{selectedUser.displayName}</span>
-                                                            <br />
-                                                            <span className="ml-3 font-light text-gray-400 text-xs truncate">{selectedUser.email}</span>
-                                                        </div>
-                                                    </span>
-                                                    <span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                                        <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                                                    </span>
-                                                </Listbox.Button>
+                                <Combobox as="div" value={selectedUser} onChange={handleSelectedUser}>
+                                    <Combobox.Label className="block text-sm font-medium text-gray-700">Search User by Email</Combobox.Label>
+                                    <div className="relative mt-1">
+                                        <Combobox.Label className="absolute inset-y-0 left-0 flex items-center rounded-r-md px-2 focus:outline-none">
+                                            {
+                                                selectedUser ?
+                                                    <ExportedImage
+                                                        src={selectedUser.photoURL}
+                                                        alt="beerlist logo"
+                                                        objectFit="contain"
+                                                        height={20}
+                                                        width={20}
+                                                        className="flex-shrink-0 h-6 w-6 rounded-full"
+                                                    // unoptimized={true}
+                                                    /> :
+                                                    null
+                                            }
+                                        </Combobox.Label>
 
-                                                <Transition
-                                                    show={open}
-                                                    as={Fragment}
-                                                    leave="transition ease-in duration-100"
-                                                    leaveFrom="opacity-100"
-                                                    leaveTo="opacity-0"
-                                                >
-                                                    <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-base">
+                                        <Combobox.Input
+                                            className="w-full pl-10 rounded-md border border-gray-300 bg-white py-2 pr-10 shadow-sm focus:border-tertiary focus:outline-none focus:ring-1 focus:ring-tertiary sm:text-sm"
+                                            onChange={(event) => setQuery(event.target.value)}
+                                            onFocus={(event) => event.target.select()}
+                                            // @ts-ignore
+                                            displayValue={
+                                                selectedUser ?
+                                                    (selectedUser: SmallUser) => selectedUser.email
+                                                    :
+                                                    ''}
+                                        />
+                                        <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+                                            <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                            <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                        </Combobox.Button>
 
-                                                        {Array.from(userList).map(([key, listUser]) => {
+                                        {filteredUserList.size > 0 && (
+                                            <Transition
+                                                enter="transition duration-100 ease-out"
+                                                enterFrom="transform scale-95 opacity-0"
+                                                enterTo="transform scale-100 opacity-100"
+                                                leave="transition duration-75 ease-out"
+                                                leaveFrom="transform scale-100 opacity-100"
+                                                leaveTo="transform scale-95 opacity-0"
+                                            >
+                                                <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white  text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                    {Array.from(filteredUserList).map(([key, listUser]) => {
+                                                        const listUserMap: Map<string, SmallUser> = new Map<string, SmallUser>();
+                                                        listUserMap.set(key, listUser);
 
-                                                            const listUserMap: Map<string, SmallUser> = new Map<string, SmallUser>();
-                                                            listUserMap.set(key, listUser);
+                                                        if (user.uid !== key) {
+                                                            return (
 
-                                                            if (user.uid !== key) {
-                                                                return (
-                                                                    <Listbox.Option
-                                                                        key={key}
-                                                                        className={({ active }) =>
-                                                                            classNames(
-                                                                                active ? 'text-white bg-tertiary' : 'text-gray-900',
-                                                                                'cursor-pointer select-none relative py-2 pl-3 pr-9 transition-all duration-150 ease-in-out'
-                                                                            )
-                                                                        }
-                                                                        value={listUserMap}
-                                                                    >
-                                                                        {({ selected, active }) => (
+                                                                <Combobox.Option
+                                                                    key={key}
+                                                                    value={listUserMap}
+                                                                    className={({ active }) =>
+                                                                        classNames(
+                                                                            active ? 'bg-tertiary text-white' : 'text-gray-900',
+                                                                            'relative select-none py-2 pl-3 pr-9 cursor-pointer'
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    {({ active }) => {
+
+                                                                        return (
                                                                             <>
                                                                                 <div className="flex items-center">
                                                                                     <ExportedImage
@@ -213,23 +237,23 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                                                     />
                                                                                     <div>
                                                                                         <span
-                                                                                            className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-3 truncate')}
+                                                                                            className={classNames(selectedUserId === key ? 'font-semibold' : 'font-normal', 'ml-3 truncate')}
                                                                                         >
                                                                                             {listUser.displayName}
                                                                                         </span>
                                                                                         <br />
                                                                                         <span
-                                                                                            className={classNames(selected ? 'font-semibold' : 'font-light', 'ml-3 text-xs truncate')}
+                                                                                            className={classNames(selectedUserId === key ? 'font-semibold' : 'font-light', 'ml-3 text-xs truncate')}
                                                                                         >
                                                                                             {listUser.email}
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
 
-                                                                                {selected ? (
+                                                                                {selectedUserId === key ? (
                                                                                     <span
                                                                                         className={classNames(
-                                                                                            active ? 'text-white' : 'text-tertiary',
+                                                                                            active ? 'text-white' : 'text-secondary',
                                                                                             'absolute inset-y-0 right-0 flex items-center pr-4'
                                                                                         )}
                                                                                     >
@@ -237,19 +261,17 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                                                     </span>
                                                                                 ) : null}
                                                                             </>
-                                                                        )}
-                                                                    </Listbox.Option>
-                                                                )
-                                                            } else {
-                                                                return null
-                                                            }
-                                                        })}
-                                                    </Listbox.Options>
-                                                </Transition>
-                                            </div>
-                                        </>
-                                    )}
-                                </Listbox>
+                                                                        );
+                                                                    }}
+                                                                </Combobox.Option>
+                                                            )
+                                                        }
+                                                    })}
+                                                </Combobox.Options>
+                                            </Transition>
+                                        )}
+                                    </div>
+                                </Combobox>
                             </div>
 
                             <div className="sm:col-span-6 mt-3">
@@ -289,7 +311,8 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                             ? 'border-transparent text-white bg-secondary'
                                                             : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
                                                         'cursor-pointer border rounded-md py-3 px-3 flex focus:ring-0 focus:outline-none items-center justify-center font-medium uppercase sm:flex-1',
-                                                        'transition-all duration-150 ease-in-out'
+                                                        'transition-all duration-150 ease-in-out',
+                                                        'hover:active:bg-tertiary sm:hover:bg-tertiary'
                                                     )
                                                 }
                                             >
@@ -322,7 +345,8 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                             ? ' border-transparent text-white bg-secondary'
                                                             : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
                                                         'cursor-pointer border rounded-md py-3 px-3 focus:ring-0 focus:outline-none flex items-center justify-center text-lg sm:text-base font-medium uppercase sm:flex-1',
-                                                        'transition-all duration-150 ease-in-out'
+                                                        'transition-all duration-150 ease-in-out',
+                                                        'hover:active:bg-tertiary hover:active:text-white sm:hover:bg-tertiary sm:hover:text-white'
                                                     )
                                                 }
                                             >
