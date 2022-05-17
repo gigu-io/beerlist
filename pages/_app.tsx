@@ -7,13 +7,16 @@ import { DashboardContextProvider } from '../context/dashboardContext';
 function MyApp({ Component, pageProps }: AppProps) {
 
   return (
-    <DashboardContextProvider>
-      <UserContextProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </UserContextProvider>
-    </DashboardContextProvider>
+    <div
+    >
+      <DashboardContextProvider>
+        <UserContextProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </UserContextProvider>
+      </DashboardContextProvider>
+    </div>
   )
 }
 
