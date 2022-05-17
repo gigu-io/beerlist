@@ -37,11 +37,6 @@ export const UserContextProvider = ({ children }: Props) => {
                 router.push('/');
                 setUser(null);
             }
-            if (error) {
-                router.push('/');
-                setUser(null);
-                setError(null);
-            }
             setLoading(false);
         })
         // eslint-disable-next-line
