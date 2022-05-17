@@ -3,6 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
+const runtimeCaching = require('next-pwa/cache')
+
 module.exports = {
   trailingSlash: true,
   nextConfig,
@@ -29,4 +31,10 @@ module.exports = {
   env: {
     storePicturesInWEBP: true,
   },
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  },
+  runtimeCaching
 }

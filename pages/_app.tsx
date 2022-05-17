@@ -4,6 +4,7 @@ import { UserContextProvider } from '../context/userContext';
 import Layout from '../components/Layout';
 import { DashboardContextProvider } from '../context/dashboardContext';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -13,13 +14,31 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
   }
 
+  useEffect(() => {
+    if("serviceWorker" in navigator && typeof window !== 'undefined') {
+      window.addEventListener("load", function () {
+       navigator.serviceWorker.register("/sw.js").then(
+          function (registration) {
+            console.log("Service Worker registration successful with scope: ", registration.scope);
+          },
+          function (err) {
+            console.log("Service Worker registration failed: ", err);
+          }
+        );
+      });
+    }
+  }, [])
+
   return (
     <div>
       <Head>
         <title>BEER LIST</title>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="images/manifest/icon-192x192.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"></meta>
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes"></meta>
         <meta name="apple-mobile-web-app-status-bar-style" content="default"></meta>
         <meta name="theme-color" content="#8BD3DD"></meta>
