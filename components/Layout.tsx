@@ -10,13 +10,13 @@ export default function Layout(props: any) {
     const router = useRouter();
 
     return (
-        <div className="flex flex-col bg-[url('/images/background/waves.svg')] bg-no-repeat bg-center bg-fixed bg-cover h-full min-h-screen items-stretch">
+        <div className="bg-[url('/images/background/waves.svg')] bg-no-repeat bg-center bg-cover h-screen">
             {
                 router.pathname != "/" ?
                     <Navbar /> :
                     null
             }
-            <main>
+            <main className="">
                 {React.cloneElement(props.children)}
             </main>
             <BuyMeACoffee />

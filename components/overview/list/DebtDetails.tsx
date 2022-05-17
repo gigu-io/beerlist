@@ -299,6 +299,30 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                                                         }
                                                     </div>
                                                 </div>
+                                                {
+                                                    debt.completedTimestamp ?
+                                                        <div className="grid grid-cols-2 text-sm">
+                                                            <div className="font-medium text-gray-700">
+                                                                Redeemed:
+                                                            </div>
+                                                            <div className="text-gray-500 font-normal">
+                                                                {timeConverterDetailed(debt.completedTimestamp)}
+                                                            </div>
+                                                        </div> :
+                                                        null
+                                                }
+                                                {
+                                                    debt.confirmedTimestamp ?
+                                                        <div className="grid grid-cols-2 text-sm">
+                                                            <div className="font-medium text-gray-700">
+                                                                Confirmed:
+                                                            </div>
+                                                            <div className="text-gray-500 font-normal">
+                                                                {timeConverterDetailed(debt.confirmedTimestamp)}
+                                                            </div>
+                                                        </div> :
+                                                        null
+                                                }
                                                 <div className="grid grid-cols-1">
                                                     <div className="grid grid-cols-2 text-sm">
                                                         <div className="font-medium text-gray-700">
@@ -308,30 +332,6 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                                                             {timeConverterDetailed(debt.createdTimestamp)}
                                                         </div>
                                                     </div>
-                                                    {
-                                                        debt.confirmedTimestamp ?
-                                                            <div className="grid grid-cols-2 text-sm">
-                                                                <div className="font-medium text-gray-700">
-                                                                    Confirmed:
-                                                                </div>
-                                                                <div className="text-gray-500 font-normal">
-                                                                    {timeConverterDetailed(debt.confirmedTimestamp)}
-                                                                </div>
-                                                            </div> :
-                                                            null
-                                                    }
-                                                    {
-                                                        debt.completedTimestamp ?
-                                                            <div className="grid grid-cols-2 text-sm">
-                                                                <div className="font-medium text-gray-700">
-                                                                    Redeemed:
-                                                                </div>
-                                                                <div className="text-gray-500 font-normal">
-                                                                    {timeConverterDetailed(debt.completedTimestamp)}
-                                                                </div>
-                                                            </div> :
-                                                            null
-                                                    }
                                                 </div>
                                             </div>
                                         </div>

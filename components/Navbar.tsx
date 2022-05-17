@@ -50,20 +50,20 @@ export default function Navbar() {
 
     return (
 
-        <Disclosure as="nav" className="bg-main mb-6">
+        <Disclosure as="nav" className="bg-white mb-6 w-full z-50">
             {({ open }) => (
                 <div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex justify-between h-16">
+                        <div className="flex justify-between h-20">
                             <div className="flex">
                                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                                     {/* Mobile menu button */}
                                     <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-button-text focus:outline-none transition-all duration-200 ease-in-out">
                                         <span className="sr-only">Open main menu</span>
                                         {open ? (
-                                            <XIcon className="block h-6 w-6" aria-hidden="true" />
+                                            <XIcon className="block h-10 w-10" aria-hidden="true" />
                                         ) : (
-                                            <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                                            <MenuIcon className="block h-10 w-10" aria-hidden="true" />
                                         )}
                                     </Disclosure.Button>
                                 </div>
@@ -85,7 +85,7 @@ export default function Navbar() {
                                             onClick={item.onClickFunction}
                                             className={classNames(
                                                 item.current ? 'bg-secondary text-button-text hover:bg-tertiary hover:text-white' : 'text-paragraph hover:bg-tertiary hover:text-white',
-                                                'px-3 py-2 rounded-md text-sm font-medium transition-colors ease-in-out'
+                                                'px-3 py-2 rounded-md text-base font-medium transition-colors ease-in-out'
                                             )}
                                             aria-current={item.current ? 'page' : undefined}
                                         >
@@ -99,9 +99,9 @@ export default function Navbar() {
                                     <button
                                         type="button"
                                         onClick={() => setShowNewDebtForm(!showNewDebtForm)}
-                                        className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-sm font-medium rounded-md bg-tertiary hover:shadow-md hover:translate-x-0.5 transition-all duration-300 ease-in-out"
+                                        className="text-button-text relative inline-flex items-center px-4 py-2 border-transparent shadow-sm text-base font-medium rounded-md bg-tertiary hover:shadow-md hover:translate-x-0.5 transition-all duration-300 ease-in-out"
                                     >
-                                        <PlusSmIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                                        <PlusSmIcon className="-ml-1 mr-2 h-7 w-7" aria-hidden="true" />
                                         <span>New Debt</span>
                                     </button>
                                 </div>
@@ -133,7 +133,7 @@ export default function Navbar() {
                                     {/* Profile dropdown */}
                                     <Menu as="div" className="ml-3 relative">
                                         <div>
-                                            <Menu.Button className="bg-gray-800 flex text-sm rounded-full">
+                                            <Menu.Button className="bg-gray-800 flex text-base rounded-full">
                                                 <span className="sr-only">Open user menu</span>
                                                 {
                                                     user && !loading ?
@@ -167,7 +167,7 @@ export default function Navbar() {
                                                         className="hover:bg-tertiary hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
                                                     >
                                                         <div
-                                                            className='block px-4 py-2 text-sm text-button-text font-bold hover:translate-x-1 transition-all duration-300 ease-in-out cursor-pointer'
+                                                            className='block px-4 py-2 text-base text-button-text font-bold hover:translate-x-1 transition-all duration-300 ease-in-out cursor-pointer'
                                                         >
                                                             {item.name}
                                                         </div>
@@ -186,12 +186,12 @@ export default function Navbar() {
                         as={Fragment}
                         enter="transition-all ease-in-out duration-300"
                         enterFrom="max-h-0"
-                        enterTo="max-h-full"
+                        enterTo=" max-h-full"
                         leave="ease-in-out duration-200"
                         leaveFrom=" max-h-full"
                         leaveTo=" max-h-0"
                     >
-                        <Disclosure.Panel className="absolute max-h-0 z-10 bg-main shadow-lg w-full md:hidden overflow-hidden rounded-b-md ">
+                        <Disclosure.Panel className="absolute max-h-0 z-10 bg-white shadow-lg w-full md:hidden overflow-hidden rounded-b-md ">
                             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                                 {navigation.map((item) => (
                                     <Disclosure.Button
@@ -227,7 +227,7 @@ export default function Navbar() {
                                     </div>
                                     <div className="ml-3">
                                         <div className="text-base font-medium text-gray-800">{user ? user.displayName : ''}</div>
-                                        <div className="text-sm font-medium text-gray-700">{user ? user.email : ''}</div>
+                                        <div className="text-base font-medium text-gray-700">{user ? user.email : ''}</div>
                                     </div>
                                 </div>
                                 <div className="mt-3 px-2 space-y-1 sm:px-3">

@@ -29,7 +29,4 @@ module.exports = {
   env: {
     storePicturesInWEBP: true,
   },
-  plugins: [
-    'postcss-100vh-fix',
-  ]
 }
