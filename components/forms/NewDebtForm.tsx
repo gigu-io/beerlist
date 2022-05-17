@@ -35,9 +35,11 @@ const beerSizeOptions = [
 export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
     const [beerType, setBeerType] = useState(beerOptions[0].name);
     const [beerSize, setBeerSize] = useState(beerSizeOptions[0].value);
-    const [selectedUser, setSelectedUser] = useState<SmallUser>({displayName: 'Select a user',
+    const [selectedUser, setSelectedUser] = useState<SmallUser>({
+        displayName: 'Select a user',
         photoURL: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y',
-        email: ''});
+        email: ''
+    });
     const [selectedUserId, setSelectedUserId] = useState('0');
     const [userList, setUserList] = useState<Map<string, SmallUser>>(new Map<string, SmallUser>());
     const [reason, setReason] = useState('');
@@ -155,12 +157,12 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                     <div>
                         <div>
                             <div>
-                                <h3 className=" text-2xl leading-6 font-normal text-gray-900">New Debt</h3>
+                                <h3 className=" text-2xl leading-6 font-bold text-gray-700">New Debt</h3>
                             </div>
 
-                            <div className="sm:col-span-3 mt-3">
+                            <div className="sm:col-span-3 mt-2">
                                 <Combobox as="div" value={selectedUser} onChange={handleSelectedUser}>
-                                    <Combobox.Label className="block text-sm font-medium text-gray-700">Search User by Email</Combobox.Label>
+                                    <Combobox.Label className="block text-sm font-medium text-gray-500">Search User by Email</Combobox.Label>
                                     <div className="relative mt-1">
                                         <Combobox.Label className="absolute inset-y-0 left-0 flex items-center rounded-r-md px-2 focus:outline-none">
                                             {
@@ -216,7 +218,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                                     value={listUserMap}
                                                                     className={({ active }) =>
                                                                         classNames(
-                                                                            active ? 'bg-tertiary text-white' : 'text-gray-900',
+                                                                            active ? 'bg-tertiary text-white' : 'text-gray-700',
                                                                             'relative select-none py-2 pl-3 pr-9 cursor-pointer'
                                                                         )
                                                                     }
@@ -274,12 +276,12 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                 </Combobox>
                             </div>
 
-                            <div className="sm:col-span-6 mt-3">
+                            <div className="sm:col-span-6 mt-2">
                                 <label htmlFor="reason" className="block text-base font-medium text-gray-700">
                                     Reason
                                 </label>
-                                <p className="text-base text-gray-500">{reason.length}/100</p>
-                                <div className="mt-1">
+                                <p className="text-sm font-medium text-gray-500">{reason.length}/100</p>
+                                <div className="">
                                     <textarea
                                         id="reason"
                                         name="reason"
@@ -292,44 +294,54 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                             </div>
 
                             <div
-                                className="mt-3"
+                                className="mt-2"
                             >
-                                <div className="flex items-center justify-between mb-2">
-                                    <h2 className="text-base font-medium text-gray-900">Beer Type</h2>
+                                <div className="flex items-center justify-between">
+                                    <h2 className="text-base font-medium text-gray-700">Beer Type</h2>
                                 </div>
                                 <RadioGroup value={beerType} onChange={setBeerType} className="">
                                     <RadioGroup.Label className="sr-only">Choose a memory option</RadioGroup.Label>
                                     <div className="grid grid-cols-4 gap-3 sm:grid-cols-4">
                                         {beerOptions.map((option) => (
-                                            <RadioGroup.Option
+                                            <div
                                                 key={option.name}
-                                                value={option.name}
-                                                className={({ active, checked }) =>
-                                                    classNames(
-                                                        active ? '' : '',
-                                                        checked
-                                                            ? 'border-transparent text-white bg-secondary'
-                                                            : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
-                                                        'cursor-pointer border rounded-md py-3 px-3 flex focus:ring-0 focus:outline-none items-center justify-center font-medium uppercase sm:flex-1',
-                                                        'transition-all duration-150 ease-in-out',
-                                                        'hover:active:bg-tertiary sm:hover:bg-tertiary'
-                                                    )
-                                                }
                                             >
-                                                <RadioGroup.Label as="span">
-                                                    {option.icon}
-                                                </RadioGroup.Label>
-                                            </RadioGroup.Option>
+                                                <div
+                                                    className={classNames(
+                                                        'text-sm text-center m-auto font-medium text-gray-500 mt-1',
+                                                    )}
+                                                >
+                                                    {option.name}
+                                                </div>
+                                                <RadioGroup.Option
+                                                    value={option.name}
+                                                    className={({ active, checked }) =>
+                                                        classNames(
+                                                            active ? '' : '',
+                                                            checked
+                                                                ? 'border-transparent text-white bg-secondary'
+                                                                : 'bg-white border-gray-200 text-gray-700',
+                                                            'cursor-pointer border rounded-md py-3 px-3 flex items-center justify-center font-medium uppercase sm:flex-1',
+                                                            'transition-all duration-150 ease-in-out',
+                                                            'hover:active:bg-tertiary sm:hover:bg-tertiary'
+                                                        )
+                                                    }
+                                                >
+                                                    <RadioGroup.Label as="span">
+                                                        {option.icon}
+                                                    </RadioGroup.Label>
+                                                </RadioGroup.Option>
+                                            </div>
                                         ))}
                                     </div>
                                 </RadioGroup>
                             </div>
 
                             <div
-                                className="mt-3"
+                                className="mt-2"
                             >
                                 <div className="flex items-center justify-between mb-2">
-                                    <h2 className="text-base font-medium text-gray-900">Beer Size</h2>
+                                    <h2 className="text-base font-medium text-gray-700">Beer Size</h2>
                                 </div>
                                 <RadioGroup value={beerSize} onChange={setBeerSize} className="">
                                     <RadioGroup.Label className="sr-only">Choose a memory option</RadioGroup.Label>
@@ -343,8 +355,8 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                                         active ? '' : '',
                                                         checked
                                                             ? ' border-transparent text-white bg-secondary'
-                                                            : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
-                                                        'cursor-pointer border rounded-md py-3 px-3 focus:ring-0 focus:outline-none flex items-center justify-center text-lg sm:text-base font-medium uppercase sm:flex-1',
+                                                            : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50',
+                                                        'cursor-pointer border rounded-md py-3 px-3 flex items-center justify-center text-lg sm:text-base font-medium uppercase sm:flex-1',
                                                         'transition-all duration-150 ease-in-out',
                                                         'hover:active:bg-tertiary hover:active:text-white sm:hover:bg-tertiary sm:hover:text-white'
                                                     )
