@@ -74,7 +74,7 @@ export default function Navbar() {
                                             key={item.name}
                                             onClick={item.onClickFunction}
                                             className={classNames(
-                                                item.current ? 'bg-tertiary text-white hover:bg-tertiary-dark' : 'text-white hover:bg-tertiary',
+                                                item.current ? 'bg-tertiary text-white md:hover:active:bg-tertiary-dark lg:hover:bg-tertiary-dark' : 'text-white md:hover:active:bg-tertiary lg:hover:bg-tertiary',
                                                 'px-3 py-2 rounded-md text-base font-medium transition-colors ease-in-out'
                                             )}
                                             aria-current={item.current ? 'page' : undefined}
@@ -154,7 +154,7 @@ export default function Navbar() {
                                                     <Menu.Button
                                                         key={item.name}
                                                         onClick={item.onClickFunction}
-                                                        className="hover:bg-tertiary-dark text-left w-full block hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
+                                                        className="sm:hover:bg-tertiary-dark text-left w-full block hover:shadow-xl transition-all duration-300 ease-in-out first:rounded-t-md last:rounded-b-md rounded-none "
                                                     >
                                                         <div
                                                             className='block px-4 py-2 text-base text-white font-bold hover:translate-x-1 transition-all duration-300 ease-in-out cursor-pointer'
