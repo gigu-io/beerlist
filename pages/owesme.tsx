@@ -8,11 +8,9 @@ export default function OwesMe() {
     return (
         <div>
             {
-                loading ?
-                    <Loading /> :
-                    user && !error ?
-                        <Dashboard /> :
-                        null
+                user && !loading ?
+                    <Dashboard /> :
+                    null
             }
         </div>
     )

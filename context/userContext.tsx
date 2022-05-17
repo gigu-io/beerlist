@@ -37,6 +37,11 @@ export const UserContextProvider = ({ children }: Props) => {
                 router.push('/');
                 setUser(null);
             }
+            if (error) {
+                router.push('/');
+                setUser(null);
+                setError(null);
+            }
             setLoading(false);
         })
         // eslint-disable-next-line
@@ -48,6 +53,7 @@ export const UserContextProvider = ({ children }: Props) => {
         signInWithPopup(auth, new GoogleAuthProvider())
             .then(() => {
                 setLoading(false);
+                DefaultAlert("Successfully signed in with Google", AlertType.Success);
             })
             .catch((err: any) => {
                 setError(err);
@@ -56,7 +62,6 @@ export const UserContextProvider = ({ children }: Props) => {
             })
             .finally(() => {
                 setLoading(false);
-                DefaultAlert("Successfully signed in with Google", AlertType.Success);
             });
     }
 
@@ -66,6 +71,7 @@ export const UserContextProvider = ({ children }: Props) => {
         signInWithPopup(auth, new GithubAuthProvider())
             .then(() => {
                 setLoading(false);
+                DefaultAlert("Successfully signed in with GitHub", AlertType.Success);
             })
             .catch((err: any) => {
                 setError(err);
@@ -74,7 +80,6 @@ export const UserContextProvider = ({ children }: Props) => {
             })
             .finally(() => {
                 setLoading(false);
-                DefaultAlert("Successfully signed in with GitHub", AlertType.Success);
             });
     }
 
