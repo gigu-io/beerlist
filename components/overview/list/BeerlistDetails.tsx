@@ -15,6 +15,7 @@ export interface SmallUser {
     email: string;
     photoURL: string;
     displayName: string | null;
+    notificationsEnabled?: boolean;
 }
 
 export interface BeerGuilty {

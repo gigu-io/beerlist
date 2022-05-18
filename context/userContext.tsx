@@ -5,7 +5,7 @@ import { User } from "firebase/auth";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import { AlertType, DefaultAlert, DefaultAlertMessage } from "../components/alerts/Alerts";
-import { ref, set } from "firebase/database";
+import { get, ref, set } from "firebase/database";
 
 export const UserContext = createContext({});
 
@@ -27,11 +27,19 @@ export const UserContextProvider = ({ children }: Props) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
-                // update user in database
-                set(ref(database, 'users/' + user.uid), {
-                    email: user.email,
-                    displayName: user.displayName,
-                    photoURL: user.photoURL,
+
+                // check if user is in database
+                const userRef = ref(database, 'users/' + user.uid);
+                get(userRef).then((snapshot) => {
+                    if (snapshot.size === 0) {
+                        // user is not in database
+                        set(userRef, {
+                            email: user.email,
+                            displayName: user.displayName,
+                            photoURL: user.photoURL,
+                            notificationsEnabled: true
+                        });
+                    }
                 });
             } else {
                 router.push('/');
