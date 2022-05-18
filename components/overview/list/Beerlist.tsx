@@ -18,14 +18,15 @@ export interface UserDebtList {
 }
 
 export interface Debt {
-  [key: string]: Beer | string | number | Map<string, SmallUser> | BeerSize | null;
   type: Beer;
   reason: string;
   createdTimestamp: number
-  confirmedTimestamp: number | null
-  completedTimestamp: number | null
+  confirmedTimestamp?: number | null
+  completedTimestamp?: number | null
+  canceledTimestamp?: number | null
   users: Map<string, SmallUser> | null
   size: BeerSize
+  background?: string
 }
 
 export default function Beerlist() {

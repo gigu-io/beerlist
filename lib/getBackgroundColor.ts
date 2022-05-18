@@ -5,7 +5,7 @@ export function getBackgroundColor(debt: Debt): string {
     if (debt.completedTimestamp) {
         return StatusBackgroundColors.Green;
     }
-    if (debt.cancelledTimestamp) {
+    if (debt.canceledTimestamp) {
         return StatusBackgroundColors.Red;
     }
     if (!debt.confirmedTimestamp) {
