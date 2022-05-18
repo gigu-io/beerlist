@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Combobox, RadioGroup } from '@headlessui/react';
-import { Beer, BeerIconDark, BeerIconIPA, BeerIconLager, BeerIconStout } from "../icons/BeerIcons";
+import { Beer, BeerIconDark, BeerIconIPA, BeerIconLager, BeerIconStout, MatchBeerIcon } from "../icons/BeerIcons";
 import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
@@ -86,6 +86,290 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
         setSelectedUser(newSelectedUser.values().next().value);
     }
 
+    const sendMail = async () => {
+        const { email } = selectedUser;
+        const mailOptions = {
+            from: '"BEER LIST" <beer.gigu.io@gmail.com>',
+            to: email,
+            subject: 'You owe ' + user.displayName + ' a beer!',
+            text: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+            <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
+            
+            <head>
+              <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+              <!--[if !mso]><!-->
+              <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+              <!--<![endif]-->
+              <!--[if (gte mso 9)|(IE)]>
+                  <xml>
+                    <o:OfficeDocumentSettings>
+                      <o:AllowPNG/>
+                      <o:PixelsPerInch>96</o:PixelsPerInch>
+                    </o:OfficeDocumentSettings>
+                  </xml>
+                  <![endif]-->
+              <!--[if (gte mso 9)|(IE)]>
+              <style type="text/css">
+                body {width: 600px;margin: 0 auto;}
+                table {border-collapse: collapse;}
+                table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
+                img {-ms-interpolation-mode: bicubic;}
+              </style>
+            <![endif]-->
+              <style type="text/css">
+                body,
+                p,
+                div {
+                  font-family: arial, helvetica, sans-serif;
+                  font-size: 14px;
+                }
+            
+                body {
+                  color: #000000;
+                }
+            
+                body a {
+                  color: #8BD3DD;
+                  text-decoration: none;
+                }
+            
+                p {
+                  margin: 0;
+                  padding: 0;
+                }
+            
+                table.wrapper {
+                  width: 100% !important;
+                  table-layout: fixed;
+                  -webkit-font-smoothing: antialiased;
+                  -webkit-text-size-adjust: 100%;
+                  -moz-text-size-adjust: 100%;
+                  -ms-text-size-adjust: 100%;
+                }
+            
+                img.max-width {
+                  max-width: 100% !important;
+                }
+            
+                .column.of-2 {
+                  width: 50%;
+                }
+            
+                .column.of-3 {
+                  width: 33.333%;
+                }
+            
+                .column.of-4 {
+                  width: 25%;
+                }
+            
+                ul ul ul ul {
+                  list-style-type: disc !important;
+                }
+            
+                ol ol {
+                  list-style-type: lower-roman !important;
+                }
+            
+                ol ol ol {
+                  list-style-type: lower-latin !important;
+                }
+            
+                ol ol ol ol {
+                  list-style-type: decimal !important;
+                }
+            
+                @media screen and (max-width:480px) {
+            
+                  .preheader .rightColumnContent,
+                  .footer .rightColumnContent {
+                    text-align: left !important;
+                  }
+            
+                  .preheader .rightColumnContent div,
+                  .preheader .rightColumnContent span,
+                  .footer .rightColumnContent div,
+                  .footer .rightColumnContent span {
+                    text-align: left !important;
+                  }
+            
+                  .preheader .rightColumnContent,
+                  .preheader .leftColumnContent {
+                    font-size: 80% !important;
+                    padding: 5px 0;
+                  }
+            
+                  table.wrapper-mobile {
+                    width: 100% !important;
+                    table-layout: fixed;
+                  }
+            
+                  img.max-width {
+                    height: auto !important;
+                    max-width: 100% !important;
+                  }
+            
+                  a.bulletproof-button {
+                    display: block !important;
+                    width: auto !important;
+                    font-size: 80%;
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                  }
+            
+                  .columns {
+                    width: 100% !important;
+                  }
+            
+                  .column {
+                    display: block !important;
+                    width: 100% !important;
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                    margin-left: 0 !important;
+                    margin-right: 0 !important;
+                  }
+            
+                  .social-icon-column {
+                    display: inline-block !important;
+                  }
+                }
+              </style>
+              <style>
+                @media screen and (max-width:480px) {
+                  table {
+                    width: 480px !important;
+                  }
+                }
+              </style>
+              <!--user entered Head Start-->
+              <!--End Head user entered-->
+            </head>
+            
+            <body>
+              <center class="wrapper" data-link-color="#8BD3DD"
+                data-body-style="font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#8BD3DD;">
+                <div class="webkit">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#8BD3DD">
+                    <tr>
+                      <td valign="top" bgcolor="#8BD3DD" width="100%">
+                        <table width="100%" role="content-container" class="outer" align="center" cellpadding="0" cellspacing="0"
+                          border="0">
+                          <tr>
+                            <td width="100%">
+                              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                  <td>
+                                    <!--[if mso]>
+                <center>
+                <table><tr><td width="600">
+              <![endif]-->
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                                      style="width:100%; max-width:600px;" align="center">
+                                      <tr>
+                                        <td role="modules-container"
+                                          style="padding:0px 0px 0px 0px; color:#000000; text-align:left;" bgcolor="#fff"
+                                          width="100%" align="left">
+                                          <table class="module preheader preheader-hide" role="module" data-type="preheader"
+                                            border="0" cellpadding="0" cellspacing="0" width="100%"
+                                            style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
+                                            <tr>
+                                              <td role="module-content">
+                                                <p></p>
+                                              </td>
+                                            </tr>
+                                          </table>
+                                          <table class="wrapper" role="module" data-type="image" border="0" cellpadding="0"
+                                            cellspacing="0" width="100%" style="table-layout: fixed;"
+                                            data-muid="ff57326d-a3b1-438e-ae0c-21223c912962">
+                                            <tbody>
+                                              <tr>
+                                                <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top"
+                                                  align="center">
+                                                  <img class="max-width" border="0"
+                                                    style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px; max-width:20% !important; width:20%; height:auto !important;"
+                                                    width="120" alt="" data-proportionally-constrained="true" data-responsive="true"
+                                                    src="http://cdn.mcauto-images-production.sendgrid.net/34c3da017e71a103/d099f85f-1cb5-4a68-99eb-80bfd98d39a8/367x507.png">
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                            cellspacing="0" width="100%" style="table-layout: fixed;"
+                                            data-muid="a6845ff3-47c2-431d-b96c-20bfa25e2b12">
+                                            <tbody>
+                                              <tr>
+                                                <td style="padding:18px 18px 18px 18px; line-height:22px; text-align:inherit;"
+                                                  height="100%" valign="top" bgcolor="" role="module-content">
+                                                  <div>
+                                                    <div class="container" style="margin-left: 20px;margin-right: 20px;">
+                                                      <h3>${user.displayName} has sent you a beer debt</h3>
+                                                      <div style="font-size: 16px;">
+                                                        <p>Reason:</p>
+                                                        <p>${reason}</p>
+                                                        <br>
+                                                      </div>
+                                                      <div style="font-size: 16px;">
+                                                        <p>Size:</p>
+                                                        <p>${beerSize}l</p>
+                                                        <br>
+                                                      </div>
+                                                      <div style="font-size: 16px;">
+                                                        <p>Type:</p>
+                                                        <p>${beerType}</p>
+                                                        <br>
+                                                      </div>
+                                                      <p style="font-size: 16px;">Head to <a href="https://beer.gigu.io/mydebts"
+                                                          target="_blank">https://beer.gigu.io/mydebts</a> to confirm the debt.</p>
+                                                    </div>
+                                                    <div></div>
+                                                  </div>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                    <!--[if mso]>
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </center>
+                                        <![endif]-->
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </center>
+            </body>
+            
+            </html>`
+        };
+        try {
+            await fetch("/api/nodemailer", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(mailOptions)
+            }).then(() => {
+                console.log('mail sent');
+            }).catch((error) => {
+                console.log(error);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handleSubmit = (event: any) => {
         event.preventDefault();
 
@@ -133,10 +417,18 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
             set(mydebtsUserRef, smallUser);
             set(debtsRef, newDebt);
         } catch (error) {
-            console.log(error);
+            DefaultAlert('Error creating debt', AlertType.Error);
+            return;
         }
 
-        DefaultAlert('Debt added', AlertType.Success);
+        try {
+            sendMail();
+        } catch (error) {
+            DefaultAlert('Error sending email', AlertType.Error);
+            return;
+        }
+
+        DefaultAlert('Debt added and email sent!', AlertType.Success);
         setShowNewDebtForm(false);
         setDashboardType(DashboardType.OwesMe);
     }
