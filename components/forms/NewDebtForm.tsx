@@ -14,6 +14,7 @@ import { AlertType, DefaultAlert } from "../alerts/Alerts";
 import { DashboardType, useDashboardContext } from "../../context/dashboardContext";
 import { Avatar } from "@mui/material";
 import { SearchIcon, UserCircleIcon } from "@heroicons/react/outline";
+import { MailOptions } from "../../lib/mail";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -89,11 +90,11 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
 
   const sendMail = async () => {
     const { email } = selectedUser;
-    const mailOptions = {
+    const mailOptions: MailOptions = {
       from: '"BEER LIST" <beer.gigu.io@gmail.com>',
       to: email,
       subject: 'You owe ' + user.displayName + ' a beer!',
-      text: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+      html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
             <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
             
             <head>
@@ -354,21 +355,13 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
             
             </html>`
     };
-    try {
-      await fetch("/api/nodemailer", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(mailOptions)
-      }).then(() => {
-        console.log('mail sent');
-      }).catch((error) => {
-        console.log(error);
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    await fetch("https://us-central1-gigu-8ed82.cloudfunctions.net/sendMail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(mailOptions)
+    });
   }
   const userRef = ref(database, 'users/' + user.uid);
 
@@ -434,8 +427,13 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
 
     if (selectedUser.notificationsEnabled === true) {
       try {
-        sendMail();
+        await sendMail();
       } catch (error) {
+        setShowNewDebtForm(false);
+        setDashboardType(DashboardType.OwesMe);
+        DefaultAlert('Debt added!', AlertType.Success)
+        console.log(error);
+        await new Promise(r => setTimeout(r, 2000));
         DefaultAlert('Error sending email', AlertType.Error);
         return;
       }
