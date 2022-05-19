@@ -14,6 +14,7 @@ import { AlertType, DefaultAlert } from "../alerts/Alerts";
 import { DashboardType, useDashboardContext } from "../../context/dashboardContext";
 import { Avatar } from "@mui/material";
 import { SearchIcon, UserCircleIcon } from "@heroicons/react/outline";
+import { MailOptions } from "../../lib/mail";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -89,11 +90,11 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
 
   const sendMail = async () => {
     const { email } = selectedUser;
-    const mailOptions = {
+    const mailOptions: MailOptions = {
       from: '"BEER LIST" <beer.gigu.io@gmail.com>',
       to: email,
       subject: 'You owe ' + user.displayName + ' a beer!',
-      text: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+      html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
             <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
             
             <head>
@@ -355,7 +356,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
             </html>`
     };
     try {
-      await fetch("/api/nodemailer", {
+      await fetch("https://us-central1-gigu-8ed82.cloudfunctions.net/sendMail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
