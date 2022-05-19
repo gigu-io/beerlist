@@ -427,8 +427,13 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
 
     if (selectedUser.notificationsEnabled === true) {
       try {
-        sendMail();
+        await sendMail();
       } catch (error) {
+        setShowNewDebtForm(false);
+        setDashboardType(DashboardType.OwesMe);
+        DefaultAlert('Debt added!', AlertType.Success)
+        console.log(error);
+        await new Promise(r => setTimeout(r, 2000));
         DefaultAlert('Error sending email', AlertType.Error);
         return;
       }
