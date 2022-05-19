@@ -362,10 +362,6 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(mailOptions)
-      }).then(() => {
-        console.log('mail sent');
-      }).catch((error) => {
-        console.log(error);
       });
     } catch (error) {
       console.log(error);
