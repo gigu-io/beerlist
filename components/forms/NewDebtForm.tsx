@@ -355,17 +355,13 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
             
             </html>`
     };
-    try {
-      await fetch("https://us-central1-gigu-8ed82.cloudfunctions.net/sendMail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(mailOptions)
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    await fetch("https://us-central1-gigu-8ed82.cloudfunctions.net/sendMail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(mailOptions)
+    });
   }
   const userRef = ref(database, 'users/' + user.uid);
 
