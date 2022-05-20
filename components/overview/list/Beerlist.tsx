@@ -72,8 +72,31 @@ export default function Beerlist() {
       <ul role="list" className="divide-y divide-stroke divide-opacity-10">
 
         {
-          owesMe.size > 0 && dashboardType === DashboardType.OwesMe &&
-            typeof owesMe.values().next().value.debts === 'undefined' && router.pathname == "/owesme" ?
+          dashboardType === DashboardType.OwesMe &&
+            router.pathname === '/owesme' ?
+            typeof owesMe.values().next().value === 'undefined' ?
+            <li>
+              <div className="text-center justify-between px-4 py-2">
+                <p
+                  className='text-lg font-medium text-gray-600'
+                >
+                  Click on &quot;
+                  <span
+                    className='sm:inline hidden'
+                  >
+                    + New Debt
+                  </span>
+                  <span
+                    className='sm:hidden inline'
+                  >
+                    +
+                  </span>
+                  &quot; to add a new beer debt to someone.
+                </p>
+              </div>
+            </li>
+            :
+            typeof owesMe.values().next().value.debts === 'undefined' &&
             <li>
               <div className="text-center justify-between px-4 py-2">
                 <p
@@ -98,9 +121,21 @@ export default function Beerlist() {
             null
         }
 
-        {
-          myDebts.size > 0 && dashboardType === DashboardType.MyDebts &&
-            typeof myDebts.values().next().value.debts === 'undefined' && router.pathname == "/mydebts" ?
+{
+          dashboardType === DashboardType.MyDebts &&
+            router.pathname === '/mydebts' ?
+            typeof myDebts.values().next().value === 'undefined' ?
+            <li>
+              <div className="text-center justify-between px-4 py-2">
+                <p
+                  className='text-lg font-medium text-gray-600'
+                >
+                  You have no debts.
+                </p>
+              </div>
+            </li>
+            :
+            typeof myDebts.values().next().value.debts === 'undefined' &&
             <li>
               <div className="text-center justify-between px-4 py-2">
                 <p
@@ -113,6 +148,8 @@ export default function Beerlist() {
             :
             null
         }
+
+
 
         {
           dashboardType === DashboardType.OwesMe ?
