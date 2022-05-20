@@ -23,7 +23,7 @@ export default function Auth() {
                 container: refAnimation.current,
                 renderer: 'svg',
                 loop: false,
-                autoplay: false,
+                autoplay: true,
                 animationData: require('./animations/beercan_opening_noloop.json')
             });
             animate.setSpeed(1);
@@ -32,12 +32,6 @@ export default function Auth() {
         }
     }, [lottie]);
 
-    const animateLogo = () => {
-        if (lottie && refAnimation.current) {
-            lottie.play();
-        }
-    }
-
     return (
         <div className="flex flex-col h-screen justify-center items-center">
             <div
@@ -45,9 +39,6 @@ export default function Auth() {
             >
                 <div className="hover:active:-rotate-12 transition-all duration-150 ease-in-out">
                     <div
-                        onClick={
-                            animateLogo
-                        }
                         className="sm:max-w-sm"
                         ref={refAnimation}
                     />
