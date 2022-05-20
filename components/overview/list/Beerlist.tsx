@@ -1,10 +1,12 @@
 import { onValue, ref } from 'firebase/database'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { DashboardType, useDashboardContext } from '../../../context/dashboardContext'
 import { useUserContext } from '../../../context/userContext'
 import { database } from '../../../firebase/firebaseAuth.client'
 import { Beer } from '../../icons/BeerIcons'
 import BeerlistDetails, { SmallUser } from './BeerlistDetails'
+import { DebtDetails } from './DebtDetails'
 
 export enum BeerSize {
   Small = '0.3',
@@ -33,6 +35,7 @@ export default function Beerlist() {
   const { user, loading, error }: any = useUserContext();
   const [owesMe, setOwnesMe] = useState<Map<string, UserDebtList>>(new Map<string, UserDebtList>());
   const [myDebts, setMyDebts] = useState<Map<string, UserDebtList>>(new Map<string, UserDebtList>());
+  const router = useRouter();
 
   const { dashboardType }: any = useDashboardContext();
 
@@ -67,6 +70,50 @@ export default function Beerlist() {
   return (
     <div className="overflow-hidden rounded-md">
       <ul role="list" className="divide-y divide-stroke divide-opacity-10">
+
+        {
+          owesMe.size > 0 && dashboardType === DashboardType.OwesMe &&
+            typeof owesMe.values().next().value.debts === 'undefined' && router.pathname == "/owesme" ?
+            <li>
+              <div className="text-center justify-between px-4 py-2">
+                <p
+                  className='text-lg font-medium text-gray-600'
+                >
+                  Click on &quot;
+                  <span
+                    className='sm:inline hidden'
+                  >
+                    + New Debt
+                  </span>
+                  <span
+                    className='sm:hidden inline'
+                  >
+                    +
+                  </span>
+                  &quot; to add a new beer debt to someone.
+                </p>
+              </div>
+            </li>
+            :
+            null
+        }
+
+        {
+          myDebts.size > 0 && dashboardType === DashboardType.MyDebts &&
+            typeof myDebts.values().next().value.debts === 'undefined' && router.pathname == "/mydebts" ?
+            <li>
+              <div className="text-center justify-between px-4 py-2">
+                <p
+                  className='text-lg font-medium text-gray-600'
+                >
+                  You have no debts.
+                </p>
+              </div>
+            </li>
+            :
+            null
+        }
+
         {
           dashboardType === DashboardType.OwesMe ?
 

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && next export && next-image-export-optimizer",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "image": "next-image-export-optimizer"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",

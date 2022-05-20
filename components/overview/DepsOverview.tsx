@@ -13,13 +13,13 @@ export default function DeptsOverview() {
             <div className="max-w-3xl mx-auto">
                 <div className="overflow-hidden rounded-lg divide-gray-200">
                     <div className="px-4 py-5 sm:px-6">
-                        <h1 className="text-center text-white px-3 py-2 rounded-md text-3xl font-bold transition-colors ease-in-out">
+                        <h1 className="sm:mt-8 mt-0 text-center text-white px-3 py-2 rounded-md text-3xl font-bold transition-colors ease-in-out">
 
                             {
                                 dashboardType === DashboardType.OwesMe ?
-                                    <h1>Owes Me</h1>
+                                    "Owes Me"
                                     :
-                                    <h1>My Debts</h1>
+                                    "My Debts"
                             }
                         </h1>
                     </div>

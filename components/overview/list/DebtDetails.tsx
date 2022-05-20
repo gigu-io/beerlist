@@ -50,8 +50,6 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                     updates[`owesme/${user.uid}/${guiltyUID}/debts/${debtid}`] = updatedDebt;
                     updates[`mydebts/${guiltyUID}/${user.uid}/debts/${debtid}`] = updatedDebt;
 
-                    console.log(updates);
-
                     update(ref(database), updates);
 
                 } catch (e) {
@@ -258,7 +256,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                                             debt.completedTimestamp ?
                                                 "bg-green-100" :
                                                 debt.confirmedTimestamp ?
-                                                    "bg-yellow-50" :
+                                                    "bg-blue-50" :
                                                     "bg-orange-50",
                                             "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10"
                                         )}
@@ -269,7 +267,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                                                 debt.completedTimestamp ?
                                                     <CheckIcon className="h-6 w-6 text-green-400" aria-hidden="true" /> :
                                                     debt.confirmedTimestamp ?
-                                                        <LightningBoltIcon className="h-6 w-6 text-yellow-400" aria-hidden="true" /> :
+                                                        <LightningBoltIcon className="h-6 w-6" aria-hidden="true" /> :
                                                         <TerminalIcon className="h-6 w-6 text-orange-400" aria-hidden="true" />
 
                                             }
@@ -287,7 +285,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                                                                     Redeemed
                                                                 </span> :
                                                                 debt.confirmedTimestamp ?
-                                                                    <span className="bg-yellow-100 sm:bg-transparent text-yellow-700 p-2 sm:p-0 rounded-lg font-bold shadow-sm cursor-default">
+                                                                    <span className="bg-blue-100 sm:bg-transparent text-blue-700 p-2 sm:p-0 rounded-lg font-bold shadow-sm cursor-default">
                                                                         Confirmed
                                                                     </span> :
                                                                     <span className="bg-orange-100 sm:bg-transparent text-orange-700 p-2 sm:p-0 rounded-lg font-bold shadow-sm cursor-default">

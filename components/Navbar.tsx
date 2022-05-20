@@ -85,15 +85,25 @@ export default function Navbar() {
                                     ))}
                                 </div>
                             </div>
+                            <div className="absolute left-1/2 top-1 -translate-x-1/2">
+                                <div className="relative sm:w-16 sm:h-24 w-12 h-16">
+                                    <ExportedImage
+                                        src="/images/logo/beerlist_logo.png"
+                                        alt="logo"
+                                        layout="fill"
+                                        objectFit="cover"
+                                    />
+                                </div>
+                            </div>
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">
                                     <button
                                         type="button"
                                         onClick={() => setShowNewDebtForm(!showNewDebtForm)}
-                                        className="text-white relative inline-flex items-center text-xl sm:text-base font-extrabold sm:font-medium bg-tertiary p-2 sm:hover:-translate-x-1 hover:active:-translate-x-1 rounded-lg transition-all duration-300 ease-in-out">
-                                        <PlusIcon className="h-6 w-6" aria-hidden="true" />
-                                        New Debt
-
+                                        className="inline-flex text-white relative items-center text-xl sm:text-base font-medium bg-tertiary p-4 sm:p-2 sm:hover:-translate-x-1 sm:hover:bg-tertiary-dark hover:active:scale-105 hover:active:bg-tertiary-dark rounded-lg sm:rounded-lg transition-all duration-150 ease-in-out">
+                                        <PlusSmIcon className="h-6 w-6 hidden sm:inline" aria-hidden="true" />
+                                        <PlusIcon className="h-6 w-6 inline sm:hidden" aria-hidden="true" />
+                                        <span className="hidden sm:block">New Debt</span>
                                     </button>
                                 </div>
 

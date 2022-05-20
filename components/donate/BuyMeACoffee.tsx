@@ -8,9 +8,10 @@ export default function BuyMeACoffee() {
                 href="https://www.buymeacoffee.com/janlauber"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="fixed bottom-5 right-5 rounded-full bg-highlight p-4 flex flex-col justify-center items-center rotate-12 hover:active:scale-105 hover:active:rotate-0 sm:hover:scale-105 sm:hover:rotate-0 transition-all duration-200 ease-in-out"
+                className="group fixed bottom-5 right-5 rounded-full sm:rounded-full bg-highlight p-4 flex-col justify-center items-center sm:hover:scale-105 transition-all duration-300 ease-in-out"
             >
-                <svg width="40" height="40" viewBox="0 0 884 1279" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <span className="hidden sm:inline">Buy me a coffee</span>
+                <svg width="40" height="40" className="inline rotate-12 group-hover:group-active:rotate-0 sm:group-hover:rotate-0 transition-all duration-200 ease-in-out" viewBox="0 0 884 1279" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M791.109 297.518L790.231 297.002L788.201 296.383C789.018 297.072 790.04 297.472 791.109 297.518V297.518Z" fill="#0D0C22" />
                     <path d="M803.896 388.891L802.916 389.166L803.896 388.891Z" fill="#0D0C22" />
                     <path d="M791.484 297.377C791.359 297.361 791.237 297.332 791.118 297.29C791.111 297.371 791.111 297.453 791.118 297.534C791.252 297.516 791.379 297.462 791.484 297.377V297.377Z" fill="#0D0C22" />

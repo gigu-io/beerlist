@@ -430,19 +430,21 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
         setShowNewDebtForm(false);
         setDashboardType(DashboardType.OwesMe);
         await sendMail();
+        DefaultAlert('Debt added and email sent!', AlertType.Success);
       } catch (error) {
+        setShowNewDebtForm(false);
+        setDashboardType(DashboardType.OwesMe);
         DefaultAlert('Debt added!', AlertType.Success)
         console.log(error);
         await new Promise(r => setTimeout(r, 2000));
         DefaultAlert('Error sending email', AlertType.Error);
         return;
       }
-      DefaultAlert('Debt added and email sent!', AlertType.Success);
     } else {
+      setShowNewDebtForm(false);
+      setDashboardType(DashboardType.OwesMe);
       DefaultAlert('Debt added!', AlertType.Success);
     }
-    setShowNewDebtForm(false);
-    setDashboardType(DashboardType.OwesMe);
   }
 
   return (
