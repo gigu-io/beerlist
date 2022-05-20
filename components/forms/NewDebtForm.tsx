@@ -427,7 +427,10 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
 
     if (selectedUser.notificationsEnabled === true) {
       try {
+        setShowNewDebtForm(false);
+        setDashboardType(DashboardType.OwesMe);
         await sendMail();
+        DefaultAlert('Debt added and email sent!', AlertType.Success);
       } catch (error) {
         setShowNewDebtForm(false);
         setDashboardType(DashboardType.OwesMe);
@@ -437,12 +440,11 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
         DefaultAlert('Error sending email', AlertType.Error);
         return;
       }
-      DefaultAlert('Debt added and email sent!', AlertType.Success);
     } else {
+      setShowNewDebtForm(false);
+      setDashboardType(DashboardType.OwesMe);
       DefaultAlert('Debt added!', AlertType.Success);
     }
-    setShowNewDebtForm(false);
-    setDashboardType(DashboardType.OwesMe);
   }
 
   return (

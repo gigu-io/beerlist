@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && next export && next-image-export-optimizer",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "image": "next-image-export-optimizer"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -18,6 +19,7 @@
     "@tailwindcss/forms": "^0.5.0",
     "firebase": "^9.6.11",
     "firebase-tools": "^10.7.2",
+    "lottie-web": "^5.9.4",
     "next": "12.1.5",
     "next-image-export-optimizer": "^0.9.6",
     "next-pwa": "^5.5.2",
