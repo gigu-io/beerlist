@@ -50,6 +50,8 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
   const [query, setQuery] = useState('');
   const { lastDebt, setLastDebt }: any = useLastDebtContext();
 
+  const MAX_DEBTS = 24;
+
   const { setDashboardType }: any = useDashboardContext();
 
   const { user, logoutUser, loading, error }: any = useUserContext();
@@ -366,6 +368,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
     });
   }
   const userRef = ref(database, 'users/' + user.uid);
+  const refOwesMe = ref(database, 'owesme/' + user.uid + '/' + selectedUserId + '/debts');
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -375,11 +378,22 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
       const diff = new Date().getTime() - lastDebt;
       if (diff < 10000) {
         DefaultAlertMessage('Anti Spam!', 'You must wait ' + Math.round((10000 - diff) / 1000) + ' seconds.', AlertType.Error);
-      return;
+        return;
       }
     }
 
-    // if maxlength is reached, don't allow debt
+    const getDebtsValue: number = await get(refOwesMe).then((snapshot) => {
+      return snapshot.size;
+    }).catch((error) => {
+      console.log(error);
+      return 0;
+    });
+
+    if (getDebtsValue >= MAX_DEBTS) {
+      // user is not in database
+      DefaultAlertMessage('Too many debts!', 'You can only have ' + MAX_DEBTS + ' debts at a time for each user.', AlertType.Error);
+      return false;
+    }
 
     if (selectedUserId == '0') {
       DefaultAlert('Please select a user', AlertType.Error);
@@ -480,6 +494,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
 
               <div className="sm:col-span-3 mt-2">
                 <Combobox as="div" value={selectedUser} onChange={handleSelectedUser}>
+                  <p className="mb-2 block text-sm bg-orange-50 font-medium p-2 text-center rounded-lg text-gray-500">Each user can owe you max. <strong className="text-orange-400">24</strong> beers</p>
                   <Combobox.Label className="block text-sm font-medium text-gray-500">Search User by Email</Combobox.Label>
                   <div className="relative mt-1">
                     <Combobox.Label className="absolute inset-y-0 left-0 flex items-center rounded-r-md px-2 focus:outline-none">
