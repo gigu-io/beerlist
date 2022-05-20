@@ -6,15 +6,16 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { SmallUser } from "../overview/list/BeerlistDetails";
 import ExportedImage from "next-image-export-optimizer";
-import { get, onValue, ref, set } from "firebase/database";
+import { child, get, onValue, ref, set } from "firebase/database";
 import { database } from "../../firebase/firebaseAuth.client";
 import { useUserContext } from "../../context/userContext";
 import { Dialog } from '@headlessui/react';
-import { AlertType, DefaultAlert } from "../alerts/Alerts";
+import { AlertType, DefaultAlert, DefaultAlertMessage } from "../alerts/Alerts";
 import { DashboardType, useDashboardContext } from "../../context/dashboardContext";
 import { Avatar } from "@mui/material";
 import { SearchIcon, UserCircleIcon } from "@heroicons/react/outline";
 import { MailOptions } from "../../lib/mail";
+import { useLastDebtContext } from "../../context/lastDebt";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -47,6 +48,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
   const [reason, setReason] = useState('');
   const [size, setSize] = useState('');
   const [query, setQuery] = useState('');
+  const { lastDebt, setLastDebt }: any = useLastDebtContext();
 
   const { setDashboardType }: any = useDashboardContext();
 
@@ -368,6 +370,15 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
+    // if lastDebtTimeStamp is less than 10 seconds ago, don't allow debt
+    if (lastDebt) {
+      const diff = new Date().getTime() - lastDebt;
+      if (diff < 10000) {
+        DefaultAlertMessage('Anti Spam!', 'You must wait ' + Math.round((10000 - diff) / 1000) + ' seconds.', AlertType.Error);
+      return;
+      }
+    }
+
     if (selectedUserId == '0') {
       DefaultAlert('Please select a user', AlertType.Error);
       return;
@@ -390,8 +401,6 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
     const getCurrentUser: SmallUser = await get(userRef).then((snapshot) => {
       return snapshot.val();
     });
-
-    console.log(getCurrentUser);
 
     const smallUser: SmallUser = {
       displayName: getCurrentUser.displayName,
@@ -424,6 +433,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
       return;
     }
 
+    setLastDebt(new Date().getTime());
 
     if (selectedUser.notificationsEnabled === true) {
       try {

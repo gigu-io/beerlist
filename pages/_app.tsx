@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import { DashboardContextProvider } from '../context/dashboardContext';
 import Head from 'next/head';
 import { useEffect } from 'react';
+import { LastDebtContextProvider } from '../context/lastDebt';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -15,9 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   useEffect(() => {
-    if("serviceWorker" in navigator && typeof window !== 'undefined') {
+    if ("serviceWorker" in navigator && typeof window !== 'undefined') {
       window.addEventListener("load", function () {
-       navigator.serviceWorker.register("/sw.js").then(
+        navigator.serviceWorker.register("/sw.js").then(
           function (registration) {
             console.log("Service Worker registration successful with scope: ", registration.scope);
           },
@@ -43,9 +44,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <DashboardContextProvider>
         <UserContextProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <LastDebtContextProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </LastDebtContextProvider>
         </UserContextProvider>
       </DashboardContextProvider>
     </div>
