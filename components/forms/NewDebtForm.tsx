@@ -379,6 +379,8 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
       }
     }
 
+    // if maxlength is reached, don't allow debt
+
     if (selectedUserId == '0') {
       DefaultAlert('Please select a user', AlertType.Error);
       return;
