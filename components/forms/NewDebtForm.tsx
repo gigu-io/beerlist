@@ -74,7 +74,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
   const filteredUserList: Map<string, SmallUser> =
     query === '' ?
       new Map<string, SmallUser>(null) :
-      query.length > 3 ?
+      query.length >= 3 ?
         new Map(
           Array.from(userList).filter(([key, value]) =>
             value.displayName && value.displayName.toLowerCase().includes(query.toLowerCase()))
@@ -458,12 +458,13 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
       try {
         setShowNewDebtForm(false);
         setDashboardType(DashboardType.OwesMe);
+        DefaultAlert('Debt added!', AlertType.Success);
         await sendMail();
-        DefaultAlert('Debt added and email sent!', AlertType.Success);
+        DefaultAlert('Email sent!', AlertType.Success);
       } catch (error) {
         setShowNewDebtForm(false);
         setDashboardType(DashboardType.OwesMe);
-        DefaultAlert('Debt added!', AlertType.Success)
+        // DefaultAlert('Debt added!', AlertType.Success)
         console.log(error);
         await new Promise(r => setTimeout(r, 2000));
         DefaultAlert('Error sending email', AlertType.Error);
@@ -472,7 +473,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
     } else {
       setShowNewDebtForm(false);
       setDashboardType(DashboardType.OwesMe);
-      DefaultAlert('Debt added!', AlertType.Success);
+      DefaultAlertMessage('Debt added!', 'User has deactivated Email Notification!', AlertType.Success);
     }
   }
 
