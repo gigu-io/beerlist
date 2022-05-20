@@ -182,10 +182,10 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
             </a>
 
             <div className={classNames(
-                showDetails ? 'max-h-screen opacity-100' : 'opacity-0 max-h-0',
-                " transition-all duration-300 ease-in-out overflow-hidden"
+                showDetails ? 'max-h-full opacity-100' : 'opacity-0 max-h-0',
+                " transition-opacity duration-300 ease-in-out overflow-hidden"
             )}>
-                <ul role="list" className="sm:p-4">
+                <ul role="list">
                     {
                         Array.from(debts).map(([key, debt]: [string, Debt], i: number) => (
 

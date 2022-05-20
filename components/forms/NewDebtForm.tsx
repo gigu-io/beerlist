@@ -427,10 +427,10 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
 
     if (selectedUser.notificationsEnabled === true) {
       try {
-        await sendMail();
-      } catch (error) {
         setShowNewDebtForm(false);
         setDashboardType(DashboardType.OwesMe);
+        await sendMail();
+      } catch (error) {
         DefaultAlert('Debt added!', AlertType.Success)
         console.log(error);
         await new Promise(r => setTimeout(r, 2000));

@@ -155,7 +155,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                         StatusBackgroundHoverColors.Gray
                     :
                     StatusBackgroundHoverColors.Orange,
-                "shadow my-2 sm:my-0 sm:shadow-none sm:hover:bg-opacity-50 bg-white text-paragraph cursor-pointer rounded-md px-2 transition-all duration-150 ease-in-out"
+                "shadow my-2 sm:shadow-none  bg-white text-paragraph cursor-pointer rounded-md px-2 transition-all duration-150 ease-in-out"
             )}
         >
             <div className="relative">
