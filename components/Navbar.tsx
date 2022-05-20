@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, PlusIcon, XIcon } from '@heroicons/react/outline'
 import { LogoutIcon, PlusSmIcon } from '@heroicons/react/solid'
@@ -11,6 +11,7 @@ import { Dialog } from '@headlessui/react';
 import { DashboardType, useDashboardContext } from '../context/dashboardContext';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { LottiePlayer } from 'lottie-web';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -49,6 +50,33 @@ export default function Navbar() {
             }, current: dashboardType === DashboardType.MyDebts
         },
     ]
+    const refAnimation = useRef<HTMLDivElement>(null);
+    const [lottie, setLottie] = useState<LottiePlayer | null>(null);
+
+    useEffect(() => {
+        import('lottie-web').then((Lottie) => setLottie(Lottie.default));
+    }, []);
+
+    useEffect(() => {
+        if (lottie && refAnimation.current) {
+            var animate = lottie.loadAnimation({
+                container: refAnimation.current,
+                renderer: 'svg',
+                loop: false,
+                autoplay: false,
+                animationData: require('./animations/beercan_opening_noloop.json')
+            });
+            animate.setSpeed(1);
+
+            return () => lottie.destroy();
+        }
+    }, [lottie]);
+
+    const animateLogo = () => {
+        if (lottie && refAnimation.current) {
+            lottie.play();
+        }
+    }
 
     return (
 
@@ -56,7 +84,7 @@ export default function Navbar() {
             {({ open }) => (
                 <div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex justify-between h-20">
+                        <div className="flex justify-between h-28">
                             <div className="flex">
                                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                                     {/* Mobile menu button */}
@@ -85,15 +113,14 @@ export default function Navbar() {
                                     ))}
                                 </div>
                             </div>
-                            <div className="absolute left-1/2 top-1 -translate-x-1/2">
-                                <div className="relative sm:w-16 sm:h-24 w-12 h-16">
-                                    <ExportedImage
-                                        src="/images/logo/beerlist_logo.png"
-                                        alt="logo"
-                                        layout="fill"
-                                        objectFit="cover"
-                                    />
-                                </div>
+                            <div className="absolute -top-2 sm:top-0 left-1/2 -translate-x-1/2 hover:active:-rotate-12 transition-all duration-150 ease-in-out">
+                                <div
+                                    onClick={
+                                        animateLogo
+                                    }
+                                    className="sm:max-w-sm h-auto w-40"
+                                    ref={refAnimation}
+                                />
                             </div>
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">

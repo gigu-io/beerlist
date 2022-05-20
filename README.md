@@ -37,7 +37,7 @@
 </p>
 
 <p align="center">
-  See who owes me beer and how much I owe them. Also show the debt history. Choose between 4 different styles of beer (Lager, Dark, IPA, Stout) and 3 sizes (small, medium, big) for each debt. Write a short reason about why someone owes you beer (max 100 characters).
+  See who owes me beer and how much I owe them. Also show the debt history. Choose between 4 different styles of beer (Lager, Dark, IPA, Stout) and 3 sizes (small, medium, big) for each debt. Write a short reason about why someone owes you beer (max 100 characters). Each user can owe you max. 24 beers. Delete old debts and add new ones if your limit is reached.
 </p>
 
 <p align="center">
