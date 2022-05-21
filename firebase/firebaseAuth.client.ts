@@ -30,12 +30,15 @@ export const analytics = isSupported().then(yes => yes ? getAnalytics() : consol
 
 export const performance = isSupported().then(yes => yes ? getPerformance() : console.log('Performance is not supported'));
 
-export const appCheck = initializeAppCheck(app, {
+export const appCheck = isSupported().then(yes => yes ? initializeAppCheck(app, {
     provider: new ReCaptchaV3Provider('6LegxwggAAAAAIyZyiIbsm0LuMe-g5G2CayAvSz1'),
   
     // Optional argument. If true, the SDK automatically refreshes App Check
     // tokens as needed.
     isTokenAutoRefreshEnabled: true
-  });
+  }) : console.log('App Check is not supported'));
+
+
+
 
 export default firebaseConfig;
