@@ -4,6 +4,9 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 
+env:
+  NODE_ENV: test
+
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
@@ -33,7 +36,6 @@ jobs:
           echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> .env
           echo "SMTP_USER=${{ secrets.SMTP_USERNAME }}" >> .env
           echo "SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}" >> .env
-          echo "NODE_ENV=test" >> .env
       - name: build
         run: |
           yarn build
