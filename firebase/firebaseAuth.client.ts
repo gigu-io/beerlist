@@ -4,7 +4,8 @@ import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { getAnalytics, isSupported } from "firebase/analytics";
 import { getPerformance } from "firebase/performance";
-import { getMessaging } from "firebase/messaging";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+
 
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
@@ -19,10 +20,7 @@ const firebaseConfig = {
     measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-
-if (!getApps().length) {
-    initializeApp(firebaseConfig);
-}
+const app = !(getApps().length) ? initializeApp(firebaseConfig) : getApps()[0];
 
 export const database = getDatabase();
 
@@ -31,5 +29,16 @@ export const auth = getAuth();
 export const analytics = isSupported().then(yes => yes ? getAnalytics() : console.log('Analytics not supported'));
 
 export const performance = isSupported().then(yes => yes ? getPerformance() : console.log('Performance is not supported'));
+
+export const appCheck = isSupported().then(yes => yes ? initializeAppCheck(app, {
+    provider: new ReCaptchaV3Provider('6LegxwggAAAAAIyZyiIbsm0LuMe-g5G2CayAvSz1'),
+  
+    // Optional argument. If true, the SDK automatically refreshes App Check
+    // tokens as needed.
+    isTokenAutoRefreshEnabled: true
+  }) : console.log('App Check is not supported'));
+
+
+
 
 export default firebaseConfig;
