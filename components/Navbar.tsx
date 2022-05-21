@@ -34,6 +34,12 @@ export default function Navbar() {
                 router.push('/profile');
             }
         },
+        {
+            name: 'Documentation', onClickFunction: () => {
+                setDashboardType(null)
+                router.push('/docs');
+            }
+        },
         { name: 'Sign out', onClickFunction: () => { logoutUser() } },
     ]
     const navigation = [
@@ -234,6 +240,20 @@ export default function Navbar() {
                                         {item.name}
                                     </Disclosure.Button>
                                 ))}
+                                <Disclosure.Button
+                                    onClick={
+                                        () => {
+                                            setDashboardType(null)
+                                            router.push('/docs')
+                                        }
+                                    }
+                                    className={classNames(
+                                        'text-white border-4 border-white hover:active:bg-tertiary hover:active:border-tertiary',
+                                        'block px-3 py-2 rounded-md text-xl font-extrabold w-full text-center transition-all duration-150 ease-in-out mb-2'
+                                    )}
+                                >
+                                    Documentation
+                                </Disclosure.Button>
                             </div>
                             <div className="p-2">
                                 <Disclosure.Button
@@ -266,6 +286,7 @@ export default function Navbar() {
                                         <span className="text-base font-normal text-gray-50">{user ? user.email : ''}</span>
                                     </div>
                                 </Disclosure.Button>
+                                
                                 <Disclosure.Button
                                     as="a"
                                     onClick={() => logoutUser()}

@@ -1,8 +1,4 @@
 <p align="center">
-  <strong style="color: red;">:construction::fire::construction_worker: WORK IN PROGRESS :construction_worker::fire::construction:</strong>
-</p>
-
-<p align="center">
     <a href="https://squidfunk.github.io/mkdocs-material/">
         <img height="120px" src="public/images/logo/beerlist_logo.png" />
     </a>
@@ -94,6 +90,9 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=<redacted>
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=<redacted>
 NEXT_PUBLIC_FIREBASE_APP_ID=<redacted>
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=<redacted>
+NEXT_PUBLIC_APP_VERSION=local
+SMTP_USER=<redacted>
+SMTP_PASSWORD=<redacted>
 ```
 
 ### Node.js
