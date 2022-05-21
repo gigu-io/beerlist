@@ -1,4 +1,4 @@
-import { BookOpenIcon, CashIcon, ChartPieIcon, MailIcon, SpeakerphoneIcon, UserIcon } from "@heroicons/react/outline";
+import { BookOpenIcon, CashIcon, ChartPieIcon, LinkIcon, MailIcon, SpeakerphoneIcon, UserIcon } from "@heroicons/react/outline";
 import { onValue, ref } from "firebase/database";
 import ExportedImage from "next-image-export-optimizer"
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import CountUp from "react-countup";
 export default function Docs() {
     const [userCount, setUserCount] = useState(0);
     const [debtCount, setDebtCount] = useState(0);
+    const ghActionRef: string = "https://github.com/gigu-io/beerlist/releases/tag/" + process.env.NEXT_PUBLIC_APP_VERSION
 
     useEffect(() => {
         const usersRef = ref(database, 'users');
@@ -143,10 +144,8 @@ export default function Docs() {
                     </div>
 
                     {/* Stats section */}
-                    <div className="mt-10 pt-8 border-t-2 border-gray-500">
-                        <p className="text-lg mb-8 leading-7 text-gray-900">
-                            <ChartPieIcon className="block m-auto w-10 h-10" />
-                        </p>
+                    <div className="mt-10 pt-8 bg-white p-6 rounded-lg shadow-lg">
+                        
                         <dl className="grid grid-cols-1 sm:grid-cols-2 text-center sm:text-left gap-x-4 gap-y-4">
                             <div className=" pt-2">
                                 <dt className="text-base font-medium text-gray-500">Active Users</dt>
@@ -171,6 +170,18 @@ export default function Docs() {
                             <div className="pt-2">
                                 <dt className="text-base font-medium text-gray-500">Founded</dt>
                                 <dd className="text-3xl font-extrabold tracking-tight text-gray-900">2022</dd>
+                            </div>
+
+                            <div className="pt-2">
+                                <dt className="text-base font-medium text-gray-500">Version</dt>
+                                <a
+                                    href={ghActionRef}
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    title="Show Changelog"
+                                >
+                                    <dd className="text-3xl font-extrabold tracking-tight text-gray-900">{process.env.NEXT_PUBLIC_APP_VERSION} <LinkIcon className="inline w-6 h-6" /></dd>
+                                </a>
                             </div>
                         </dl>
                         <div className="mt-10 text-center sm:text-left">
