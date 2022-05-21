@@ -4,9 +4,6 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 
-env:
-  NODE_ENV: test
-
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
@@ -37,6 +34,8 @@ jobs:
           echo "SMTP_USER=${{ secrets.SMTP_USERNAME }}" >> .env
           echo "SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}" >> .env
       - name: build
+        env:
+          NODE_ENV: test
         run: |
           yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
