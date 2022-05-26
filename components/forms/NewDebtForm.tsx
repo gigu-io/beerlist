@@ -524,7 +524,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                       // @ts-ignore
                       displayValue={
                         selectedUser ?
-                          (selectedUser: SmallUser) => selectedUser.email
+                          (selectedUser: SmallUser) => selectedUser.displayName
                           :
                           ''}
                     />
@@ -582,10 +582,15 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                                             </span>
                                             <br />
                                             <span
-                                              className={classNames(selectedUserId === key ? 'font-semibold' : 'font-light', 'ml-3 text-xs truncate')}
+                                              className={classNames(selectedUserId === key ? 'font-base' : 'font-normal', 'ml-3 truncate')}
                                             >
-                                              {listUser.email}
+
+                                              {
+                                                // censor email address with * except for the first 3 characters
+                                                listUser.email.replace(/^(.{2}).*(@.*)$/, '$1***$2')
+                                              }
                                             </span>
+                                            <br />
                                           </div>
                                         </div>
 
@@ -637,7 +642,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
                   <h2 className="text-base font-medium text-gray-700">Beer Type</h2>
                 </div>
                 <RadioGroup value={beerType} onChange={setBeerType} className="">
-                  <RadioGroup.Label className="sr-only">Choose a memory option</RadioGroup.Label>
+                  <RadioGroup.Label className="sr-only">Choose a beer type</RadioGroup.Label>
                   <div className="grid grid-cols-4 gap-3 sm:grid-cols-4">
                     {beerOptions.map((option) => (
                       <div
