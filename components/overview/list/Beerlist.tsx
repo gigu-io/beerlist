@@ -68,22 +68,25 @@ export default function Beerlist() {
     }
     // eslint-disable-next-line
   }, []);
+  if (typeof myDebts.values().next().value !== 'undefined') {
+    Array.from(myDebts).map(([key, value]) => {
+      if (value.debts === undefined) {
+        noMyDebts = true;
+      } else {
+        noMyDebts = false;
+      }
+    });
+  }
 
-  Array.from(myDebts).map(([key, value]) => {
-    if (value.debts === undefined) {
-      noMyDebts = true;
-    } else {
-      noMyDebts = false;
-    }
-  });
-
-  Array.from(owesMe).map(([key, value]) => {
-    if (value.debts === undefined) {
-      noOwesMe = true;
-    } else {
-      noOwesMe = false;
-    }
-  });
+  if (typeof owesMe.values().next().value !== 'undefined') {
+    Array.from(owesMe).map(([key, value]) => {
+      if (value.debts === undefined) {
+        noOwesMe = true;
+      } else {
+        noOwesMe = false;
+      }
+    });
+  }
 
   return (
     <div className="overflow-hidden rounded-md">
@@ -93,78 +96,78 @@ export default function Beerlist() {
           dashboardType === DashboardType.OwesMe &&
             router.pathname === '/owesme' ?
             typeof owesMe.values().next().value === 'undefined' ?
-            <li>
-              <div className="text-center justify-between px-4 py-2">
-                <p
-                  className='text-lg font-medium text-gray-600'
-                >
-                  Click on &quot;
-                  <span
-                    className='sm:inline hidden'
+              <li>
+                <div className="text-center justify-between px-4 py-2">
+                  <p
+                    className='text-lg font-medium text-gray-600'
                   >
-                    + New Debt
-                  </span>
-                  <span
-                    className='sm:hidden inline'
+                    Click on &quot;
+                    <span
+                      className='sm:inline hidden'
+                    >
+                      + New Debt
+                    </span>
+                    <span
+                      className='sm:hidden inline'
+                    >
+                      +
+                    </span>
+                    &quot; to add a new beer debt to someone.
+                  </p>
+                </div>
+              </li>
+              :
+              typeof owesMe.values().next().value.debts === 'undefined'
+              &&
+              <li>
+                <div className="text-center justify-between px-4 py-2">
+                  <p
+                    className='text-lg font-medium text-gray-600'
                   >
-                    +
-                  </span>
-                  &quot; to add a new beer debt to someone.
-                </p>
-              </div>
-            </li>
-            :
-            typeof owesMe.values().next().value.debts === 'undefined' 
-            &&
-            <li>
-              <div className="text-center justify-between px-4 py-2">
-                <p
-                  className='text-lg font-medium text-gray-600'
-                >
-                  Click on &quot;
-                  <span
-                    className='sm:inline hidden'
-                  >
-                    + New Debt
-                  </span>
-                  <span
-                    className='sm:hidden inline'
-                  >
-                    +
-                  </span>
-                  &quot; to add a new beer debt to someone.
-                </p>
-              </div>
-            </li>
+                    Click on &quot;
+                    <span
+                      className='sm:inline hidden'
+                    >
+                      + New Debt
+                    </span>
+                    <span
+                      className='sm:hidden inline'
+                    >
+                      +
+                    </span>
+                    &quot; to add a new beer debt to someone.
+                  </p>
+                </div>
+              </li>
             :
             null
         }
 
-{
+        {
           dashboardType === DashboardType.MyDebts &&
             router.pathname === '/mydebts' ?
             typeof myDebts.values().next().value === 'undefined' ?
-            <li>
-              <div className="text-center justify-between px-4 py-2">
-                <p
-                  className='text-lg font-medium text-gray-600'
-                >
-                  You have no debts.
-                </p>
-              </div>
-            </li>
-            :
-            // typeof myDebts.values().next().value.debts === 'undefined' 
-            noMyDebts &&
-            <li>
-              <div className="text-center justify-between px-4 py-2">
-                <p
-                  className='text-lg font-medium text-gray-600'
-                >
-                  You have no debts.
-                </p>
-              </div>
-            </li>
+              <li>
+                <div className="text-center justify-between px-4 py-2">
+                  <p
+                    className='text-lg font-medium text-gray-600'
+                  >
+                    You have no debts.
+                  </p>
+                </div>
+              </li>
+              :
+              // typeof myDebts.values().next().value.debts === 'undefined' 
+              noMyDebts &&
+              <li>
+                <div className="text-center justify-between px-4 py-2">
+                  <p
+                    className='text-lg font-medium text-gray-600'
+                  >
+                    You have no debts.
+                  </p>
+                </div>
+              </li>
             :
             null
         }
