@@ -272,7 +272,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
 
                                             }
                                         </div>
-                                        <div className="mt-3 text-left sm:mt-0 sm:ml-4">
+                                        <div className="mt-3 text-left sm:mt-0 sm:ml-4 select-none">
                                             <Dialog.Title as="h3" className="text-2xl my-4 leading-6 font-medium text-gray-900 text-center sm:text-left">
                                                 Debt Actions
                                             </Dialog.Title>
