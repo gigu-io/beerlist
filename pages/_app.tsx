@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <div>
+    <div className='select-none'>
       <Head>
         <title>BEER LIST</title>
         <link rel="manifest" href="/manifest.json" />
