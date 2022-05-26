@@ -38,7 +38,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
   const [beerType, setBeerType] = useState(beerOptions[0].name);
   const [beerSize, setBeerSize] = useState(beerSizeOptions[0].value);
   const [selectedUser, setSelectedUser] = useState<SmallUser>({
-    displayName: 'Select a user',
+    displayName: '',
     photoURL: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y',
     email: '',
     notificationsEnabled: false
@@ -500,7 +500,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
               <div className="sm:col-span-3 mt-2">
                 <Combobox as="div" value={selectedUser} onChange={handleSelectedUser}>
                   <p className="mb-2 block text-sm bg-orange-50 font-medium p-2 text-center rounded-lg text-gray-500">Each user can owe you max. <strong className="text-orange-400">24</strong> beers</p>
-                  <Combobox.Label className="block text-base font-medium">Search User<br /><span className="text-sm font-normal text-gray-500">(enter min. 3 chars of Display Name)</span></Combobox.Label>
+                  <Combobox.Label className="block text-base font-medium">Search User<br /><span className="text-sm font-normal text-gray-500">(enter min. 3 chars of the Name)</span></Combobox.Label>
                   <div className="relative mt-1">
                     <Combobox.Label className="absolute inset-y-0 left-0 flex items-center rounded-r-md px-2 focus:outline-none">
                       {
