@@ -475,6 +475,7 @@ export const NewDebtForm = ({ setShowNewDebtForm }: any) => {
       setDashboardType(DashboardType.OwesMe);
       DefaultAlertMessage('Debt added!', 'User has deactivated Email Notification!', AlertType.Success);
     }
+    setShowNewDebtForm(false);
   }
 
   return (

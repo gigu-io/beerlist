@@ -16,7 +16,7 @@ export enum BeerSize {
 
 export interface UserDebtList {
   userinfo: SmallUser
-  debts: Map<string, Debt>;
+  debts: Map<string, Debt> | undefined;
 }
 
 export interface Debt {
@@ -34,7 +34,9 @@ export interface Debt {
 export default function Beerlist() {
   const { user, loading, error }: any = useUserContext();
   const [owesMe, setOwnesMe] = useState<Map<string, UserDebtList>>(new Map<string, UserDebtList>());
+  let noOwesMe: boolean = true;
   const [myDebts, setMyDebts] = useState<Map<string, UserDebtList>>(new Map<string, UserDebtList>());
+  let noMyDebts: boolean = true;
   const router = useRouter();
 
   const { dashboardType }: any = useDashboardContext();
@@ -67,6 +69,22 @@ export default function Beerlist() {
     // eslint-disable-next-line
   }, []);
 
+  Array.from(myDebts).map(([key, value]) => {
+    if (value.debts === undefined) {
+      noMyDebts = true;
+    } else {
+      noMyDebts = false;
+    }
+  });
+
+  Array.from(owesMe).map(([key, value]) => {
+    if (value.debts === undefined) {
+      noOwesMe = true;
+    } else {
+      noOwesMe = false;
+    }
+  });
+
   return (
     <div className="overflow-hidden rounded-md">
       <ul role="list" className="divide-y divide-stroke divide-opacity-10">
@@ -96,7 +114,8 @@ export default function Beerlist() {
               </div>
             </li>
             :
-            typeof owesMe.values().next().value.debts === 'undefined' &&
+            typeof owesMe.values().next().value.debts === 'undefined' 
+            &&
             <li>
               <div className="text-center justify-between px-4 py-2">
                 <p
@@ -135,7 +154,8 @@ export default function Beerlist() {
               </div>
             </li>
             :
-            typeof myDebts.values().next().value.debts === 'undefined' &&
+            // typeof myDebts.values().next().value.debts === 'undefined' 
+            noMyDebts &&
             <li>
               <div className="text-center justify-between px-4 py-2">
                 <p
