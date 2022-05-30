@@ -153,7 +153,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                         StatusBackgroundHoverColors.Gray
                     :
                     StatusBackgroundHoverColors.Orange,
-                "shadow my-2 sm:shadow-none  bg-white text-paragraph cursor-pointer rounded-md px-2 transition-all duration-150 ease-in-out"
+                "shadow my-2 sm:shadow-none  bg-white text-gray-700 cursor-pointer rounded-md px-2 transition-all duration-150 ease-in-out"
             )}
         >
             <div className="relative">
@@ -192,7 +192,7 @@ export const DebtDetails = ({ debt, debtid, guiltyUID, totalDebts, last }: { deb
                         </p>
                     </div>
 
-                    <div className="col-span-1 text-paragraph text-sm sm:whitespace-nowrap">
+                    <div className="col-span-1 text-gray-700 text-sm sm:whitespace-nowrap">
                         <time
                             className={classNames(
                                 debt.background,

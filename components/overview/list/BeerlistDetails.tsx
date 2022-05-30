@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { MatchBeerIcon } from "../../icons/BeerIcons";
+import { Beer, MatchBeerIcon } from "../../icons/BeerIcons";
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import ExportedImage from "next-image-export-optimizer";
 import { StatusBackgroundColors } from "../Dashboard";
@@ -83,6 +83,10 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
     let incompleteConfirmedDebts: Map<string, Debt> = new Map<string, Debt>();
     let incompleteUnconfirmedDebts: Map<string, Debt> = new Map<string, Debt>();
     let completeConfirmedDebts: Map<string, Debt> = new Map<string, Debt>();
+    let lagerCount: number = 0;
+    let darkCount: number = 0;
+    let ipaCount: number = 0;
+    let stoutCount: number = 0;
 
     if (debts) {
         Array.from(debts).map(([key, debt]: [string, Debt]) => {
@@ -90,6 +94,18 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
                 incompleteUnconfirmedDebts.set(key, debt);
             } else if (!debt.completedTimestamp) {
                 incompleteConfirmedDebts.set(key, debt);
+                if (debt.type === Beer.Lager) {
+                    lagerCount++;
+                }
+                if (debt.type === Beer.Dark) {
+                    darkCount++;
+                }
+                if (debt.type === Beer.IPA) {
+                    ipaCount++;
+                }
+                if (debt.type === Beer.Stout) {
+                    stoutCount++;
+                }
             } else {
                 completeConfirmedDebts.set(key, debt);
             }
@@ -120,46 +136,90 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
                             />
                         </div>
                         <div className="min-w-0 flex-1 px-4">
-                            <p className="text-xl font-medium text-stroke truncate">{userDebtList.userinfo.displayName}</p>
+                            <p className="text-xl font-medium text-gray-700 truncate">{userDebtList.userinfo.displayName}</p>
                             <p className=" text-sm font-light text-gray-500 truncate">
                                 {
                                     userDebtList.userinfo.email.replace(/^(.{2}).*(@.*)$/, '$1***$2')
                                 }
                             </p>
-                            <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
+                            <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-gray-700">
+                                {/* Every Type of Beer */}
                                 {
-                                    incompleteConfirmedDebts.size > 0 ?
-                                        <span key={
-                                            incompleteConfirmedDebts.values().next().value.type
-                                        } className="inline-flex p-1 shadow-md rounded-md ">
-                                            <div className="flex m-auto">
-                                                <span className="my-auto">
-                                                    <span className="font-bold">{incompleteConfirmedDebts.size}</span>x
-                                                </span>
-                                                <span className="sm:group-hover:rotate-12 group-hover:group-active:rotate-12 transition-all duration-300 ease-in-out">
-                                                    {MatchBeerIcon(incompleteConfirmedDebts.values().next().value.type, 35, 35)}
-                                                </span>
-                                            </div>
-                                        </span>
+                                    incompleteConfirmedDebts.size > 0 && lagerCount > 0 ?
+                                        <div className={classNames(
+                                            "inline-flex px-2.5 sm:px-5 m-auto py-2 rounded-md shadow-md text-center bg-white"
+                                        )}>
+                                            <span className="my-auto">
+                                                <span className="font-bold">{lagerCount}</span>x
+                                            </span>
+                                            <span className="sm:group-hover:rotate-12 group-hover:group-active:rotate-12 transition-all duration-300 ease-in-out">
+                                                {MatchBeerIcon(Beer.Lager, 35, 35)}
+                                            </span>
+                                        </div>
                                         : null
                                 }
+                                {
+                                    incompleteConfirmedDebts.size > 0 && darkCount > 0 ?
+                                        <div className={classNames(
+                                            "inline-flex px-2.5 sm:px-5 m-auto py-2 rounded-md shadow-md text-center bg-white"
+                                        )}>
+                                            <span className="my-auto">
+                                                <span className="font-bold">{darkCount}</span>x
+                                            </span>
+                                            <span className="sm:group-hover:rotate-12 group-hover:group-active:rotate-12 transition-all duration-300 ease-in-out">
+                                                {MatchBeerIcon(Beer.Dark, 35, 35)}
+                                            </span>
+                                        </div>
+                                        : null
+                                }
+                                {
+                                    incompleteConfirmedDebts.size > 0 && ipaCount > 0 ?
+                                        <div className={classNames(
+                                            "inline-flex px-2.5 sm:px-5 m-auto py-2 rounded-md shadow-md text-center bg-white"
+                                        )}>
+                                            <span className="my-auto">
+                                                <span className="font-bold">{ipaCount}</span>x
+                                            </span>
+                                            <span className="sm:group-hover:rotate-12 group-hover:group-active:rotate-12 transition-all duration-300 ease-in-out">
+                                                {MatchBeerIcon(Beer.IPA, 35, 35)}
+                                            </span>
+                                        </div>
+                                        : null
+                                }
+                                {
+                                    incompleteConfirmedDebts.size > 0 && stoutCount > 0 ?
+                                        <div className={classNames(
+                                            "inline-flex px-2.5 sm:px-5 m-auto py-2 rounded-md shadow-md text-center bg-white"
+                                        )}>
+                                            <span className="my-auto">
+                                                <span className="font-bold">{stoutCount}</span>x
+                                            </span>
+                                            <span className="sm:group-hover:rotate-12 group-hover:group-active:rotate-12 transition-all duration-300 ease-in-out">
+                                                {MatchBeerIcon(Beer.Stout, 35, 35)}
+                                            </span>
+                                        </div>
+                                        : null
+                                }
+
+                                {/* Unconfirmed */}
                                 {
                                     incompleteUnconfirmedDebts.size > 0 ?
                                         <span className={classNames(
                                             StatusBackgroundColors.Orange,
-                                            "group inline-flex p-2.5 rounded-md shadow-md text-center"
+                                            "inline-flex w-full py-3.5 rounded-md shadow-md text-center"
                                         )}>
                                             <div className="flex m-auto">
-                                                <span className="text-paragraph font-bold">
+                                                <span className="text-gray-700 font-bold">
                                                     {incompleteUnconfirmedDebts.size}
                                                     <span className="font-normal">x</span>
                                                 </span>
                                                 &nbsp;
-                                                <span className="text-paragraph font-extrabold">?</span>
+                                                <span className="text-gray-700 font-extrabold">?</span>
                                             </div>
                                         </span>
                                         : null
                                 }
+                                {/* Completed */}
                                 {
                                     completeConfirmedDebts.size > 0 ?
                                         <span className={classNames(
@@ -167,12 +227,12 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
                                             "group inline-flex p-2.5 rounded-md shadow-md text-center"
                                         )}>
                                             <div className="flex m-auto">
-                                                <span className="text-paragraph font-bold">
+                                                <span className="text-gray-700 font-bold">
                                                     {completeConfirmedDebts.size}
                                                     <span className="font-normal">x</span>
                                                 </span>
                                                 &nbsp;
-                                                <span className="text-paragraph font-extrabold">✓</span>
+                                                <span className="text-gray-700 font-extrabold">✓</span>
                                             </div>
                                         </span>
                                         : null
@@ -182,7 +242,7 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
                     </div>
                     <div>
                         <ChevronRightIcon className={classNames(
-                            showDetails ? 'rotate-90 text-tertiary' : 'rotate-0 text-paragraph',
+                            showDetails ? 'rotate-90 text-tertiary' : 'rotate-0 text-gray-700',
                             "h-6 w-6 transition-all duration-150 ease-in-out"
                         )}
                         />
