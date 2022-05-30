@@ -121,7 +121,11 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
                         </div>
                         <div className="min-w-0 flex-1 px-4">
                             <p className="text-xl font-medium text-stroke truncate">{userDebtList.userinfo.displayName}</p>
-                            <p className=" text-sm font-light text-gray-500 truncate">{userDebtList.userinfo.email}</p>
+                            <p className=" text-sm font-light text-gray-500 truncate">
+                                {
+                                    userDebtList.userinfo.email.replace(/^(.{2}).*(@.*)$/, '$1***$2')
+                                }
+                            </p>
                             <div className="mt-2 grid sm:grid-cols-6 grid-cols-3 gap-2 items-center text-md text-paragraph">
                                 {
                                     incompleteConfirmedDebts.size > 0 ?
