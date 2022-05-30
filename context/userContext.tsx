@@ -39,6 +39,14 @@ export const UserContextProvider = ({ children }: Props) => {
                             photoURL: user.photoURL,
                             notificationsEnabled: true
                         });
+                    } else {
+                        // user is in database
+                        set(userRef, {
+                            email: user.email,
+                            displayName: user.displayName,
+                            photoURL: user.photoURL,
+                            notificationsEnabled: snapshot.val().notificationsEnabled
+                        });
                     }
                 });
             } else {
