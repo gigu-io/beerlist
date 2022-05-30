@@ -2,9 +2,10 @@ import { BookOpenIcon, CashIcon, ChartPieIcon, LinkIcon, MailIcon, SpeakerphoneI
 import { onValue, ref } from "firebase/database";
 import ExportedImage from "next-image-export-optimizer"
 import { useEffect, useState } from "react";
-import { BeerIconLager } from "../components/icons/BeerIcons";
+import { Beer, BeerIconLager, MatchBeerIcon } from "../components/icons/BeerIcons";
 import { database } from "../firebase/firebaseAuth.client";
 import CountUp from "react-countup";
+import { HeartIcon } from "@heroicons/react/solid";
 
 export default function Docs() {
     const [userCount, setUserCount] = useState(0);
@@ -27,11 +28,27 @@ export default function Docs() {
         // eslint-disable-next-line
     }, []);
 
+    const getBeerTypeDescription = (beerType: Beer) => {
+        switch (beerType) {
+            case Beer.Lager:
+                return "Lagers are a tighter group of beers than ales. While there are countless styles of ale, there are only a few styles within the lager family. Generally, the characteristics of a lager include a light, crisp taste that is mellow and smooth. They also tend to have more carbonation than ales and are less bitter.";
+            case Beer.Dark:
+                return "Dark/Amber beer showcases a medium-high to high malt character with medium to low caramel character derived from the use of roasted crystal malts. The American amber is characterized by American-variety hops, which lend the amber ale notes of citrus, fruit and pine to balance the sweetness of the malt.";
+            case Beer.IPA:
+                return "India Pale Ales (IPAs), which encompass numerous styles of beer, get their characteristics largely from hops and herbal, citrus or fruity flavors. They can be bitter and contain high alcohol levels, though the final product depends on the variety of hops used.";
+            case Beer.Stout:
+                return "Stout, dark, heavy-bodied beer popular in Great Britain and Ireland. Stouts are stronger versions of mild ale. There are various types, including oatmeal stout, milk stout, and imperial stout. Popular stouts have included the so-called dry Irish stouts, notably Guinness.";
+            default:
+                return "";
+        }
+    }
+
 
     return (
         <div className="relative pb-12">
             <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
                 <div className="relative sm:py-16 lg:py-0">
+                    
                     <div aria-hidden="true" className="hidden sm:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-screen">
                         <svg
                             className="absolute top-8 left-1/2 -ml-3 lg:-right-8 lg:left-auto lg:top-12"
@@ -100,14 +117,56 @@ export default function Docs() {
                             </blockquote>
                         </div>
 
+                        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl sm:leading-10 mt-20">
+                            Beer Types
+                        </h1>
+
+                        <div
+                            className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-10"
+                        >
+
+                            {
+                                // Foreach enum value of Beer
+                                Object.values(Beer).map((beertype) => {
+                                    return (
+                                        <div
+                                            className="relative sm:hover:rotate-2 transition-all duration-300 ease-in-out flex-col gap-4 items-center bg-white border-2 border-gray-500 shadow-md rounded-lg"
+                                            key={beertype}
+                                        >
+                                            <div
+                                                className="w-full bg-gray-500 py-4"
+                                            >
+                                                <span
+                                                    className=" inset-0 flex items-center justify-center"
+                                                >
+                                                    <span
+                                                        className="bg-white rounded-full p-4 shadow-xl"
+                                                    >
+                                                        {MatchBeerIcon(beertype, 60, 60)}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <div className="mt-4 text-2xl font-bold text-center p-2">
+                                                {beertype}
+                                            </div>
+                                            <div
+                                                className=" text-sm text-gray-500 p-4"
+                                            >
+                                                {getBeerTypeDescription(beertype)}
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
 
 
+                        </div>
                     </div>
                 </div>
 
                 <div className="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0">
                     {/* Content area */}
-                    <div className="pt-12 sm:pt-16 lg:pt-20">
+                    <div className="pt-12 sm:pt-12 lg:pt-20">
                         <h2 className="text-3xl text-gray-900 font-extrabold tracking-tight sm:text-4xl">
                             Documentation
                         </h2>
@@ -145,7 +204,7 @@ export default function Docs() {
 
                     {/* Stats section */}
                     <div className="mt-10 pt-8 bg-white p-6 rounded-lg shadow-lg">
-                        
+
                         <dl className="grid grid-cols-1 sm:grid-cols-2 text-center sm:text-left gap-x-4 gap-y-4">
                             <div className=" pt-2">
                                 <dt className="text-base font-medium text-gray-500">Active Users</dt>
@@ -176,7 +235,7 @@ export default function Docs() {
                                 <dt className="text-base font-medium text-gray-500">Version</dt>
                                 <a
                                     href={ghActionRef}
-                                    target="_blank" 
+                                    target="_blank"
                                     rel="noreferrer"
                                     title="Show Changelog"
                                 >
