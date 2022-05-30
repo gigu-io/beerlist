@@ -100,7 +100,12 @@ export default function BeerlistDetails({ userDebtList, guiltyUID }: { userDebtL
         <Disclosure>
             <a
                 onClick={() => setShowDetails(!showDetails)}
-                className="cursor-pointer block group bg-white sm:hover:bg-gray-50 hover:active:bg-gray-50 transition-all duration-150 ease-in-out"
+                className={
+                    classNames(
+                        "cursor-pointer block group bg-white sm:hover:bg-gray-50 hover:active:bg-gray-50 transition-all duration-150 ease-in-out"
+                    )
+                }
+
             >
                 <div className="flex items-center px-4 py-4 sm:px-6">
                     <div className="min-w-0 flex-1 flex items-center">
