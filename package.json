@@ -29,7 +29,8 @@
     "react-countup": "^6.2.0",
     "react-dom": "18.1.0",
     "sharp": "^0.30.4",
-    "sweetalert2": "^11.4.10"
+    "sweetalert2": "^11.4.10",
+    "terser": "^5.15.0"
   },
   "devDependencies": {
     "@types/node": "17.0.29",
