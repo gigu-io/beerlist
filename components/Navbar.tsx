@@ -86,10 +86,10 @@ export default function Navbar() {
 
     return (
 
-        <Disclosure as="nav" className="bg-secondary w-full z-50">
+        <Disclosure as="nav" className="z-10 w-full bg-secondary">
             {({ open }) => (
                 <div>
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
                         <div className="flex justify-between h-28">
                             <div className="flex">
                                 <div className="-ml-2 mr-2 flex items-center md:hidden">
