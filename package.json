@@ -25,7 +25,7 @@
     "next": "12.1.5",
     "next-image-export-optimizer": "^0.9.6",
     "next-pwa": "^5.5.2",
-    "nodemailer": "^6.7.5",
+    "nodemailer": "^6.9.9",
     "protobufjs": "^7.2.4",
     "react": "18.1.0",
     "react-countup": "^6.2.0",
