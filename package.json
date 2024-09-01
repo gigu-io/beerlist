@@ -22,7 +22,7 @@
     "firebase-tools": "^10.7.2",
     "got": "^12.3.1",
     "lottie-web": "^5.9.4",
-    "next": "12.1.5",
+    "next": "14.1.1",
     "next-image-export-optimizer": "^0.9.6",
     "next-pwa": "^5.5.2",
     "nodemailer": "^6.9.9",
